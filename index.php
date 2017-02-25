@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
 function matchScouting($param){
+echo 'hello world';
 
 }
 
@@ -13,3 +14,5 @@ $routingArray = array(
   )
 
 );
+
+Router::route ($routingArray);
