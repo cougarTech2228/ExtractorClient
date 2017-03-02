@@ -1,4 +1,7 @@
 <?php
+define('BASEURL', 'http://localhost:9999');
+define('BASEURI', '/');
+define('CONFIG', 'config.json');
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
 
 function matchScouting($param) {
