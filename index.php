@@ -53,6 +53,29 @@ function redirect() {
 
 }
 
+/**
+ * Render Template
+ * Renders a Template in Mustache
+ *
+ * @param string $template template file
+ * @param array $context gives context to template
+ */
+function render($template, $context){
+  if(!isset($template) || isset($context)){
+    return false;
+  }
+
+  if(!file_exists('templates/partial/'.$template.'.mustache')){
+    return false;
+  }
+  $mustache = new Mustache_Engine(array(
+    'loader' => new Mustache_Loader_FilesystemLoader('templates/'),
+    'partials_loader' => new Mustache_Loader_FilesystemLoader('templates/partial')
+  ));
+  $render = $mustache->loadTemplate($template);
+  return $render->render($context);
+}
+
 $routingArray = array(
     //returns scouting form for
     array(
