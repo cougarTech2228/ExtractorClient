@@ -9,7 +9,7 @@ class Router {
      *
      * @return bool
      */
-    public static function process(array $routes) {
+    public static function process($routes) {
         $requestURI = self::preProcess();
 
         if (self::checkURI() === false) {
@@ -38,7 +38,7 @@ class Router {
      * @return string Processed URI
      */
     private static function preProcess() {
-        $requestURI = substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), strlen(MOTDBASE));
+        $requestURI = substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), strlen(BASEURI));
         $requestURI = strtok($requestURI, '?');
 
         return $requestURI;
