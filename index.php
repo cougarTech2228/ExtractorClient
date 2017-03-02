@@ -59,10 +59,10 @@ function return404() {
 }
 
 /**
-* rederict
-* redericts browser to a different location
+* redirect
+* redirects browser to a different location
 *
-* @param string $uri rederict to
+* @param string $uri redirect to
 *
 * @return true
 */
