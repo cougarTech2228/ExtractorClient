@@ -44,13 +44,28 @@ function config($param) {
 function postConfig($param) {
 
 }
-
+/**
+* return404
+* returns browser to a 404 page
+*
+* @return string|false
+*/
 function return404() {
-
+  header('HTTP/1.0 404 Not Found');
+  return render('404', array());
 }
 
-function redirect() {
-
+/**
+* rederict
+* redericts browser to a different location
+*
+* @param string $uri rederict to
+*
+* @return true
+*/
+function redirect($uri) {
+  header('Location: '.$uri);
+  return true;
 }
 
 /**
@@ -60,7 +75,7 @@ function redirect() {
  * @param string $template template file
  * @param array $context gives context to template
  *
- * @return false|string updated php dock 
+ * @return false|string updated php dock
  */
 function render($template, $context){
   if(!isset($template) || isset($context)){
