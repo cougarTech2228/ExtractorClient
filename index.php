@@ -59,6 +59,8 @@ function redirect() {
  *
  * @param string $template template file
  * @param array $context gives context to template
+ *
+ * @return false|string updated php dock 
  */
 function render($template, $context){
   if(!isset($template) || isset($context)){
