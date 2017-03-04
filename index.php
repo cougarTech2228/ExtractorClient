@@ -56,6 +56,7 @@ function matchList($param) {
 /**
  * Schedule Controller
  * Outputs the schedule page render.
+ * TODO: Add current match highlight.
  *
  * @param array $param Router input
  */
