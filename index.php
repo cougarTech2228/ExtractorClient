@@ -39,6 +39,11 @@ function pitScouting($param) {
 }
 
 function transfer($param) {
+
+}
+
+function transferDisplay($param) {
+
 }
 
 function matchSubmit($param) {
@@ -101,13 +106,40 @@ function render($template, $context, $title = 'Extractor') {
         return false;
     }
 
+    // Define globals.
     $context['title'] = $title;
     $context['BASEURI'] = BASEURI;
+    $context['VERSION'] = VERSION;
     $context['navlinks'] = array(
         array(
-            'active' => false,
-            'link'   => '',
-            'name'   => ''
+            'active' => ($template == 'matchList' || $template === 'matchForm'),
+            'link'   => 'match',
+            'icon'   => 'view_list',
+            'name'   => 'Match'
+        ),
+        array(
+            'active' => ($template == 'pitList' || $template === 'pitForm'),
+            'link'   => 'pit',
+            'icon'   => 'view_list',
+            'name'   => 'Pit'
+        ),
+        array(
+            'active' => ($template == 'transfer' || $template === 'transferDisplay'),
+            'link'   => 'transfer',
+            'icon'   => 'present_to_all',
+            'name'   => 'Transfer'
+        ),
+        array(
+            'active' => ($template == 'schedule'),
+            'link'   => 'schedule',
+            'icon'   => 'list',
+            'name'   => 'Schedule'
+        ),
+        array(
+            'active' => ($template == 'about' || $template === 'config'),
+            'link'   => 'about',
+            'icon'   => 'phonelink_setup',
+            'name'   => 'About'
         )
     );
 
@@ -170,6 +202,12 @@ $routingArray = array(
         'uri'    => 'transfer'
     ),
 
+    // Transfer Begin
+    array(
+        'method' => 'get',
+        'func'   => 'transferDisplay',
+        'uri'    => 'transfer\/display'
+    ),
 
     // Match data handler
     array(
