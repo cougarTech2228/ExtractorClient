@@ -79,4 +79,37 @@ class ExtractorConfig {
 
         return true;
     }
+
+    /**
+     * Full Load
+     * Load configuration data fully from hot swap config.
+     *
+     * @return bool
+     */
+    public function fullLoad() {
+        // Check if mounted.
+        if (!file_exists(DATASEARCHPATH)) {
+            return false;
+        }
+
+        // Scan for files.
+        $files = scandir(DATASEARCHPATH);
+        foreach ($files as $file) {
+            if (is_file($file) && $file === 'config.json') {
+                $new = file_get_contents(DATASEARCHPATH . $file);
+                $new = json_decode($new, true);
+
+                if (!is_array($new)) {
+                    return false;
+                }
+
+                $this->config = $new;
+                $this->saveConfig();
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

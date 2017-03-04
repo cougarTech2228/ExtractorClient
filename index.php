@@ -5,19 +5,21 @@
 /////////////
 define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
-define('DATADIR', __DIR__ . 'data' . DIRECTORY_SEPARATOR);
+define('DS', DIRECTORY_SEPARATOR);
+define('DATADIR', __DIR__ . 'data' . DS);
+define('DATASEARCHPATH', DS . 'storage' . DS . 'sdcard1' . DS . 'Extractor');
 define('CONFIG', DATADIR . 'config.json');
 define('VERSION', '0.0.0');
 
 //////////
 // Main //
 //////////
-include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+include_once __DIR__ . DS . 'vendor' . DS . 'autoload.php';
 
 // Include everything for Extractor.
-$files = scandir(__DIR__ . DIRECTORY_SEPARATOR . 'inc');
+$files = scandir(__DIR__ . DS . 'inc');
 foreach ($files as $file) {
-    $path = __DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . $file;
+    $path = __DIR__ . DS . 'inc' . DS . $file;
     if (is_file($path) || pathinfo($path)['extension'] === 'php') {
         include_once $file;
     }
