@@ -2,5 +2,8 @@
   "require": {
     "mustache/mustache": "~2.5",
     "endroid/qrcode": "^1.9"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
   }
 }
