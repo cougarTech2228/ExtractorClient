@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class ExtractorClient
+ * Class ExtractorConfig
  */
-class ExtractorClient {
+class ExtractorConfig {
     private $config;
 
     /**

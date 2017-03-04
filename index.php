@@ -11,8 +11,16 @@ define('VERSION', '0.0.0');
 //////////
 // Main //
 //////////
-include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
+// Include everything for Extractor.
+$files = scandir(__DIR__ . DIRECTORY_SEPARATOR . 'inc');
+foreach ($files as $file) {
+    $path = __DIR__ . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . $file;
+    if (is_file($path) || pathinfo($path)['extension'] === 'php') {
+        include_once $file;
+    }
+}
 
 function matchScouting($param) {
 
