@@ -14,6 +14,7 @@ define('VERSION', '0.0.0');
 //////////
 // Main //
 //////////
+/** @noinspection PhpIncludeInspection */
 include_once __DIR__ . DS . 'vendor' . DS . 'autoload.php';
 
 // Include everything for Extractor.
@@ -21,6 +22,7 @@ $files = scandir(__DIR__ . DS . 'inc');
 foreach ($files as $file) {
     $path = __DIR__ . DS . 'inc' . DS . $file;
     if (is_file($path) || pathinfo($path)['extension'] === 'php') {
+        /** @noinspection PhpIncludeInspection */
         include_once $path;
     }
 }
