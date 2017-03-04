@@ -29,7 +29,7 @@ class ExtractorTransferUtil {
     public static function setTransferred($cat, $key, $isTransferred) {
         $list = ExtractorStorage::fetch('sys', 'notTransferred');
 
-        if ($isTransferred) {
+        if (!$isTransferred) {
             $list[$cat][] = $key;
         } else {
             $arrayKey = array_search($key, $list[$cat]);
