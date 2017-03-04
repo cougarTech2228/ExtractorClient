@@ -45,7 +45,7 @@ function index($param) {
     return;
 }
 
-function matchScouting($param) {
+function matchForm($param) {
 
 }
 
@@ -251,7 +251,7 @@ $routingArray = array(
     // Scouting form
     array(
         'method' => 'get',
-        'func'   => 'matchScouting',
+        'func'   => 'matchForm',
         'uri'    => 'match\/([0-9]{1,})'
     ),
 
