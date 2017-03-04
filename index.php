@@ -53,8 +53,24 @@ function matchList($param) {
 
 }
 
+/**
+ * Schedule Controller
+ * Outputs the schedule page render.
+ *
+ * @param array $param Router input
+ */
 function schedule($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    $context = array(
+        'matches' => $ec->getConfig('matches')
+    );
+
+    echo render('schedule', $context, 'Schedule');
+
+    return;
 }
 
 /**

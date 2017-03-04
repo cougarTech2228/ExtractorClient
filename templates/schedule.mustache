@@ -1,0 +1,36 @@
+{{> header}}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1>Match Schedule</h1>
+
+            <table class="striped">
+                <thead>
+                <tr>
+                    <th data-field="matchNum">Match</th>
+                    <th data-field="red1">Red 1</th>
+                    <th data-field="red2">Red 2</th>
+                    <th data-field="red3">Red 3</th>
+                    <th data-field="blue1">Blue 1</th>
+                    <th data-field="blue2">Blue 2</th>
+                    <th data-field="blue3">Blue 3</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#matches}}
+                    <tr>
+                        <td>{{match}}</td>
+                        <td>{{red1}}</td>
+                        <td>{{red2}}</td>
+                        <td>{{red3}}</td>
+                        <td>{{blue1}}</td>
+                        <td>{{blue2}}</td>
+                        <td>{{blue3}}</td>
+                    </tr>
+                {{/matches}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{{> footer}}
