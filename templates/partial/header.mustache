@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>{{title}}</title>
+
+    <!-- CSS  -->
+    <link href="{{BASEURI}}assets/materialize/css/Material.css" rel="stylesheet">
+    <link href="{{BASEURI}}assets/materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">&sigma;xtractor</a>
+        <ul class="right hide-on-med-and-down">
+            {{#navlinks}}
+                <li {{#active}}class="active"{{/active}}><a href="{{link}}">{{name}}</a></li>
+            {{/navlinks}}
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+            {{#navlinks}}
+                <li {{#active}}class="active"{{/active}}><a href="{{link}}">{{name}}</a></li>
+            {{/navlinks}}
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
