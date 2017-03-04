@@ -1,0 +1,124 @@
+{{> header}}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1>Match Scouting</h1>
+
+            <div class="row">
+                <form class="col s12" action="{{BASEURI}}post/match" method="post">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate" value="{{match}}" min="0" required disabled>
+                            <label for="match_number">Match Number</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate" value="{{team}}" min="0" required disabled>
+                            <label for="match_number">Team Number</label>
+                        </div>
+                    </div>
+                    <h3>Autonomous</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="auto_baseline" name="autoBaseline" type="checkbox" {{autoBaseline}}>
+                            <label for="auto_baseline">Broke baseline</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="auto_gear" name="autoGear" type="checkbox" {{autoGear}}>
+                            <label for="auto_gear">Delivered gear</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Fuel" id="auto_fuel_high" name="autoFuelHigh" type="number" class="validate" value="{{autoFuelHigh}}" min="0" required>
+                            <label for="auto_fuel_high">Fuel launched into the high position</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Fuel" id="auto_fuel_low" name="autoFuelLow" type="number" class="validate" value="{{autoFuelLow}}" min="0" required>
+                            <label for="auto_fuel_low">Fuel launched into the low position</label>
+                        </div>
+                    </div>
+                    <h3>Tele-operated</h3>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Fuel" id="tele_fuel_high" name="teleFuelHigh" type="number" class="validate" value="{{teleFuelHigh}}" min="0" required>
+                            <label for="tele_fuel_high">Fuel launched into the high position</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Fuel" id="tele_fuel_low" name="teleFuelLow" type="number" class="validate" value="{{teleFuelLow}}" min="0" required>
+                            <label for="tele_fuel_low">Fuel launched into the low position</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Fuel" id="tele_gears" name="teleGears" type="number" class="validate" value="{{teleGears}}" min="0" required>
+                            <label for="tele_gears">Number of gears delivered</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" {{teleTookOff}}>
+                            <label for="tele_tookoff">Took off</label>
+                        </div>
+                    </div>
+                    <h3>Tags</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="tag_no_show" name="tagNoShow" type="checkbox" {{tagNoShow}}>
+                            <label for="tag_no_show">No Show</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="tag_no_move" name="tagNoMove" type="checkbox" {{tagNoMove}}>
+                            <label for="tag_no_move">Didn't move</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="tag_flipped" name="tagFlipped" type="checkbox" {{tagFlipped}}>
+                            <label for="tag_flipped">Flipped</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="tag_stuck" name="tagStuck" type="checkbox" {{tagStuck}}>
+                            <label for="tag_stuck">Stuck</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="tag_fell" name="tagFell" type="checkbox" {{tagFell}}>
+                            <label for="tag_fell">Fell</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="tag_penalized" name="tagPenalized" type="checkbox" {{tagPenalized}}>
+                            <label for="tag_penalized">Penalized</label>
+                        </div>
+                    </div>
+                    <h3>Overall Performance</h3>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="performance" type="radio" id="pref_confused" value="confused" {{prefConfused}}>
+                                <label for="pref_confused">Confused</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="performance" type="radio" id="pref_slow" value="slow" {{prefSlow}}>
+                                <label for="pref_slow">Slow</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="performance" type="radio" id="pref_efficient" value="efficient" {{prefEfficient}}>
+                                <label for="pref_efficient">Efficient</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="performance" type="radio" id="pref_powerhouse" value="powerhouse" {{prefPowerhouse}}>
+                                <label for="pref_powerhouse">Powerhouse</label>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{> footer}}
