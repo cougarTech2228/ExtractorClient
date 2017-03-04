@@ -123,8 +123,32 @@ function about($param) {
     return;
 }
 
+/**
+ *  pit List
+ *  stores list of team pits
+ *
+ * @param $param
+ */
 function pitList($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    $pitList = array();
+    foreach ($ec->getConfig('pit') as $pit) {
+        $pitList[] = array(
+            'teamNum' => $pit[$ec->getConfig('team')]
+
+        );
+    }
+
+    $context = array(
+        'team'    => ExtractorUtil::teamNiceName($ec->getConfig('team')),
+    );
+
+    echo render('pitList', $context, 'Pit List');
+
+    return;
 }
 
 function pitScouting($param) {
