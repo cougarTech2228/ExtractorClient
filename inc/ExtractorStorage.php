@@ -39,5 +39,5 @@ class ExtractorStorage {
         }
 
         return json_decode(file_get_contents(DATADIR . $cat . DS . $key . '.json'), true);
-    }   
+    }
 }
