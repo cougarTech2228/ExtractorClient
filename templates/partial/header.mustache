@@ -14,13 +14,13 @@
     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">&sigma;xtractor</a>
         <ul class="right hide-on-med-and-down">
             {{#navlinks}}
-                <li {{#active}}class="active"{{/active}}><a href="{{link}}">{{name}}</a></li>
+                <li {{#active}}class="active"{{/active}}><a href="{{BASEURI}}{{link}}">{{name}}</a></li>
             {{/navlinks}}
         </ul>
 
         <ul id="nav-mobile" class="side-nav">
             {{#navlinks}}
-                <li {{#active}}class="active"{{/active}}><a href="{{link}}">{{name}}</a></li>
+                <li {{#active}}class="active"{{/active}}><a href="{{BASEURI}}{{link}}">{{name}}</a></li>
             {{/navlinks}}
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
