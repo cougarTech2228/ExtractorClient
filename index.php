@@ -21,7 +21,7 @@ $files = scandir(__DIR__ . DS . 'inc');
 foreach ($files as $file) {
     $path = __DIR__ . DS . 'inc' . DS . $file;
     if (is_file($path) || pathinfo($path)['extension'] === 'php') {
-        include_once $file;
+        include_once $path;
     }
 }
 
@@ -55,8 +55,27 @@ function schedule($param) {
 
 }
 
+/**
+ * About Controller
+ * Outputs the about page render.
+ *
+ * @param array $param Router input
+ */
 function about($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    $context = array(
+        'deviceID'     => $ec->getConfig('deviceID'),
+        'team'         => $ec->getConfig('team'),
+        'currentMatch' => $ec->getConfig('currentMatch'),
+        'qrRateMS'     => $ec->getConfig('qrRateMS')
+    );
+
+    echo render('about', $context, 'About');
+
+    return;
 }
 
 function pitList($param) {
@@ -132,7 +151,7 @@ function render($tmp, $context, $title = 'Extractor') {
     }
 
     // Define globals.
-    $context['title'] = $title;
+    $context['title'] = 'Extractor' . ($title !== null ? ' | ' . $title : '');
     $context['BASEURI'] = BASEURI;
     $context['VERSION'] = VERSION;
     $context['navlinks'] = array(
