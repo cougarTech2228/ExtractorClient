@@ -1,9 +1,9 @@
 <?php
 define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
-define('CONFIG', 'config.json');
+define('CONFIG', __DIR__ . 'data' . DIRECTORY_SEPARATOR . 'config.json');
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
-include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 function matchScouting($param) {
 
@@ -29,8 +29,7 @@ function pitScouting($param) {
 
 }
 
-function xfer($param) {
-
+function transfer($param) {
 }
 
 function matchSubmit($param) {
@@ -45,34 +44,31 @@ function config($param) {
 
 }
 
-function postConfig($param) {
-
-}
-
 /**
- * return404
- * returns browser to a 404 page
+ * Return 404
+ * Returns a 404 to the browser.
  *
  * @return true
  */
 function return404() {
     header('HTTP/1.0 404 Not Found');
 
+    // TODO: Add 404 template.
     echo render('404', array());
 
     return true;
 }
 
 /**
- * redirect
- * redirects browser to a different location
+ * Redirect
+ * Redirects browser to desired location.
  *
- * @param string $uri redirect to
+ * @param string $uri Redirect URI
  *
  * @return true
  */
 function redirect($uri) {
-    header('Location: ' . $uri);
+    header('Location: ' . BASEURI . $uri);
 
     return true;
 }
@@ -81,11 +77,11 @@ function redirect($uri) {
  * Render Template
  * Renders a Template in Mustache
  *
- * @param string $template template file
- * @param array  $context  gives context to template
- * @param string $title    sets page title
+ * @param string $template Template
+ * @param array  $context  Placeholder context
+ * @param string $title    Page title
  *
- * @return false|string updated php dock
+ * @return false|string
  */
 function render($template, $context, $title = 'Extractor') {
     if (!isset($template) || isset($context)) {
@@ -116,81 +112,75 @@ function render($template, $context, $title = 'Extractor') {
 }
 
 $routingArray = array(
-    //returns scouting form for
+    // Scouting form
     array(
         'method' => 'get',
         'func'   => 'matchScouting',
         'uri'    => 'match\/([0-9]{1,})'
     ),
 
-    //list of matches
+    // Match list
     array(
         'method' => 'get',
         'func'   => 'matchList',
         'uri'    => 'match'
     ),
 
-    //schedule of matches
+    // Schedule
     array(
         'method' => 'get',
         'func'   => 'schedule',
         'uri'    => 'schedule'
     ),
 
-    //about
+    // About
     array(
         'method' => 'get',
         'func'   => 'about',
         'uri'    => 'about'
     ),
 
-    //list of pit data
+    // Pit list
     array(
         'method' => 'get',
         'func'   => 'pitList',
         'uri'    => 'pit'
     ),
 
-    //pit scouting
+    // Pit form
     array(
         'method' => 'get',
         'func'   => 'pitScouting',
         'uri'    => 'pit\/([0-9]{1,})'
     ),
 
-    //xfer
+    // Transfer
     array(
         'method' => 'get',
-        'func'   => 'xfer',
-        'uri'    => 'xfer'
+        'func'   => 'transfer',
+        'uri'    => 'transfer'
     ),
 
 
-    //submits match data
+    // Match data handler
     array(
         'method' => 'post',
         'func'   => 'matchSubmit',
         'uri'    => 'post\/match'
     ),
 
-    //submits pit data
+    // Pit data handler
     array(
         'method' => 'post',
         'func'   => 'pitSubmit',
         'uri'    => 'post\/pit'
     ),
 
-    //configuration
+    // Configuration
     array(
         'method' => 'get',
         'func'   => 'config',
         'uri'    => 'config'
-    ),
-    //post configuration
-    array(
-        'method' => 'post',
-        'func'   => 'postConfig',
-        'uri'    => 'post\/config'
     )
 );
 
