@@ -1,7 +1,16 @@
 <?php
+
+/////////////
+// Globals //
+/////////////
 define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
 define('CONFIG', __DIR__ . 'data' . DIRECTORY_SEPARATOR . 'config.json');
+define('VERSION', '0.0.0');
+
+//////////
+// Main //
+//////////
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
