@@ -49,8 +49,34 @@ function matchScouting($param) {
 
 }
 
+/**
+ * Match List Controller
+ * Outputs the schedule page render.
+ * TODO: Add current match highlight.
+ *
+ * @param array $param Router input
+ */
 function matchList($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    $matches = array();
+    foreach ($ec->getConfig('matches') as $match) {
+        $matches[] = array(
+            'match'   => $match['match'],
+            'teamNum' => $match[$ec->getConfig('team')]
+        );
+    }
+
+    $context = array(
+        'team'    => ExtractorUtil::teamNiceName($ec->getConfig('team')),
+        'matches' => $matches
+    );
+
+    echo render('matchList', $context, 'Match List');
+
+    return;
 }
 
 /**
