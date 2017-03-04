@@ -5,7 +5,8 @@
 /////////////
 define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
-define('CONFIG', __DIR__ . 'data' . DIRECTORY_SEPARATOR . 'config.json');
+define('DATADIR', __DIR__ . 'data' . DIRECTORY_SEPARATOR);
+define('CONFIG', DATADIR . 'config.json');
 define('VERSION', '0.0.0');
 
 //////////
@@ -20,6 +21,24 @@ foreach ($files as $file) {
     if (is_file($path) || pathinfo($path)['extension'] === 'php') {
         include_once $file;
     }
+}
+
+////////////
+// Models //
+////////////
+
+/**
+ * Index Redirect
+ * Simply redirects index ('/') to match list.
+ *
+ * @param array $param Router input
+ */
+function index($param) {
+    unset($param);
+
+    redirect('match');
+
+    return;
 }
 
 function matchScouting($param) {
@@ -69,8 +88,6 @@ function config($param) {
 /**
  * Return 404
  * Returns a 404 to the browser.
- *
- * @return true
  */
 function return404() {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
@@ -78,7 +95,7 @@ function return404() {
     // TODO: Add 404 template.
     echo render('404', array());
 
-    return true;
+    return;
 }
 
 /**
@@ -86,31 +103,29 @@ function return404() {
  * Redirects browser to desired location.
  *
  * @param string $uri Redirect URI
- *
- * @return true
  */
 function redirect($uri) {
     header('Location: ' . BASEURI . $uri);
 
-    return true;
+    return;
 }
 
 /**
  * Render Template
  * Renders a Template in Mustache
  *
- * @param string $template Template
- * @param array  $context  Placeholder context
- * @param string $title    Page title
+ * @param string $tmp     Template
+ * @param array  $context Placeholder context
+ * @param string $title   Page title
  *
  * @return false|string
  */
-function render($template, $context, $title = 'Extractor') {
-    if (!isset($template) || isset($context)) {
+function render($tmp, $context, $title = 'Extractor') {
+    if (!isset($tmp) || isset($context)) {
         return false;
     }
 
-    if (!file_exists('templates/partial/' . $template . '.mustache')) {
+    if (!file_exists('templates/partial/' . $tmp . '.mustache')) {
         return false;
     }
 
@@ -120,31 +135,31 @@ function render($template, $context, $title = 'Extractor') {
     $context['VERSION'] = VERSION;
     $context['navlinks'] = array(
         array(
-            'active' => ($template == 'matchList' || $template === 'matchForm'),
+            'active' => ($tmp == 'matchList' || $tmp === 'matchForm'),
             'link'   => 'match',
             'icon'   => 'view_list',
             'name'   => 'Match'
         ),
         array(
-            'active' => ($template == 'pitList' || $template === 'pitForm'),
+            'active' => ($tmp == 'pitList' || $tmp === 'pitForm'),
             'link'   => 'pit',
             'icon'   => 'view_list',
             'name'   => 'Pit'
         ),
         array(
-            'active' => ($template == 'transfer' || $template === 'transferDisplay'),
+            'active' => ($tmp == 'transfer' || $tmp === 'transferDisplay'),
             'link'   => 'transfer',
             'icon'   => 'present_to_all',
             'name'   => 'Transfer'
         ),
         array(
-            'active' => ($template == 'schedule'),
+            'active' => ($tmp == 'schedule'),
             'link'   => 'schedule',
             'icon'   => 'list',
             'name'   => 'Schedule'
         ),
         array(
-            'active' => ($template == 'about' || $template === 'config'),
+            'active' => ($tmp == 'about' || $tmp === 'config'),
             'link'   => 'about',
             'icon'   => 'phonelink_setup',
             'name'   => 'About'
@@ -155,12 +170,18 @@ function render($template, $context, $title = 'Extractor') {
         'loader'          => new Mustache_Loader_FilesystemLoader('templates/'),
         'partials_loader' => new Mustache_Loader_FilesystemLoader('templates/partial')
     ));
-    $render = $mustache->loadTemplate($template);
+    $render = $mustache->loadTemplate($tmp);
 
     return $render->render($context);
 }
 
 $routingArray = array(
+    // Index
+    array(
+        'method' => 'get',
+        'func'   => 'index',
+        'uri'    => ''
+    ),
     // Scouting form
     array(
         'method' => 'get',
