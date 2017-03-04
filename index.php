@@ -3,6 +3,7 @@ define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
 define('CONFIG', 'config.json');
 include_once __DIR__ . DIRECTORY_SEPARATOR . 'Router.php';
+include_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 
 function matchScouting($param) {
 
@@ -52,12 +53,14 @@ function postConfig($param) {
  * return404
  * returns browser to a 404 page
  *
- * @return string|false
+ * @return true
  */
 function return404() {
     header('HTTP/1.0 404 Not Found');
 
-    return render('404', array());
+    echo render('404', array());
+
+    return true;
 }
 
 /**
@@ -80,7 +83,7 @@ function redirect($uri) {
  *
  * @param string $template template file
  * @param array  $context  gives context to template
- * @param string $title   sets page title
+ * @param string $title    sets page title
  *
  * @return false|string updated php dock
  */
@@ -93,14 +96,14 @@ function render($template, $context, $title = 'Extractor') {
         return false;
     }
 
-    $context['title']= $title;
-    $context['BASEURI']= BASEURI;
-    $context['navlinks']= array(
-      array(
-        'active'=> false,
-        'link'=> '',
-        'name'=> ''
-      )
+    $context['title'] = $title;
+    $context['BASEURI'] = BASEURI;
+    $context['navlinks'] = array(
+        array(
+            'active' => false,
+            'link'   => '',
+            'name'   => ''
+        )
     );
 
     $mustache = new Mustache_Engine(array(
