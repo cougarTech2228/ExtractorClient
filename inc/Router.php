@@ -53,6 +53,10 @@ class Router {
     private static function checkURI() {
         $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
 
+        if ($uri === BASEURI) {
+            return true;
+        }
+
         if (preg_match('/^(.+)(\/)(|\?.+)$/', $uri, $matches) === 1) {
             $uri = $matches[1] . $matches[3];
 
