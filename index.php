@@ -6,7 +6,7 @@
 define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
 define('DS', DIRECTORY_SEPARATOR);
-define('DATADIR', __DIR__ . 'data' . DS);
+define('DATADIR', __DIR__ . DS . 'data' . DS);
 define('DATASEARCHPATH', DS . 'storage' . DS . 'sdcard1' . DS . 'Extractor');
 define('CONFIG', DATADIR . 'config.json');
 define('VERSION', '0.0.0');
@@ -204,18 +204,18 @@ function redirect($uri) {
  * Render Template
  * Renders a Template in Mustache
  *
- * @param string $tmp     Template
+ * @param string $tpl     Template
  * @param array  $context Placeholder context
  * @param string $title   Page title
  *
  * @return false|string
  */
-function render($tmp, $context, $title = 'Extractor') {
-    if (!isset($tmp) || isset($context)) {
+function render($tpl, $context, $title = 'Extractor') {
+    if (!isset($tpl) || !isset($context)) {
         return false;
     }
 
-    if (!file_exists('templates/partial/' . $tmp . '.mustache')) {
+    if (!file_exists(__DIR__ . DS . 'templates' . DS . $tpl . '.mustache')) {
         return false;
     }
 
@@ -225,31 +225,31 @@ function render($tmp, $context, $title = 'Extractor') {
     $context['VERSION'] = VERSION;
     $context['navlinks'] = array(
         array(
-            'active' => ($tmp == 'matchList' || $tmp === 'matchForm'),
+            'active' => ($tpl == 'matchList' || $tpl === 'matchForm'),
             'link'   => 'match',
             'icon'   => 'view_list',
             'name'   => 'Match'
         ),
         array(
-            'active' => ($tmp == 'pitList' || $tmp === 'pitForm'),
+            'active' => ($tpl == 'pitList' || $tpl === 'pitForm'),
             'link'   => 'pit',
             'icon'   => 'view_list',
             'name'   => 'Pit'
         ),
         array(
-            'active' => ($tmp == 'transfer' || $tmp === 'transferDisplay'),
+            'active' => ($tpl == 'transfer' || $tpl === 'transferDisplay'),
             'link'   => 'transfer',
             'icon'   => 'present_to_all',
             'name'   => 'Transfer'
         ),
         array(
-            'active' => ($tmp == 'schedule'),
+            'active' => ($tpl == 'schedule'),
             'link'   => 'schedule',
             'icon'   => 'list',
             'name'   => 'Schedule'
         ),
         array(
-            'active' => ($tmp == 'about' || $tmp === 'config'),
+            'active' => ($tpl == 'about' || $tpl === 'config'),
             'link'   => 'about',
             'icon'   => 'phonelink_setup',
             'name'   => 'About'
@@ -257,10 +257,10 @@ function render($tmp, $context, $title = 'Extractor') {
     );
 
     $mustache = new Mustache_Engine(array(
-        'loader'          => new Mustache_Loader_FilesystemLoader('templates/'),
-        'partials_loader' => new Mustache_Loader_FilesystemLoader('templates/partial')
+        'loader'          => new Mustache_Loader_FilesystemLoader(__DIR__ . DS . 'templates'),
+        'partials_loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . DS . 'templates' . DS . 'partial')
     ));
-    $render = $mustache->loadTemplate($tmp);
+    $render = $mustache->loadTemplate($tpl);
 
     return $render->render($context);
 }
@@ -351,5 +351,9 @@ $routingArray = array(
 );
 
 if (!Router::process($routingArray)) {
+    $pre = Router::preProcess();
+    if (preg_match('/^.{1,}\..{1,}$/', $pre) && file_exists(__DIR__ . DS . $pre)) {
+        return false;
+    }
     return404();
 }

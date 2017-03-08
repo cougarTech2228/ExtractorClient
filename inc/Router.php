@@ -37,7 +37,7 @@ class Router {
      *
      * @return string Processed URI
      */
-    private static function preProcess() {
+    public static function preProcess() {
         $requestURI = substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), strlen(BASEURI));
         $requestURI = strtok($requestURI, '?');
 

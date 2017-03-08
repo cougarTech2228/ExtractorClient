@@ -4,25 +4,20 @@
         <div class="col s12">
             <h1>Match List</h1>
 
-            <table class="striped">
-                <thead>
-                <tr>
-                    <th data-field="matchNum">Match List</th>
-                    <th data-field="selectedTeam">{{team}}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ul class="collection with-header">
-                    {{#matches}}
-                        <li class="collection-item"><a href="{{BASEURI}}match/{{match}}">
-                            <div>Match &num;{{match}}
-                                <div class="secondary-content">{{teamNum}}</div>
-                            </div>
-                        </a></li>
-                    {{/matches}}
-                </ul>
-                </tbody>
-            </table>
+            <ul class="collection with-header">
+                <li class="collection-item">
+                    <div>Match #
+                        <div class="secondary-content">{{team}}</div>
+                    </div>
+                </li>
+                {{#matches}}
+                    <li class="collection-item"><a href="{{BASEURI}}match/{{match}}">
+                        <div>Match &num;{{match}}
+                            <div class="secondary-content">{{teamNum}}</div>
+                        </div>
+                    </a></li>
+                {{/matches}}
+            </ul>
         </div>
     </div>
 </div>
