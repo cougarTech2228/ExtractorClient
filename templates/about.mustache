@@ -4,14 +4,34 @@
         <div class="col s12">
             <h1>About</h1>
             <ul class="collection with-header">
-                <li class="collection-item"><div><i class="material-icons">info</i> Version<div class="secondary-content">{{VERSION}}</div></div></li>
-                <li class="collection-item"><div><i class="material-icons">perm_device_information</i> Device ID<div class="secondary-content">{{deviceID}}</div></div></li>
-                <li class="collection-item"><div><i class="material-icons">input</i> Configured Team<div class="secondary-content">{{team}}</div></div></li>
-                <li class="collection-item"><div><i class="material-icons">av_timer</i> Current Match<div class="secondary-content">{{currentMatch}}</div></div></li>
-                <li class="collection-item"><div><i class="material-icons">av_timer</i> QR Swap Rate<div class="secondary-content">{{qrRateMS}}</div></div></li>
+                <li class="collection-item">
+                    <div>Version: {{VERSION}}
+                        <div class="secondary-content"><i class="material-icons">info</i></div>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>Device ID: {{deviceID}}
+                        <div class="secondary-content"><i class="material-icons">perm_device_information</i></div>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>Configured Team: <span style="color: {{{teamColor}}};">{{team}}</span>
+                        <div class="secondary-content"><i class="material-icons">input</i></div>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>Current Match: {{currentMatch}}
+                        <div class="secondary-content"><i class="material-icons">av_timer</i></div>
+                    </div>
+                </li>
+                <li class="collection-item">
+                    <div>QR Swap Rate: {{qrRateMS}}
+                        <div class="secondary-content"><i class="material-icons">av_timer</i></div>
+                    </div>
+                </li>
             </ul>
 
-            <a class="waves-effect waves-light btn-large center"><i class="material-icons left">system_update_alt</i> Hot Swap Config</a>
+            <a class="waves-effect waves-light btn-large center" href="{{BASEURI}}config"><i class="material-icons left">system_update_alt</i> Hot Swap Config</a>
         </div>
     </div>
 </div>
