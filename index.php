@@ -182,8 +182,7 @@ function config($param) {
 function return404() {
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
 
-    // TODO: Add 404 template.
-    echo render('404', array());
+    echo render('404', array(), '404');
 
     return;
 }
