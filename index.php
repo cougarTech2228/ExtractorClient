@@ -126,26 +126,18 @@ function about($param) {
 }
 
 /**
- *  pit List
+ *  Pit List Controller
  *  stores list of team pits
  *
- * @param $param
+ * @param array $param Router input
  */
 function pitList($param) {
     unset($param);
 
     $ec = new ExtractorConfig();
 
-    $pitList = array();
-    foreach ($ec->getConfig('pit') as $pit) {
-        $pitList[] = array(
-            'teamNum' => $pit[$ec->getConfig('team')]
-
-        );
-    }
-
     $context = array(
-        'team'    => ExtractorUtil::teamNiceName($ec->getConfig('team')),
+        'pits' => $ec->getConfig('pit')
     );
 
     echo render('pitList', $context, 'Pit List');

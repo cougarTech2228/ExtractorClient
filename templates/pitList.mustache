@@ -10,13 +10,13 @@
                         <div class="secondary-content">Team</div>
                     </div>
                 </li>
-                {{#matches}}
-                    <li class="collection-item"><a href="{{BASEURI}}pit/{{teamNum}}">
+                {{#pits}}
+                    <li class="collection-item"><a href="{{BASEURI}}pit/{{team}}">
                         <div>Pit Data
-                            <div class="secondary-content">{{teamNum}}</div>
+                            <div class="secondary-content">{{team}}</div>
                         </div>
                     </a></li>
-                {{/matches}}
+                {{/pits}}
             </ul>
         </div>
     </div>
