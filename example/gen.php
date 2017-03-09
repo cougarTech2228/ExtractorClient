@@ -24,6 +24,14 @@ $a = array(
             'blue2' => 2211,
             'blue3' => 3321
         )
+    ),
+    'pit'          => array(
+        array(
+            'team' => 2228,
+        ),
+        array(
+            'team' => 118,
+        ),
     )
 );
 
