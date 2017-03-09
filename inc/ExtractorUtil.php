@@ -13,19 +13,29 @@ class ExtractorUtil {
      * @return string
      */
     public static function teamNiceName($identifier) {
-        switch ($identifier) {
-            case 'red1':
-            case 'red2':
-            case 'red3':
-            case 'blue1':
-            case 'blue2':
-            case 'blue3':
-                preg_match('/^(red|blue)([1-3])$/', $identifier, $match);
+        preg_match('/^(red|blue)([1-3])$/', $identifier, $match);
 
-                return ucfirst($match[1]) . $match[2];
-                break;
-            default;
-                return 'Unknown';
+        return ucfirst($match[1]) . $match[2];
+    }
+
+    /**
+     * Team Color
+     * Returns color of the team.
+     *
+     * @param string $identifier
+     *
+     * @return string
+     */
+    public static function teamColor($identifier) {
+        preg_match('/^(red|blue)[1-3]$/', $identifier, $match);
+
+        switch ($match[1]) {
+            case 'red':
+                return 'rgb(255,0,0)';
+            case 'blue':
+                return 'rgb(0,0,255)';
+            default:
+                return 'rgb(53,53,53)';
         }
     }
 }
