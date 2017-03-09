@@ -126,8 +126,8 @@ function about($param) {
 }
 
 /**
- *  Pit List Controller
- *  stores list of team pits
+ * Pit List Controller
+ * Lists pit data the user is responsible for.
  *
  * @param array $param Router input
  */
@@ -149,8 +149,22 @@ function pitScouting($param) {
 
 }
 
+/**
+ * Transfer Controller
+ * Returns the confirm page for beginning data transfer.
+ *
+ * @param array $param Router input
+ */
 function transfer($param) {
+    unset($param);
 
+    $context = array(
+        'qrs' => ''
+    );
+
+    echo render('transfer', $context, 'Transfer');
+
+    return;
 }
 
 function transferDisplay($param) {
