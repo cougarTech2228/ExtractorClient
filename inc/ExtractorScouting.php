@@ -17,13 +17,11 @@ class ExtractorScouting {
         $this->type = $type;
         $this->key = $key;
 
-        $fetch = ExtractorStorage::fetch($this->type, $this->key);
+        $this->data = ExtractorStorage::fetch($this->type, $this->key);
 
-        if (!$fetch) {
+        if ($this->data === false) {
             $this->data = array();
         }
-
-        $this->data = $fetch;
     }
 
     /**
