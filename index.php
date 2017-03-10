@@ -367,7 +367,7 @@ $routingArray = array(
     array(
         'method' => 'get',
         'func'   => 'matchForm',
-        'uri'    => 'match\/([0-9]{1,})'
+        'uri'    => 'match\/([0-9]{1,}|blank)'
     ),
 
     // Match list
@@ -402,7 +402,7 @@ $routingArray = array(
     array(
         'method' => 'get',
         'func'   => 'pitScouting',
-        'uri'    => 'pit\/([0-9]{1,})'
+        'uri'    => 'pit\/([0-9]{1,}|blank)'
     ),
 
     // Transfer
