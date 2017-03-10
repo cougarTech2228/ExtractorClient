@@ -95,7 +95,7 @@ class ExtractorConfig {
         // Scan for files.
         $files = scandir(DATASEARCHPATH);
         foreach ($files as $file) {
-            if (is_file($file) && $file === 'config.json') {
+            if (is_file(DATASEARCHPATH . $file) && $file === 'config.json') {
                 $new = file_get_contents(DATASEARCHPATH . $file);
                 $new = json_decode($new, true);
 

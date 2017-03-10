@@ -7,7 +7,7 @@ define('BASEURL', 'http://localhost:9999');
 define('BASEURI', '/');
 define('DS', DIRECTORY_SEPARATOR);
 define('DATADIR', __DIR__ . DS . 'data' . DS);
-define('DATASEARCHPATH', DS . 'storage' . DS . 'sdcard1' . DS . 'Extractor');
+define('DATASEARCHPATH', DS . 'storage' . DS . 'sdcard1' . DS . 'Extractor' . DS);
 define('CONFIG', DATADIR . 'config.json');
 define('VERSION', '0.0.0');
 
