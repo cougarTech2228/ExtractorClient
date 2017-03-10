@@ -29,7 +29,13 @@ class ExtractorTransferUtil {
     public static function setTransferred($cat, $key, $isTransferred) {
         $list = ExtractorStorage::fetch('sys', 'notTransferred');
 
-        if (!$isTransferred) {
+        // Prep if it doesn't exist.
+        if ($list === false) {
+            $list = array();
+        }
+
+        // Add if not transferred, else remove.
+        if (!$isTransferred && !in_array($key, $list[$cat])) {
             $list[$cat][] = $key;
         } else {
             $arrayKey = array_search($key, $list[$cat]);
