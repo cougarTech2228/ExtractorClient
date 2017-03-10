@@ -159,9 +159,9 @@ function transferDisplay($param) {
     // Set key num.
     $k = 1;
     // Iterate through cat.
-    foreach (ExtractorTransferUtil::listNotTransferred() as $cat) {
+    foreach (ExtractorTransferUtil::listNotTransferred() as $cat => $items) {
         // Iterate through data.
-        foreach ($cat as $item) {
+        foreach ($items as $item) {
             $es = new ExtractorScouting($cat, $item);
 
             /** @noinspection PhpVoidFunctionResultUsedInspection */
