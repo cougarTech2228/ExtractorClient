@@ -5,6 +5,9 @@
         <div class="col s12">
             <h1>Match List</h1>
 
+            <a class="waves-effect waves-light btn-large" href="{{BASEURI}}match/current"><i class="material-icons left">skip_next</i> Jump to Current Match</a>
+            <a class="btn-floating btn-large waves-effect waves-light right" href="{{BASEURI}}match/blank"><i class="material-icons">add</i></a>
+
             <ul class="collection with-header">
                 <li class="collection-item">
                     <div>Match &num;
@@ -12,7 +15,7 @@
                     </div>
                 </li>
                 {{#matches}}
-                    <li class="collection-item"><a href="{{BASEURI}}match/{{match}}">
+                    <li class="collection-item{{#current}} green lighten-3{{/current}}"><a href="{{BASEURI}}match/{{match}}">
                         <div>Match &num;{{match}}
                             <div class="secondary-content" style="color: {{{teamColor}}};">{{teamNum}}</div>
                         </div>
