@@ -158,17 +158,78 @@ function pitScouting($param) {
 function transfer($param) {
     unset($param);
 
-    $context = array(
-        'qrs' => ''
-    );
-
-    echo render('transfer', $context, 'Transfer');
+    echo render('transfer', array(), 'Transfer');
 
     return;
 }
 
+/**
+ * Transfer Display Controller
+ *
+ * @param array $param Router input
+ */
 function transferDisplay($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    // If nothing is left to transfer, fail silently.
+    if (ExtractorTransferUtil::listNotTransferred() === false) {
+        redirect('transfer');
+
+        return;
+    }
+
+    $context = array(
+        'qrMS' => $ec->getConfig('qrRateMS'),
+        'qrs'  => array()
+    );
+
+    // Set key num.
+    $k = 1;
+    // Iterate through cat.
+    foreach (ExtractorTransferUtil::listNotTransferred() as $cat) {
+        // Iterate through data.
+        foreach ($cat as $item) {
+            $es = new ExtractorScouting($cat, $item);
+
+            $context['qrs'][] = array(
+                'key' => $k,
+                'src' => ExtractorQR::uri($es->csv())
+            );
+
+            $k++;
+        }
+    }
+
+    $context['qrs'][] = array(
+        'key' => 0,
+        'src' => ExtractorQR::start($k - 1)
+    );
+
+    echo render('transferDisplay', $context, 'Transfer');
+
+    return;
+}
+
+/**
+ * Transfer Finished Controller
+ *
+ * @param array $param Router input
+ */
+function transferFinished($param) {
+    unset($param);
+
+    // Fail silently if there is no data.
+    if (ExtractorTransferUtil::listNotTransferred() === false) {
+        redirect('transfer');
+
+        return;
+    }
+
+    ExtractorTransferUtil::setAllTransferred();
+
+    redirect('transfer');
 }
 
 function matchSubmit($param) {
