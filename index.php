@@ -179,8 +179,31 @@ function pitSubmit($param) {
 
 }
 
+/**
+ * Config Controller
+ * When loaded, the hot swap config location is pulled and returns a message.
+ *
+ * @param array $param Router input
+ */
 function config($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+    $check = $ec->fullLoad();
+
+    if ($check) {
+        $context = array(
+            'msg' => 'It worked! The new configuration has been saved.'
+        );
+    } else {
+        $context = array(
+            'msg' => 'Could not find the configuration file. Are you sure the config is in the right place?'
+        );
+    }
+
+    echo render('config', $context, 'Config');
+
+    return;
 }
 
 /**
