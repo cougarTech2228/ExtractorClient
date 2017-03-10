@@ -20,11 +20,11 @@
                     <h3>Autonomous</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_baseline" name="autoBaseline" type="checkbox" value="true" {{autoBaseline}}>
+                            <input id="auto_baseline" name="autoBaseline" type="checkbox" value="true" {{#autoBaseline}}checked{{/autoBaseline}}>
                             <label for="auto_baseline">Broke baseline</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="auto_gear" name="autoGear" type="checkbox" value="true" {{autoGear}}>
+                            <input id="auto_gear" name="autoGear" type="checkbox" value="true" {{#autoGear}}checked{{/autoGear}}>
                             <label for="auto_gear">Delivered gear</label>
                         </div>
                     </div>
@@ -61,38 +61,38 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" value="true" {{teleTookOff}}>
+                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" value="true" {{#teleTookOff}}checked{{/teleTookOff}}>
                             <label for="tele_tookoff">Took off</label>
                         </div>
                     </div>
                     <h3>Tags</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_no_show" name="tagNoShow" type="checkbox" value="true" {{tagNoShow}}>
+                            <input id="tag_no_show" name="tagNoShow" type="checkbox" value="true" {{#tagNoShow}}checked{{/tagNoShow}}>
                             <label for="tag_no_show">No Show</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_no_move" name="tagNoMove" type="checkbox" value="true" {{tagNoMove}}>
+                            <input id="tag_no_move" name="tagNoMove" type="checkbox" value="true" {{#$tagNoMove}}checked{{/$tagNoMove}}>
                             <label for="tag_no_move">Didn't move</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_flipped" name="tagFlipped" type="checkbox" value="true" {{tagFlipped}}>
+                            <input id="tag_flipped" name="tagFlipped" type="checkbox" value="true" {{#tagFlipped}}checked{{/tagFlipped}}>
                             <label for="tag_flipped">Flipped</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_stuck" name="tagStuck" type="checkbox" value="true" {{tagStuck}}>
+                            <input id="tag_stuck" name="tagStuck" type="checkbox" value="true" {{#tagStuck}}checked{{/tagStuck}}>
                             <label for="tag_stuck">Stuck</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_fell" name="tagFell" type="checkbox" value="true" {{tagFell}}>
+                            <input id="tag_fell" name="tagFell" type="checkbox" value="true" {{#tagFell}}checked{{/tagFell}}>
                             <label for="tag_fell">Fell</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_penalized" name="tagPenalized" type="checkbox" value="true" {{tagPenalized}}>
+                            <input id="tag_penalized" name="tagPenalized" type="checkbox" value="true" {{#tagPenalized}}checked{{/tagPenalized}}>
                             <label for="tag_penalized">Penalized</label>
                         </div>
                     </div>
@@ -100,19 +100,19 @@
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_confused" value="confused" {{prefConfused}}>
+                                <input class="with-gap" name="performance" type="radio" id="pref_confused" value="confused" {{#prefConfused}}checked{{/prefConfused}}>
                                 <label for="pref_confused">Confused</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_slow" value="slow" {{prefSlow}}>
+                                <input class="with-gap" name="performance" type="radio" id="pref_slow" value="slow" {{#prefSlow}}checked{{/prefSlow}}>
                                 <label for="pref_slow">Slow</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_efficient" value="efficient" {{prefEfficient}}>
+                                <input class="with-gap" name="performance" type="radio" id="pref_efficient" value="efficient" {{#prefEfficient}}checked{{/prefEfficient}}>
                                 <label for="pref_efficient">Efficient</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_powerhouse" value="powerhouse" {{prefPowerhouse}}>
+                                <input class="with-gap" name="performance" type="radio" id="pref_powerhouse" value="powerhouse" {{#prefPowerhouse}}checked{{/prefPowerhouse}}>
                                 <label for="pref_powerhouse">Powerhouse</label>
                             </p>
                         </div>
