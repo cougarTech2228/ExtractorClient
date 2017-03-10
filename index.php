@@ -239,6 +239,26 @@ function transferFinished($param) {
 
 function matchSubmit($param) {
 
+/**
+ * Current Match Controller
+ * Redirects to the current match.
+ *
+ * @param array $param Router input
+ */
+function currentMatch($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    if (in_array($ec->getConfig('currentMatch'), array_column($ec->getConfig('matches'), 'match'))) {
+        redirect('match/' . $ec->getConfig('currentMatch'));
+
+        return;
+    }
+
+    redirect('match/blank');
+
+    return;
 }
 
 function pitSubmit($param) {
@@ -374,7 +394,12 @@ $routingArray = array(
         'func'   => 'matchForm',
         'uri'    => 'match\/([0-9]{1,}|blank)'
     ),
-
+    // Current match
+    array(
+        'method' => 'get',
+        'func'   => 'currentMatch',
+        'uri'    => 'match\/current'
+    ),
     // Match list
     array(
         'method' => 'get',

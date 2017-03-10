@@ -12,7 +12,7 @@ class ExtractorConfig {
     protected $defaults = array(
         'deviceID'     => 1,
         'team'         => 'red1',
-        'currentMatch' => 1,
+        'currentMatch' => 0,
         'qrRateMS'     => 1000,
         'matches'      => array(),
         'pit'          => array()
