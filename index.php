@@ -119,7 +119,7 @@ function about($param) {
 
     $context = array(
         'deviceID'     => $ec->getConfig('deviceID'),
-        'team'         => $ec->getConfig('team'),
+        'team'         => ExtractorUtil::teamNiceName($ec->getConfig('team')),
         'teamColor'    => ExtractorUtil::teamColor($ec->getConfig('team')),
         'currentMatch' => $ec->getConfig('currentMatch'),
         'qrRateMS'     => $ec->getConfig('qrRateMS')
