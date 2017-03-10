@@ -7,6 +7,18 @@ class ExtractorConfig {
     private $config;
 
     /**
+     * @var array Array of default config values.
+     */
+    protected $defaults = array(
+        'deviceID'     => 1,
+        'team'         => 'red1',
+        'currentMatch' => 1,
+        'qrRateMS'     => 1000,
+        'matches'      => array(),
+        'pit'          => array()
+    );
+
+    /**
      * ExtractorClient constructor.
      * Pre-loads config.
      */
@@ -21,8 +33,14 @@ class ExtractorConfig {
      * @return true
      */
     private function loadConfig() {
-        $this->config = file_get_contents(CONFIG);
-        $this->config = json_decode($this->config, true);
+
+        if (file_exists(CONFIG)) {
+            $this->config = file_get_contents(CONFIG);
+            $this->config = json_decode($this->config, true);
+            $this->config = array_merge($this->defaults, $this->config);
+        } else {
+            $this->config = $this->defaults;
+        }
 
         return true;
     }
@@ -94,20 +112,19 @@ class ExtractorConfig {
 
         // Scan for files.
         $files = scandir(DATASEARCHPATH);
-        foreach ($files as $file) {
-            if (is_file(DATASEARCHPATH . $file) && $file === 'config.json') {
-                $new = file_get_contents(DATASEARCHPATH . $file);
-                $new = json_decode($new, true);
 
-                if (!is_array($new)) {
-                    return false;
-                }
+        if (in_array('config.json', $files) && is_file(DATASEARCHPATH . 'config.json')) {
+            $new = file_get_contents(DATASEARCHPATH . 'config.json');
+            $new = json_decode($new, true);
 
-                $this->config = $new;
-                $this->saveConfig();
-
-                return true;
+            if (!is_array($new)) {
+                return false;
             }
+
+            $this->config = array_merge($this->defaults, $this->config, $new);
+            $this->saveConfig();
+
+            return true;
         }
 
         return false;
