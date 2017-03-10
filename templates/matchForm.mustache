@@ -9,22 +9,22 @@
                 <form class="col s12" action="{{BASEURI}}post/match" method="post">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate" value="{{match}}" min="0" required disabled>
+                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate" value="{{match}}" min="0" required {{#matchDisable}}disabled{{/matchDisable}}>
                             <label for="match_number">Match Number</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate" value="{{team}}" min="0" required disabled>
-                            <label for="match_number">Team Number</label>
+                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate" value="{{team}}" min="0" required {{#teamDisable}}disabled{{/teamDisable}}>
+                            <label for="team_number">Team Number</label>
                         </div>
                     </div>
                     <h3>Autonomous</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_baseline" name="autoBaseline" type="checkbox" {{autoBaseline}}>
+                            <input id="auto_baseline" name="autoBaseline" type="checkbox" value="true" {{autoBaseline}}>
                             <label for="auto_baseline">Broke baseline</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="auto_gear" name="autoGear" type="checkbox" {{autoGear}}>
+                            <input id="auto_gear" name="autoGear" type="checkbox" value="true" {{autoGear}}>
                             <label for="auto_gear">Delivered gear</label>
                         </div>
                     </div>
@@ -61,38 +61,38 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" {{teleTookOff}}>
+                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" value="true" {{teleTookOff}}>
                             <label for="tele_tookoff">Took off</label>
                         </div>
                     </div>
                     <h3>Tags</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_no_show" name="tagNoShow" type="checkbox" {{tagNoShow}}>
+                            <input id="tag_no_show" name="tagNoShow" type="checkbox" value="true" {{tagNoShow}}>
                             <label for="tag_no_show">No Show</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_no_move" name="tagNoMove" type="checkbox" {{tagNoMove}}>
+                            <input id="tag_no_move" name="tagNoMove" type="checkbox" value="true" {{tagNoMove}}>
                             <label for="tag_no_move">Didn't move</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_flipped" name="tagFlipped" type="checkbox" {{tagFlipped}}>
+                            <input id="tag_flipped" name="tagFlipped" type="checkbox" value="true" {{tagFlipped}}>
                             <label for="tag_flipped">Flipped</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_stuck" name="tagStuck" type="checkbox" {{tagStuck}}>
+                            <input id="tag_stuck" name="tagStuck" type="checkbox" value="true" {{tagStuck}}>
                             <label for="tag_stuck">Stuck</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_fell" name="tagFell" type="checkbox" {{tagFell}}>
+                            <input id="tag_fell" name="tagFell" type="checkbox" value="true" {{tagFell}}>
                             <label for="tag_fell">Fell</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_penalized" name="tagPenalized" type="checkbox" {{tagPenalized}}>
+                            <input id="tag_penalized" name="tagPenalized" type="checkbox" value="true" {{tagPenalized}}>
                             <label for="tag_penalized">Penalized</label>
                         </div>
                     </div>
