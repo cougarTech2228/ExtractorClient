@@ -36,7 +36,7 @@ class ExtractorTransferUtil {
             unset($list[$cat][$arrayKey]);
         }
 
-        ExtractorStorage::store('sys', 'notTransferred', $list);
+        ExtractorStorage::store('sys', 'notTransferred', array_values($list));
 
         return true;
     }
