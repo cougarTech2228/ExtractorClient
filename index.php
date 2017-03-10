@@ -388,11 +388,23 @@ $routingArray = array(
         'func'   => 'index',
         'uri'    => ''
     ),
-    // Scouting form
+    // Match list
+    array(
+        'method' => 'get',
+        'func'   => 'matchList',
+        'uri'    => 'match'
+    ),
+    // Match form
     array(
         'method' => 'get',
         'func'   => 'matchForm',
         'uri'    => 'match\/([0-9]{1,}|blank)'
+    ),
+    // Match data handler
+    array(
+        'method' => 'post',
+        'func'   => 'matchSubmit',
+        'uri'    => 'post\/match'
     ),
     // Current match
     array(
@@ -400,69 +412,60 @@ $routingArray = array(
         'func'   => 'currentMatch',
         'uri'    => 'match\/current'
     ),
-    // Match list
-    array(
-        'method' => 'get',
-        'func'   => 'matchList',
-        'uri'    => 'match'
-    ),
-
-    // Schedule
-    array(
-        'method' => 'get',
-        'func'   => 'schedule',
-        'uri'    => 'schedule'
-    ),
-
-    // About
-    array(
-        'method' => 'get',
-        'func'   => 'about',
-        'uri'    => 'about'
-    ),
-
     // Pit list
     array(
         'method' => 'get',
         'func'   => 'pitList',
         'uri'    => 'pit'
     ),
-
     // Pit form
     array(
         'method' => 'get',
         'func'   => 'pitScouting',
         'uri'    => 'pit\/([0-9]{1,}|blank)'
     ),
-
-    // Transfer
-    array(
-        'method' => 'get',
-        'func'   => 'transfer',
-        'uri'    => 'transfer'
-    ),
-
-    // Transfer Begin
-    array(
-        'method' => 'get',
-        'func'   => 'transferDisplay',
-        'uri'    => 'transfer\/display'
-    ),
-
-    // Match data handler
-    array(
-        'method' => 'post',
-        'func'   => 'matchSubmit',
-        'uri'    => 'post\/match'
-    ),
-
     // Pit data handler
     array(
         'method' => 'post',
         'func'   => 'pitSubmit',
         'uri'    => 'post\/pit'
     ),
-
+    // Current pit form TODO
+    array(
+        'method' => 'get',
+        'func'   => '',
+        'uri'    => 'pit\/current'
+    ),
+    // Transfer
+    array(
+        'method' => 'get',
+        'func'   => 'transfer',
+        'uri'    => 'transfer'
+    ),
+    // Transfer Begin
+    array(
+        'method' => 'get',
+        'func'   => 'transferDisplay',
+        'uri'    => 'transfer\/display'
+    ),
+    // Transfer finish
+    array(
+        'method' => 'get',
+        'func'   => 'transferFinished',
+        'uri'    => 'transfer\/finished'
+    ),
+    // Schedule
+    array(
+        'method' => 'get',
+        'func'   => 'schedule',
+        'uri'    => 'schedule'
+    ),
+    // About
+    array(
+        'method' => 'get',
+        'func'   => 'about',
+        'uri'    => 'about'
+    ),
     // Configuration
     array(
         'method' => 'get',
