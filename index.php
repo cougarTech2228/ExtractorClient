@@ -40,42 +40,7 @@ foreach ($files as $file) {
 function index($param) {
     unset($param);
 
-    redirect('match');
-
-    return;
-}
-
-function matchForm($param) {
-
-}
-
-/**
- * Match List Controller
- * Outputs the schedule page render.
- * TODO: Add current match highlight.
- *
- * @param array $param Router input
- */
-function matchList($param) {
-    unset($param);
-
-    $ec = new ExtractorConfig();
-
-    $matches = array();
-    foreach ($ec->getConfig('matches') as $match) {
-        $matches[] = array(
-            'match'   => $match['match'],
-            'teamNum' => $match[$ec->getConfig('team')]
-        );
-    }
-
-    $context = array(
-        'team'      => ExtractorUtil::teamNiceName($ec->getConfig('team')),
-        'teamColor' => ExtractorUtil::teamColor($ec->getConfig('team')),
-        'matches'   => $matches
-    );
-
-    echo render('matchList', $context, 'Match List');
+    redirect('schedule');
 
     return;
 }
@@ -170,6 +135,7 @@ function transfer($param) {
 
 /**
  * Transfer Display Controller
+ * Processes the QRs to display.
  *
  * @param array $param Router input
  */
@@ -198,6 +164,7 @@ function transferDisplay($param) {
         foreach ($cat as $item) {
             $es = new ExtractorScouting($cat, $item);
 
+            /** @noinspection PhpVoidFunctionResultUsedInspection */
             $context['qrs'][] = array(
                 'key' => $k,
                 'src' => ExtractorQR::uri($es->csv())
@@ -219,6 +186,7 @@ function transferDisplay($param) {
 
 /**
  * Transfer Finished Controller
+ * Internally clears the not transferred list to avoid sending more data than we have to.
  *
  * @param array $param Router input
  */
@@ -237,7 +205,182 @@ function transferFinished($param) {
     redirect('transfer');
 }
 
+/**
+ * Match List Controller
+ * Outputs the schedule page render.
+ *
+ * @param array $param Router input
+ */
+function matchList($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    $matches = array();
+    foreach ($ec->getConfig('matches') as $match) {
+        $matches[] = array(
+            'match'   => $match['match'],
+            'teamNum' => $match[$ec->getConfig('team')],
+            'current' => ($ec->getConfig('currentMatch') === $match['match'])
+        );
+    }
+
+    // Handle any extra matches.
+    $extra = ExtractorStorage::fetch('sys', 'extraMatches');
+    if ($extra !== false) {
+        foreach ($extra as $match) {
+            $matches[] = array(
+                'match'   => $match['match'],
+                'teamNum' => $match[$ec->getConfig('team')],
+                'current' => ($ec->getConfig('currentMatch') === $match['match'])
+            );
+        }
+    }
+
+    $context = array(
+        'team'      => ExtractorUtil::teamNiceName($ec->getConfig('team')),
+        'teamColor' => ExtractorUtil::teamColor($ec->getConfig('team')),
+        'matches'   => $matches,
+    );
+
+    echo render('matchList', $context, 'Match List');
+
+    return;
+}
+
+function matchForm($param) {
+    // Config instance.
+    $ec = new ExtractorConfig();
+
+    // Set defaults.
+    $defaults = array(
+        'match'          => '',
+        'team'           => '',
+        'autoBaseline'   => '',
+        'autoGear'       => '',
+        'autoFuelHigh'   => '',
+        'autoFuelLow'    => '',
+        'teleFuelHigh'   => '',
+        'teleFuelLow'    => '',
+        'teleGears'      => '',
+        'teleTookOff'    => false,
+        'tagNoShow'      => false,
+        'tagNoMove'      => false,
+        'tagFlipped'     => false,
+        'tagStuck'       => false,
+        'tagFell'        => false,
+        'tagPenalized'   => false,
+        'prefConfused'   => false,
+        'prefSlow'       => false,
+        'prefEfficient'  => false,
+        'prefPowerhouse' => false
+    );
+
+    if ($param[1] !== 'blank') {
+        // Search if data is in the matches config key.
+        $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'match'));
+
+        $es = new ExtractorScouting('match', $param[1]);
+        $data = $es->get();
+
+        // Merge data with defaults.
+        $data = array_merge($defaults, $data);
+
+
+        if (array_key_exists('performance', $data)) {
+            $data['pref' . ucfirst($data['performance'])] = true;
+        }
+
+        $context = $data;
+    } else {
+        $context = $defaults;
+    }
+
+
+    echo render('matchForm', $context, 'Match Form');
+
+    return;
+}
+
+/**
+ * Match Submission Controller
+ * Handles incoming data from the match form.
+ *
+ * @param array $param Router input
+ */
 function matchSubmit($param) {
+    unset($param);
+
+    // Validation array.
+    $validate = array(
+        'match'        => FILTER_VALIDATE_INT,
+        'team'         => FILTER_VALIDATE_INT,
+        'autoBaseline' => FILTER_VALIDATE_BOOLEAN,
+        'autoGear'     => FILTER_VALIDATE_BOOLEAN,
+        'autoFuelHigh' => FILTER_VALIDATE_INT,
+        'autoFuelLow'  => FILTER_VALIDATE_INT,
+        'teleFuelHigh' => FILTER_VALIDATE_INT,
+        'teleFuelLow'  => FILTER_VALIDATE_INT,
+        'teleGears'    => FILTER_VALIDATE_INT,
+        'teleTookOff'  => FILTER_VALIDATE_BOOLEAN,
+        'tagNoShow'    => FILTER_VALIDATE_BOOLEAN,
+        'tagNoMove'    => FILTER_VALIDATE_BOOLEAN,
+        'tagFlipped'   => FILTER_VALIDATE_BOOLEAN,
+        'tagStuck'     => FILTER_VALIDATE_BOOLEAN,
+        'tagFell'      => FILTER_VALIDATE_BOOLEAN,
+        'tagPenalized' => FILTER_VALIDATE_BOOLEAN,
+        'performance'  => null
+    );
+
+    $data = filter_input_array(INPUT_POST, $validate, true);
+
+    // Filter data to correct for PHP's filtering.
+    foreach ($data as $k => $v) {
+        if ($v === null) {
+            switch ($validate[$k]) {
+                case FILTER_VALIDATE_INT:
+                    $data[$k] = 0;
+                    break;
+                case FILTER_VALIDATE_BOOLEAN:
+                    $data[$k] = false;
+                    break;
+                case null:
+                    $data[$k] = 'efficient';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if ($v === false && $validate[$k] === FILTER_VALIDATE_INT) {
+            $data[$k] = 0;
+        }
+    }
+
+    $es = new ExtractorScouting('match', $data['match']);
+    $es->set($data);
+    $es->save();
+
+    $ec = new ExtractorConfig();
+
+    $matchKey = array_search($data['match'], array_column($ec->getConfig('matches'), $ec->getConfig('match')));
+
+    if ($matchKey !== false) {
+        // Set current match one up from the last.
+        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 1);
+    } else {
+        $append = array(
+            'match' => $data['match'],
+            'team'  => $data['team']
+        );
+
+        ExtractorStorage::append('sys', 'extraMatches', $append);
+    }
+
+    redirect('match/current');
+
+    return;
+}
 
 /**
  * Current Match Controller
