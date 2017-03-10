@@ -70,12 +70,4 @@ class ExtractorScouting {
     public function csv() {
 //TODO
     }
-
-    /** @noinspection PhpUnusedPrivateMethodInspection */
-    /**
-     * TODO: Validate data array.
-     */
-    private function validate() {
-
-    }
 }
