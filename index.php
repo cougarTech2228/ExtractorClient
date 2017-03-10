@@ -83,7 +83,6 @@ function matchList($param) {
 /**
  * Schedule Controller
  * Outputs the schedule page render.
- * TODO: Add current match highlight.
  *
  * @param array $param Router input
  */
@@ -92,8 +91,14 @@ function schedule($param) {
 
     $ec = new ExtractorConfig();
 
+    $matches = $ec->getConfig('matches');
+
+    foreach ($matches as $k => $match) {
+        $matches[$k]['current'] = ($ec->getConfig('currentMatch') === $match['match']);
+    }
+
     $context = array(
-        'matches' => $ec->getConfig('matches')
+        'matches' => $matches
     );
 
     echo render('schedule', $context, 'Schedule');
