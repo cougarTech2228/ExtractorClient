@@ -363,7 +363,7 @@ function matchSubmit($param) {
 
     $ec = new ExtractorConfig();
 
-    $matchKey = array_search($data['match'], array_column($ec->getConfig('matches'), $ec->getConfig('match')));
+    $matchKey = array_search($data['match'], array_column($ec->getConfig('matches'), 'match'));
 
     if ($matchKey !== false) {
         // Set current match one up from the last.

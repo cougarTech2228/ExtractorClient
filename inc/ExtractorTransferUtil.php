@@ -34,6 +34,10 @@ class ExtractorTransferUtil {
             $list = array();
         }
 
+        if (!array_key_exists($cat, $list)) {
+            $list[$cat] = array();
+        }
+
         // Add if not transferred, else remove.
         if (!$isTransferred && !in_array($key, $list[$cat])) {
             $list[$cat][] = $key;
@@ -42,7 +46,7 @@ class ExtractorTransferUtil {
             unset($list[$cat][$arrayKey]);
         }
 
-        ExtractorStorage::store('sys', 'notTransferred', array_values($list));
+        ExtractorStorage::store('sys', 'notTransferred', $list);
 
         return true;
     }
