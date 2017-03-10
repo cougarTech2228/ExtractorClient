@@ -9,11 +9,11 @@
                 <form class="col s12" action="{{BASEURI}}post/match" method="post">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate" value="{{match}}" min="0" required {{#matchDisable}}disabled{{/matchDisable}}>
+                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate" value="{{match}}" min="0" required>
                             <label for="match_number">Match Number</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate" value="{{team}}" min="0" required {{#teamDisable}}disabled{{/teamDisable}}>
+                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate" value="{{team}}" min="0" required>
                             <label for="team_number">Team Number</label>
                         </div>
                     </div>
