@@ -46,4 +46,22 @@ class ExtractorTransferUtil {
 
         return true;
     }
+
+    /**
+     * Set All Transferred
+     * Removes all not transferred items.
+     *
+     * @return true
+     */
+    public static function setAllTransferred() {
+        $list = ExtractorStorage::fetch('sys', 'notTransferred');
+
+        if ($list === false) {
+            return true;
+        }
+
+        ExtractorStorage::store('sys', 'notTransferred', array());
+
+        return true;
+    }
 }
