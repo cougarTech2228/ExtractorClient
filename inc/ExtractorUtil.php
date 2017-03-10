@@ -15,7 +15,7 @@ class ExtractorUtil {
     public static function teamNiceName($identifier) {
         preg_match('/^(red|blue)([1-3])$/', $identifier, $match);
 
-        return ucfirst($match[1]) . $match[2];
+        return ucfirst($match[1]) . ' ' . $match[2];
     }
 
     /**
