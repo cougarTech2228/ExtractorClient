@@ -40,4 +40,28 @@ class ExtractorStorage {
 
         return json_decode(file_get_contents(DATADIR . $cat . DS . $key . '.json'), true);
     }
+
+    /**
+     * Append to Store
+     * Appends data to the end of a store.
+     *
+     * @param string $cat  Store category
+     * @param string $key  File key
+     * @param array  $data Data array to be appended
+     *
+     * @return bool
+     */
+    public static function append($cat, $key, $data) {
+        $fetch = self::fetch($cat, $key);
+
+        if ($fetch === false) {
+            $fetch = array();
+        }
+
+        $fetch[] = $data;
+
+        self::store($cat, $key, $fetch);
+
+        return true;
+    }
 }
