@@ -266,8 +266,20 @@ function pitList($param) {
 
     $ec = new ExtractorConfig();
 
+    $pits = $ec->getConfig('pit');
+
+    // Handle any extra matches.
+    $extra = ExtractorStorage::fetch('sys', 'extraPits');
+    if ($extra !== false) {
+        foreach ($extra as $pit) {
+            $pits[] = array(
+                'team' => $pit['team']
+            );
+        }
+    }
+
     $context = array(
-        'pits' => $ec->getConfig('pit')
+        'pits' => $pits
     );
 
     echo render('pitList', $context, 'Pit List');
