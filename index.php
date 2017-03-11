@@ -224,6 +224,12 @@ function matchSubmit($param) {
 
         // Check if extra already exists for the match.
         $extra = ExtractorStorage::fetch('sys', 'extraMatches');
+        // Initialize if extraMatches doesn't exist yet.
+        // FIXME: Could use a rework.
+        if ($extra === false) {
+            $extra = array();
+        }
+
         $extraKey = array_search($data['match'], array_column($extra, 'match'));
 
         if ($extraKey === false) {
@@ -449,6 +455,12 @@ function pitSubmit($param) {
 
         // Check if extra already exists for the match.
         $extra = ExtractorStorage::fetch('sys', 'extraPits');
+        // Initialize if extraMatches doesn't exist yet.
+        // FIXME: Could use a rework.
+        if ($extra === false) {
+            $extra = array();
+        }
+
         $extraKey = array_search($data['team'], array_column($extra, 'team'));
 
         if ($extraKey === false) {
