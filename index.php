@@ -156,7 +156,7 @@ function transferDisplay($param) {
         'qrs'  => array()
     );
 
-    // Set key num.
+    // Set key num. Start at 1 because 0 is start key.
     $k = 1;
     // Iterate through cat.
     foreach (ExtractorTransferUtil::listNotTransferred() as $cat => $items) {

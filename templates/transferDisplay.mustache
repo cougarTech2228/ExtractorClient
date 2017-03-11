@@ -18,10 +18,10 @@
     var qrs = new Array();
 
         {{#qrs}}
-        qrs[{{key}}] = "{{src}}";
+        qrs[{{key}}] = "{{{src}}}";
         {{/qrs}}
 
-    var curQR = 0;
+    var curQR = -1;
 
     function nextQR() {
         curQR++;
