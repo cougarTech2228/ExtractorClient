@@ -73,7 +73,7 @@ class ExtractorScouting {
      */
     public function csv() {
         // Check if match data or pit data
-        if (in_array('match', $this->data)) {
+        if (array_key_exists('match', $this->data)) {
             $type = 'match';
             $order = array(
                 'match',
@@ -99,7 +99,24 @@ class ExtractorScouting {
             );
         } else {
             $type = 'pit';
-            $order = array(// TODO
+            $order = array(
+                'team',
+                'autoFuelHigh',
+                'autoFuelLow',
+                'autoGear',
+                'autoBaseline',
+                'autoMultiple',
+                'teleFuelHigh',
+                'teleFuelLow',
+                'teleGear',
+                'teleTakeOff',
+                'driveTrain4',
+                'driveTrain6',
+                'driveTrainTank',
+                'robotCamera',
+                'robotVision',
+                'teleRoleFuel',
+                'teleRoleGear',
             );
         }
 
@@ -111,6 +128,15 @@ class ExtractorScouting {
                 case ($item === 'prefEfficient'):
                 case ($item === 'prefPowerhouse'):
                     $return[] = ($this->data['performance'] === strtolower(substr($item, 4))) ? 1 : 0;
+                    break;
+                case ($item === 'driveTrain4'):
+                case ($item === 'driveTrain6'):
+                case ($item === 'driveTrainTank'):
+                    $return[] = ($this->data['driveTrain'] === strtolower(substr($item, 10))) ? 1 : 0;
+                    break;
+                case ($item === 'teleRoleFuel'):
+                case ($item === 'teleRoleGear'):
+                    $return[] = ($this->data['teleRole'] === strtolower(substr($item, 8))) ? 1 : 0;
                     break;
                 case (is_bool($this->data[$item])):
                     $return[] = ($this->data[$item]) ? 1 : 0;
