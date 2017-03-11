@@ -266,7 +266,7 @@ function pitList($param) {
 
     $ec = new ExtractorConfig();
 
-    $pits = $ec->getConfig('pit');
+    $pits = $ec->getConfig('pits');
 
     // Handle any extra matches.
     $extra = ExtractorStorage::fetch('sys', 'extraPits');

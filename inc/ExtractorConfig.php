@@ -15,7 +15,7 @@ class ExtractorConfig {
         'currentMatch' => 0,
         'qrRateMS'     => 1000,
         'matches'      => array(),
-        'pit'          => array()
+        'pits'         => array()
     );
 
     /**

@@ -25,7 +25,7 @@ $a = array(
             'blue3' => 3321
         )
     ),
-    'pit'          => array(
+    'pits'          => array(
         array(
             'team' => 2228,
         ),
