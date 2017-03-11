@@ -332,12 +332,12 @@ function pitForm($param) {
         $data = array_merge($defaults, $data);
 
         // Handle radio for role.
-        if (array_key_exists('role', $data)) {
+        if (array_key_exists('teleRole', $data)) {
             $data['teleRole' . ucfirst($data['teleRole'])] = true;
         }
 
         // Handle radio for drive train.
-        if (array_key_exists('role', $data)) {
+        if (array_key_exists('driveTrain', $data)) {
             $data['driveTrain' . ucfirst($data['driveTrain'])] = true;
         }
 
