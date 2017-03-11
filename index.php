@@ -300,9 +300,9 @@ function pitForm($param) {
     // Set defaults.
     $defaults = array(
         'team'           => '',
-        'autoMobility'   => false,
         'autoFuelHigh'   => false,
         'autoFuelLow'    => false,
+        'autoBaseline'   => false,
         'autoGear'       => false,
         'autoMultiple'   => false,
         'teleFuelHigh'   => false,
@@ -364,9 +364,9 @@ function pitSubmit($param) {
     // Validation array.
     $validate = array(
         'team'         => FILTER_VALIDATE_INT,
-        'autoMobility' => FILTER_VALIDATE_BOOLEAN,
         'autoFuelHigh' => FILTER_VALIDATE_BOOLEAN,
         'autoFuelLow'  => FILTER_VALIDATE_BOOLEAN,
+        'autoBaseline' => FILTER_VALIDATE_BOOLEAN,
         'autoGear'     => FILTER_VALIDATE_BOOLEAN,
         'autoMultiple' => FILTER_VALIDATE_BOOLEAN,
         'teleFuelHigh' => FILTER_VALIDATE_BOOLEAN,
