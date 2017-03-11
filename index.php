@@ -725,6 +725,12 @@ function render($tpl, $context, $title = 'Extractor') {
             'name'   => 'Pit'
         ),
         array(
+            'active' => ($tpl == 'driverList' || $tpl === 'driverForm'),
+            'link'   => 'driver',
+            'icon'   => 'view_list',
+            'name'   => 'Driver'
+        ),
+        array(
             'active' => ($tpl == 'transfer' || $tpl === 'transferDisplay'),
             'link'   => 'transfer',
             'icon'   => 'present_to_all',
