@@ -220,12 +220,24 @@ function matchSubmit($param) {
         // Set current match one up from the last.
         $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 1);
     } else {
-        $append = array(
-            'match' => $data['match'],
-            'team'  => $data['team']
-        );
+        $ec->setConfig('currentMatch', $data['match'] + 1);
 
-        ExtractorStorage::append('sys', 'extraMatches', $append);
+        // Check if extra already exists for the match.
+        $extra = ExtractorStorage::fetch('sys', 'extraMatches');
+        $extraKey = array_search($data['match'], array_column($extra, 'match'));
+
+        if ($extraKey === false) {
+            $append = array(
+                'match' => $data['match'],
+                'team'  => $data['team']
+            );
+
+            ExtractorStorage::append('sys', 'extraMatches', $append);
+        } else {
+            $extra[$extraKey]['team'] = $data['team'];
+
+            ExtractorStorage::store('sys', 'extraMatches', $extra);
+        }
     }
 
     redirect('match/current');
@@ -427,7 +439,13 @@ function pitSubmit($param) {
             'team' => $data['team']
         );
 
-        ExtractorStorage::append('sys', 'extraPits', $append);
+        // Check if extra already exists for the match.
+        $extra = ExtractorStorage::fetch('sys', 'extraPits');
+        $extraKey = array_search($data['team'], array_column($extra, 'team'));
+
+        if ($extraKey === false) {
+            ExtractorStorage::append('sys', 'extraPits', $append);
+        }
     }
 
     redirect('pit/current');
