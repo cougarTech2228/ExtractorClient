@@ -4,6 +4,7 @@ $a = array(
     'deviceID'     => 1,
     'team'         => 'red1',
     'currentMatch' => 1,
+    'currentPit'   => 0,
     'qrRateMS'     => 1000,
     'matches'      => array(
         array(
@@ -25,7 +26,7 @@ $a = array(
             'blue3' => 3321
         )
     ),
-    'pits'          => array(
+    'pits'         => array(
         array(
             'team' => 2228,
         ),

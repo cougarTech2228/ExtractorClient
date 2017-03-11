@@ -13,6 +13,7 @@ class ExtractorConfig {
         'deviceID'     => 1,
         'team'         => 'red1',
         'currentMatch' => 0,
+        'currentPit'   => 0,
         'qrRateMS'     => 1000,
         'matches'      => array(),
         'pits'         => array()

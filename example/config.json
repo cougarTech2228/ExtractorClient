@@ -2,6 +2,7 @@
     "deviceID": 1,
     "team": "red1",
     "currentMatch": 1,
+    "currentPit": 0,
     "qrRateMS": 1000,
     "matches": [
         {
