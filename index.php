@@ -433,8 +433,27 @@ function pitSubmit($param) {
     return;
 }
 
+/**
+ * Current Pit Controller
+ * Redirects the user to the current pit form.
+ *
+ * @param array $param Router input
+ */
 function currentPit($param) {
-    //TODO
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    if (array_key_exists($ec->getConfig('currentPit'), $ec->getConfig('pits'))) {
+        $team = $ec->getConfig('pits')[$ec->getConfig('currentPit')]['team'];
+        redirect('pit/' . $team);
+
+        return;
+    }
+
+    redirect('pit/blank');
+
+    return;
 }
 
 /**
