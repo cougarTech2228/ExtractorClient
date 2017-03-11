@@ -145,7 +145,8 @@ function transferDisplay($param) {
     $ec = new ExtractorConfig();
 
     // If nothing is left to transfer, fail silently.
-    if (ExtractorTransferUtil::listNotTransferred() === false) {
+    $transfer = ExtractorTransferUtil::listNotTransferred();
+    if ($transfer === false || count($transfer) === 0) {
         redirect('transfer');
 
         return;
@@ -194,7 +195,8 @@ function transferFinished($param) {
     unset($param);
 
     // Fail silently if there is no data.
-    if (ExtractorTransferUtil::listNotTransferred() === false) {
+    $transfer = ExtractorTransferUtil::listNotTransferred();
+    if ($transfer === false || count($transfer) === 0) {
         redirect('transfer');
 
         return;
@@ -203,6 +205,8 @@ function transferFinished($param) {
     ExtractorTransferUtil::setAllTransferred();
 
     redirect('transfer');
+
+    return;
 }
 
 /**
