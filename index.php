@@ -353,7 +353,78 @@ function pitForm($param) {
 }
 
 function pitSubmit($param) {
-    //TODO
+    unset($param);
+
+    // Validation array.
+    $validate = array(
+        'team'         => FILTER_VALIDATE_INT,
+        'autoMobility' => FILTER_VALIDATE_BOOLEAN,
+        'autoFuelHigh' => FILTER_VALIDATE_BOOLEAN,
+        'autoFuelLow'  => FILTER_VALIDATE_BOOLEAN,
+        'autoGear'     => FILTER_VALIDATE_BOOLEAN,
+        'autoMultiple' => FILTER_VALIDATE_BOOLEAN,
+        'teleFuelHigh' => FILTER_VALIDATE_BOOLEAN,
+        'teleFuelLow'  => FILTER_VALIDATE_BOOLEAN,
+        'teleGear'     => FILTER_VALIDATE_BOOLEAN,
+        'teleRole'     => null,
+        'driveTrain'   => null,
+        'robotCamera'  => FILTER_VALIDATE_BOOLEAN,
+        'robotVision'  => FILTER_VALIDATE_BOOLEAN
+    );
+
+    $data = filter_input_array(INPUT_POST, $validate, true);
+
+    // Filter data to correct for PHP's filtering.
+    foreach ($data as $k => $v) {
+        if ($v === null) {
+            switch ($validate[$k]) {
+                case FILTER_VALIDATE_INT:
+                    $data[$k] = 0;
+                    break;
+                case FILTER_VALIDATE_BOOLEAN:
+                    $data[$k] = false;
+                    break;
+                default:
+                    break;
+            }
+
+            if ($k === 'teleRole' && $v === null) {
+                $data[$k] = 'fuel';
+            }
+
+            if ($k === 'driveTrain' && $v === null) {
+                $data[$k] = '4';
+            }
+
+        }
+
+        if ($v === false && $validate[$k] === FILTER_VALIDATE_INT) {
+            $data[$k] = 0;
+        }
+    }
+
+    $es = new ExtractorScouting('pit', $data['team']);
+    $es->set($data);
+    $es->save();
+
+    $ec = new ExtractorConfig();
+
+    $pitKey = array_search($data['team'], array_column($ec->getConfig('pits'), 'team'));
+
+    if ($pitKey !== false) {
+        // Set current match one up from the last.
+        $ec->setConfig('currentPit', $pitKey + 1);
+    } else {
+        $append = array(
+            'team' => $data['team']
+        );
+
+        ExtractorStorage::append('sys', 'extraPits', $append);
+    }
+
+    redirect('pit/current');
+
+    return;
 }
 
 function currentPit($param) {
