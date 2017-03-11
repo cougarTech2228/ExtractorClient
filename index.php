@@ -284,6 +284,11 @@ function matchForm($param) {
         // Search if data is in the matches config key.
         $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'match'));
 
+        if ($matchKey !== false) {
+            $defaults['match'] = $ec->getConfig('matches')[$matchKey]['match'];
+            $defaults['team'] = $ec->getConfig('matches')[$matchKey][$ec->getConfig('team')];
+        }
+
         $es = new ExtractorScouting('match', $param[1]);
         $data = $es->get();
 
