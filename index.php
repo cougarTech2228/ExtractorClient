@@ -352,6 +352,12 @@ function pitForm($param) {
     return;
 }
 
+/**
+ * Pit Submission Controller
+ * Validates, filters, and handles incoming pit data.
+ *
+ * @param array $param Router input
+ */
 function pitSubmit($param) {
     unset($param);
 
