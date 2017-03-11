@@ -1,0 +1,29 @@
+{{> header}}
+{{> nav}}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1>Driver List</h1>
+
+            <a class="waves-effect waves-light btn-large" href="{{BASEURI}}driver/current"><i class="material-icons left">skip_next</i> Jump to Current Driver</a>
+            <a class="btn-floating btn-large waves-effect waves-light right" href="{{BASEURI}}driver/blank"><i class="material-icons">add</i></a>
+
+            <ul class="collection with-header">
+                <li class="collection-item">
+                    <div>Match &num;
+                        <div class="secondary-content" style="color: {{{teamColor}}};">{{team}}</div>
+                    </div>
+                </li>
+                {{#matches}}
+                    <li class="collection-item{{#current}} green lighten-3{{/current}}"><a href="{{BASEURI}}driver/{{match}}">
+                        <div>Match &num;{{match}}
+                            <div class="secondary-content" style="color: {{{teamColor}}};">{{teamNum}}</div>
+                        </div>
+                    </a></li>
+                {{/matches}}
+            </ul>
+        </div>
+    </div>
+</div>
+{{> foot}}
+{{> footer}}
