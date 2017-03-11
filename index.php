@@ -492,6 +492,7 @@ function about($param) {
         'team'         => ExtractorUtil::teamNiceName($ec->getConfig('team')),
         'teamColor'    => ExtractorUtil::teamColor($ec->getConfig('team')),
         'currentMatch' => $ec->getConfig('currentMatch'),
+        'currentPit'   => $ec->getConfig('currentPit'),
         'qrRateMS'     => $ec->getConfig('qrRateMS')
     );
 
