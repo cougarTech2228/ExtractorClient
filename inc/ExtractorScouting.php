@@ -73,49 +73,63 @@ class ExtractorScouting {
      */
     public function csv() {
         // Check if match data or pit data
-        if (array_key_exists('match', $this->data)) {
-            $type = 'match';
-            $order = array(
-                'match',
-                'team',
-                'autoFuelHigh',
-                'autoFuelLow',
-                'autoGear',
-                'autoBaseline',
-                'teleFuelHigh',
-                'teleFuelLow',
-                'teleGears',
-                'teleTookOff',
-                'prefConfused',
-                'prefSlow',
-                'prefEfficient',
-                'prefPowerhouse',
-                'tagNoShow',
-                'tagNoMove',
-                'tagFlipped',
-                'tagStuck',
-                'tagFell',
-                'tagPenalized',
-            );
-        } else {
-            $type = 'pit';
-            $order = array(
-                'team',
-                'autoFuelHigh',
-                'autoFuelLow',
-                'autoGear',
-                'autoBaseline',
-                'autoMultiple',
-                'teleFuelHigh',
-                'teleFuelLow',
-                'teleGear',
-                'driveTrain',
-                'teleTakeOff',
-                'robotCamera',
-                'robotVision',
-                'teleRoleFuel',
-                'teleRoleGear',
-            );
+        switch ($this->type) {
+            case 'match':
+                $order = array(
+                    'match',
+                    'team',
+                    'autoFuelHigh',
+                    'autoFuelLow',
+                    'autoGear',
+                    'autoBaseline',
+                    'teleFuelHigh',
+                    'teleFuelLow',
+                    'teleGears',
+                    'teleTookOff',
+                    'prefConfused',
+                    'prefSlow',
+                    'prefEfficient',
+                    'prefPowerhouse',
+                    'tagNoShow',
+                    'tagNoMove',
+                    'tagFlipped',
+                    'tagStuck',
+                    'tagFell',
+                    'tagPenalized',
+                );
+                break;
+            case 'pit':
+                $order = array(
+                    'team',
+                    'autoFuelHigh',
+                    'autoFuelLow',
+                    'autoGear',
+                    'autoBaseline',
+                    'autoMultiple',
+                    'teleFuelHigh',
+                    'teleFuelLow',
+                    'teleGear',
+                    'driveTrain',
+                    'teleTakeOff',
+                    'robotCamera',
+                    'robotVision',
+                    'teleRoleFuel',
+                    'teleRoleGear',
+                );
+                break;
+            case 'driver':
+                $order = array(
+                    'match',
+                    'team',
+                    'prefConfused',
+                    'prefSlow',
+                    'prefEfficient',
+                    'prefPowerhouse',
+                );
+                break;
+            default:
+                $order = array();
+                break;
         }
 
         $return = array();
@@ -145,7 +159,7 @@ class ExtractorScouting {
             }
         }
 
-        $return = strtoupper($type) . ':' . implode(',', $return);
+        $return = strtoupper($this->type) . ':' . implode(',', $return);
 
         return $return;
     }
