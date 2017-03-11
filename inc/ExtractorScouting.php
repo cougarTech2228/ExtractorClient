@@ -65,7 +65,66 @@ class ExtractorScouting {
         return $this->data;
     }
 
+    /**
+     * Format to CSV
+     * Formats the data to be outputted as a CSV.
+     *
+     * @return string
+     */
     public function csv() {
-//TODO
+        // Check if match data or pit data
+        if (in_array('match', $this->data)) {
+            $type = 'match';
+            $order = array(
+                'match',
+                'team',
+                'autoFuelHigh',
+                'autoFuelLow',
+                'autoGear',
+                'autoBaseline',
+                'teleFuelHigh',
+                'teleFuelLow',
+                'teleGears',
+                'teleTookOff',
+                'prefConfused',
+                'prefSlow',
+                'prefEfficient',
+                'prefPowerhouse',
+                'tagNoShow',
+                'tagNoMove',
+                'tagFlipped',
+                'tagStuck',
+                'tagFell',
+                'tagPenalized',
+            );
+        } else {
+            $type = 'pit';
+            $order = array(// TODO
+            );
+        }
+
+        $return = array();
+        foreach ($order as $item) {
+            switch (true) {
+                case ($item === 'prefConfused'):
+                case ($item === 'prefSlow'):
+                case ($item === 'prefEfficient'):
+                case ($item === 'prefPowerhouse'):
+                    $return[] = ($this->data['performance'] === strtolower(substr($item, 4))) ? 1 : 0;
+                    break;
+                case (is_bool($this->data[$item])):
+                    $return[] = ($this->data[$item]) ? 1 : 0;
+                    break;
+                case (is_int($this->data[$item])):
+                    $return[] = $this->data[$item];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        $return = strtoupper($type) . ':' . implode(',', $return);
+
+        return $return;
     }
 }
