@@ -278,14 +278,22 @@ function pitList($param) {
 
     $ec = new ExtractorConfig();
 
-    $pits = $ec->getConfig('pits');
+    $pits = array();
+    foreach ($ec->getConfig('pits') as $pit) {
+        $pits[] = array(
+            'team'    => $pit['team'],
+            'current' => ($ec->getConfig('currentPit') === array_search($pit['team'], array_column($ec->getConfig('pits'), 'team')))
+
+        );
+    }
 
     // Handle any extra matches.
     $extra = ExtractorStorage::fetch('sys', 'extraPits');
     if ($extra !== false) {
         foreach ($extra as $pit) {
             $pits[] = array(
-                'team' => $pit['team']
+                'team'    => $pit['team'],
+                'current' => ($ec->getConfig('currentPit') === array_search($pit['team'], array_column($ec->getConfig('pits'), 'team')))
             );
         }
     }
