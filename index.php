@@ -669,7 +669,7 @@ $routingArray = array(
     // Current pit form
     array(
         'method' => 'get',
-        'func'   => '',
+        'func'   => 'currentPit',
         'uri'    => 'pit\/current'
     ),
     // Transfer
