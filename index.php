@@ -46,170 +46,6 @@ function index($param) {
 }
 
 /**
- * Schedule Controller
- * Outputs the schedule page render.
- *
- * @param array $param Router input
- */
-function schedule($param) {
-    unset($param);
-
-    $ec = new ExtractorConfig();
-
-    $matches = $ec->getConfig('matches');
-
-    foreach ($matches as $k => $match) {
-        $matches[$k]['current'] = ($ec->getConfig('currentMatch') === $match['match']);
-    }
-
-    $context = array(
-        'matches' => $matches
-    );
-
-    echo render('schedule', $context, 'Schedule');
-
-    return;
-}
-
-/**
- * About Controller
- * Outputs the about page render.
- *
- * @param array $param Router input
- */
-function about($param) {
-    unset($param);
-
-    $ec = new ExtractorConfig();
-
-    $context = array(
-        'deviceID'     => $ec->getConfig('deviceID'),
-        'team'         => ExtractorUtil::teamNiceName($ec->getConfig('team')),
-        'teamColor'    => ExtractorUtil::teamColor($ec->getConfig('team')),
-        'currentMatch' => $ec->getConfig('currentMatch'),
-        'qrRateMS'     => $ec->getConfig('qrRateMS')
-    );
-
-    echo render('about', $context, 'About');
-
-    return;
-}
-
-/**
- * Pit List Controller
- * Lists pit data the user is responsible for.
- *
- * @param array $param Router input
- */
-function pitList($param) {
-    unset($param);
-
-    $ec = new ExtractorConfig();
-
-    $context = array(
-        'pits' => $ec->getConfig('pit')
-    );
-
-    echo render('pitList', $context, 'Pit List');
-
-    return;
-}
-
-function pitScouting($param) {
-
-}
-
-/**
- * Transfer Controller
- * Returns the confirm page for beginning data transfer.
- *
- * @param array $param Router input
- */
-function transfer($param) {
-    unset($param);
-
-    echo render('transfer', array(), 'Transfer');
-
-    return;
-}
-
-/**
- * Transfer Display Controller
- * Processes the QRs to display.
- *
- * @param array $param Router input
- */
-function transferDisplay($param) {
-    unset($param);
-
-    $ec = new ExtractorConfig();
-
-    // If nothing is left to transfer, fail silently.
-    $transfer = ExtractorTransferUtil::listNotTransferred();
-    if ($transfer === false || count($transfer) === 0) {
-        redirect('transfer');
-
-        return;
-    }
-
-    $context = array(
-        'qrMS' => $ec->getConfig('qrRateMS'),
-        'qrs'  => array()
-    );
-
-    // Set key num. Start at 1 because 0 is start key.
-    $k = 1;
-    // Iterate through cat.
-    foreach (ExtractorTransferUtil::listNotTransferred() as $cat => $items) {
-        // Iterate through data.
-        foreach ($items as $item) {
-            $es = new ExtractorScouting($cat, $item);
-
-            /** @noinspection PhpVoidFunctionResultUsedInspection */
-            $context['qrs'][] = array(
-                'key' => $k,
-                'src' => ExtractorQR::uri($es->csv())
-            );
-
-            $k++;
-        }
-    }
-
-    $context['qrs'][] = array(
-        'key' => 0,
-        'src' => ExtractorQR::start($k - 1)
-    );
-
-    echo render('transferDisplay', $context, 'Transfer');
-
-    return;
-}
-
-/**
- * Transfer Finished Controller
- * Internally clears the not transferred list to avoid sending more data than we have to.
- *
- * @param array $param Router input
- */
-function transferFinished($param) {
-    unset($param);
-
-    // Fail silently if there is no data.
-    $transfer = ExtractorTransferUtil::listNotTransferred();
-    if ($transfer === false || count($transfer) === 0) {
-        redirect('transfer');
-
-        return;
-    }
-
-    ExtractorTransferUtil::setAllTransferred();
-
-    redirect('transfer');
-
-    return;
-}
-
-/**
  * Match List Controller
  * Outputs the schedule page render.
  *
@@ -252,6 +88,12 @@ function matchList($param) {
     return;
 }
 
+/**
+ * Match Form Controller
+ * Handles pre-filling and rendering the match forms.
+ *
+ * @param array $param Router input
+ */
 function matchForm($param) {
     // Config instance.
     $ec = new ExtractorConfig();
@@ -413,8 +255,176 @@ function currentMatch($param) {
     return;
 }
 
-function pitSubmit($param) {
+/**
+ * Pit List Controller
+ * Lists pit data the user is responsible for.
+ *
+ * @param array $param Router input
+ */
+function pitList($param) {
+    unset($param);
 
+    $ec = new ExtractorConfig();
+
+    $context = array(
+        'pits' => $ec->getConfig('pit')
+    );
+
+    echo render('pitList', $context, 'Pit List');
+
+    return;
+}
+
+function pitScouting($param) {
+    //TODO
+}
+
+function pitSubmit($param) {
+    //TODO
+}
+
+function currentPit($param) {
+    //TODO
+}
+
+/**
+ * Transfer Controller
+ * Returns the confirm page for beginning data transfer.
+ *
+ * @param array $param Router input
+ */
+function transfer($param) {
+    unset($param);
+
+    echo render('transfer', array(), 'Transfer');
+
+    return;
+}
+
+/**
+ * Transfer Display Controller
+ * Processes the QRs to display.
+ *
+ * @param array $param Router input
+ */
+function transferDisplay($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    // If nothing is left to transfer, fail silently.
+    $transfer = ExtractorTransferUtil::listNotTransferred();
+    if ($transfer === false || count($transfer) === 0) {
+        redirect('transfer');
+
+        return;
+    }
+
+    $context = array(
+        'qrMS' => $ec->getConfig('qrRateMS'),
+        'qrs'  => array()
+    );
+
+    // Set key num. Start at 1 because 0 is start key.
+    $k = 1;
+    // Iterate through cat.
+    foreach (ExtractorTransferUtil::listNotTransferred() as $cat => $items) {
+        // Iterate through data.
+        foreach ($items as $item) {
+            $es = new ExtractorScouting($cat, $item);
+
+            /** @noinspection PhpVoidFunctionResultUsedInspection */
+            $context['qrs'][] = array(
+                'key' => $k,
+                'src' => ExtractorQR::uri($es->csv())
+            );
+
+            $k++;
+        }
+    }
+
+    $context['qrs'][] = array(
+        'key' => 0,
+        'src' => ExtractorQR::start($k - 1)
+    );
+
+    echo render('transferDisplay', $context, 'Transfer');
+
+    return;
+}
+
+/**
+ * Transfer Finished Controller
+ * Internally clears the not transferred list to avoid sending more data than we have to.
+ *
+ * @param array $param Router input
+ */
+function transferFinished($param) {
+    unset($param);
+
+    // Fail silently if there is no data.
+    $transfer = ExtractorTransferUtil::listNotTransferred();
+    if ($transfer === false || count($transfer) === 0) {
+        redirect('transfer');
+
+        return;
+    }
+
+    ExtractorTransferUtil::setAllTransferred();
+
+    redirect('transfer');
+
+    return;
+}
+
+/**
+ * Schedule Controller
+ * Outputs the schedule page render.
+ *
+ * @param array $param Router input
+ */
+function schedule($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    $matches = $ec->getConfig('matches');
+
+    foreach ($matches as $k => $match) {
+        $matches[$k]['current'] = ($ec->getConfig('currentMatch') === $match['match']);
+    }
+
+    $context = array(
+        'matches' => $matches
+    );
+
+    echo render('schedule', $context, 'Schedule');
+
+    return;
+}
+
+/**
+ * About Controller
+ * Outputs the about page render.
+ *
+ * @param array $param Router input
+ */
+function about($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    $context = array(
+        'deviceID'     => $ec->getConfig('deviceID'),
+        'team'         => ExtractorUtil::teamNiceName($ec->getConfig('team')),
+        'teamColor'    => ExtractorUtil::teamColor($ec->getConfig('team')),
+        'currentMatch' => $ec->getConfig('currentMatch'),
+        'qrRateMS'     => $ec->getConfig('qrRateMS')
+    );
+
+    echo render('about', $context, 'About');
+
+    return;
 }
 
 /**
@@ -582,7 +592,7 @@ $routingArray = array(
         'func'   => 'pitSubmit',
         'uri'    => 'post\/pit'
     ),
-    // Current pit form TODO
+    // Current pit form
     array(
         'method' => 'get',
         'func'   => '',
