@@ -235,7 +235,7 @@ function matchList($param) {
         foreach ($extra as $match) {
             $matches[] = array(
                 'match'   => $match['match'],
-                'teamNum' => $match[$ec->getConfig('team')],
+                'teamNum' => $match['team'],
                 'current' => ($ec->getConfig('currentMatch') === $match['match'])
             );
         }
