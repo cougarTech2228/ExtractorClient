@@ -287,7 +287,7 @@ function pitList($param) {
     return;
 }
 
-function pitScouting($param) {
+function pitForm($param) {
     //TODO
 }
 
@@ -595,7 +595,7 @@ $routingArray = array(
     // Pit form
     array(
         'method' => 'get',
-        'func'   => 'pitScouting',
+        'func'   => 'pitForm',
         'uri'    => 'pit\/([0-9]{1,}|blank)'
     ),
     // Pit data handler
