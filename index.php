@@ -287,8 +287,69 @@ function pitList($param) {
     return;
 }
 
+/**
+ * Pit Form Controller
+ * Handles, renders, and pre-fills pit forms with any pre-existing data.
+ *
+ * @param array $param Router input
+ */
 function pitForm($param) {
-    //TODO
+    // Config instance.
+    $ec = new ExtractorConfig();
+
+    // Set defaults.
+    $defaults = array(
+        'team'           => '',
+        'autoMobility'   => false,
+        'autoFuelHigh'   => false,
+        'autoFuelLow'    => false,
+        'autoGear'       => false,
+        'autoMultiple'   => false,
+        'teleFuelHigh'   => false,
+        'teleFuelLow'    => false,
+        'teleGear'       => false,
+        'teleRoleFuel'   => false,
+        'teleRoleGear'   => false,
+        'driveTrain4'    => false,
+        'driveTrain6'    => false,
+        'driveTrainTank' => false,
+        'robotCamera'    => false,
+        'robotVision'    => false
+    );
+
+    if ($param[1] !== 'blank') {
+        // Search if data is in the pits config key.
+        $pitKey = array_search(intval($param[1]), array_column($ec->getConfig('pits'), 'team'));
+
+        if ($pitKey !== false) {
+            $defaults['team'] = $ec->getConfig('pits')[$pitKey]['team'];
+        }
+
+        $es = new ExtractorScouting('pit', $param[1]);
+        $data = $es->get();
+
+        // Merge data with defaults.
+        $data = array_merge($defaults, $data);
+
+        // Handle radio for role.
+        if (array_key_exists('role', $data)) {
+            $data['teleRole' . ucfirst($data['teleRole'])] = true;
+        }
+
+        // Handle radio for drive train.
+        if (array_key_exists('role', $data)) {
+            $data['driveTrain' . ucfirst($data['driveTrain'])] = true;
+        }
+
+        $context = $data;
+    } else {
+        $context = $defaults;
+    }
+
+
+    echo render('pitForm', $context, 'Pit Form');
+
+    return;
 }
 
 function pitSubmit($param) {
