@@ -808,6 +808,30 @@ $routingArray = array(
         'func'   => 'currentPit',
         'uri'    => 'pit\/current'
     ),
+    // Driver list
+    array(
+        'method' => 'get',
+        'func'   => 'driverList',
+        'uri'    => 'driver'
+    ),
+    // Driver form
+    array(
+        'method' => 'get',
+        'func'   => 'driverForm',
+        'uri'    => 'driver\/([0-9]{1,}|blank)'
+    ),
+    // Driver data handler
+    array(
+        'method' => 'post',
+        'func'   => 'driverSubmit',
+        'uri'    => 'post\/driver'
+    ),
+    // Current pit form
+    array(
+        'method' => 'get',
+        'func'   => 'currentDriver',
+        'uri'    => 'driver\/current'
+    ),
     // Transfer
     array(
         'method' => 'get',
