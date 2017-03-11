@@ -497,6 +497,184 @@ function currentPit($param) {
 }
 
 /**
+ * Driver List Controller
+ * Lists driver data the user is responsible for.
+ *
+ * @param array $param Router input
+ */
+function driverList($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    $drivers = array();
+    $extra = ExtractorStorage::fetch('sys', 'extraDriver');
+    if ($extra !== false) {
+        foreach ($extra as $match) {
+            $drivers[] = array(
+                'match'   => $match['match'],
+                'teamNum' => $match['team'],
+                'current' => ($ec->getConfig('currentMatch') === $match['match'])
+            );
+        }
+    }
+
+    $context = array(
+        'drivers' => $drivers,
+    );
+
+    echo render('driverList', $context, 'Driver List');
+
+    return;
+}
+
+/**
+ * Driver Form Controller
+ * Handles, renders, and pre-fills driver forms with any pre-existing data.
+ *
+ * @param array $param Router input
+ */
+function driverForm($param) {
+    // Config instance.
+    $ec = new ExtractorConfig();
+
+    // Set defaults.
+    $defaults = array(
+        'match'          => '',
+        'team'           => '',
+        'prefConfused'   => false,
+        'prefSlow'       => false,
+        'prefEfficient'  => false,
+        'prefPowerhouse' => false
+    );
+
+    if ($param[1] !== 'blank') {
+        $es = new ExtractorScouting('driver', $param[1]);
+        $data = $es->get();
+
+        // Merge data with defaults.
+        $data = array_merge($defaults, $data);
+
+
+        if (array_key_exists('performance', $data)) {
+            $data['pref' . ucfirst($data['performance'])] = true;
+        }
+
+        $context = $data;
+    } else {
+        $context = $defaults;
+    }
+
+
+    echo render('driverForm', $context, 'Driver Form');
+
+    return;
+}
+
+/**
+ * Pit Submission Controller
+ * Validates, filters, and handles incoming pit data.
+ *
+ * @param array $param Router input
+ */
+function driverSubmit($param) {
+    unset($param);
+
+    // Validation array.
+    $validate = array(
+        'match'       => FILTER_VALIDATE_INT,
+        'team'        => FILTER_VALIDATE_INT,
+        'performance' => null
+    );
+
+    $data = filter_input_array(INPUT_POST, $validate, true);
+
+    // Filter data to correct for PHP's filtering.
+    foreach ($data as $k => $v) {
+        if ($v === null) {
+            switch ($validate[$k]) {
+                case FILTER_VALIDATE_INT:
+                    $data[$k] = 0;
+                    break;
+                case null:
+                    $data[$k] = 'efficient';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        if ($v === false && $validate[$k] === FILTER_VALIDATE_INT) {
+            $data[$k] = 0;
+        }
+    }
+
+    $es = new ExtractorScouting('driver', $data['match']);
+    $es->set($data);
+    $es->save();
+
+    $ec = new ExtractorConfig();
+
+    $ec->setConfig('currentMatch', $data['match'] + 1);
+
+    // Check if extra already exists for the match.
+    $extra = ExtractorStorage::fetch('sys', 'extraDriver');
+    // Initialize if extraMatches doesn't exist yet.
+    // FIXME: Could use a rework.
+    if ($extra === false) {
+        $extra = array();
+    }
+
+    $extraKey = array_search($data['match'], array_column($extra, 'match'));
+
+    if ($extraKey === false) {
+        $append = array(
+            'match' => $data['match'],
+            'team'  => $data['team']
+        );
+
+        ExtractorStorage::append('sys', 'extraDriver', $append);
+    } else {
+        $extra[$extraKey]['team'] = $data['team'];
+
+        ExtractorStorage::store('sys', 'extraDriver', $extra);
+    }
+
+    redirect('driver/current');
+
+    return;
+}
+
+/**
+ * Current Pit Controller
+ * Redirects the user to the current pit form.
+ *
+ * @param array $param Router input
+ */
+function currentDriver($param) {
+    unset($param);
+
+    $ec = new ExtractorConfig();
+
+    $store = ExtractorStorage::fetch('sys', 'extraDriver');
+
+    if ($store === false) {
+        $store = array();
+    }
+
+    if (in_array($ec->getConfig('currentMatch'), array_column($store, 'match'))) {
+        redirect('driver/' . $ec->getConfig('currentMatch'));
+
+        return;
+    }
+
+    redirect('driver/blank');
+
+    return;
+}
+
+
+/**
  * Transfer Controller
  * Returns the confirm page for beginning data transfer.
  *
