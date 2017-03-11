@@ -11,16 +11,16 @@
             <ul class="collection with-header">
                 <li class="collection-item">
                     <div>Match &num;
-                        <div class="secondary-content" style="color: {{{teamColor}}};">{{team}}</div>
+                        <div class="secondary-content">Team</div>
                     </div>
                 </li>
-                {{#matches}}
+                {{#drivers}}
                     <li class="collection-item{{#current}} green lighten-3{{/current}}"><a href="{{BASEURI}}driver/{{match}}">
                         <div>Match &num;{{match}}
-                            <div class="secondary-content" style="color: {{{teamColor}}};">{{teamNum}}</div>
+                            <div class="secondary-content">{{teamNum}}</div>
                         </div>
                     </a></li>
-                {{/matches}}
+                {{/drivers}}
             </ul>
         </div>
     </div>
