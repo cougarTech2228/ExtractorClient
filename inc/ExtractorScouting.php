@@ -109,10 +109,8 @@ class ExtractorScouting {
                 'teleFuelHigh',
                 'teleFuelLow',
                 'teleGear',
+                'driveTrain',
                 'teleTakeOff',
-                'driveTrain4',
-                'driveTrain6',
-                'driveTrainTank',
                 'robotCamera',
                 'robotVision',
                 'teleRoleFuel',
@@ -129,10 +127,8 @@ class ExtractorScouting {
                 case ($item === 'prefPowerhouse'):
                     $return[] = ($this->data['performance'] === strtolower(substr($item, 4))) ? 1 : 0;
                     break;
-                case ($item === 'driveTrain4'):
-                case ($item === 'driveTrain6'):
-                case ($item === 'driveTrainTank'):
-                    $return[] = ($this->data['driveTrain'] === strtolower(substr($item, 10))) ? 1 : 0;
+                case ($item === 'driveTrain'):
+                    $return[] = strtoupper($this->data['driveTrain']);
                     break;
                 case ($item === 'teleRoleFuel'):
                 case ($item === 'teleRoleGear'):
