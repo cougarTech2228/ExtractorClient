@@ -97,7 +97,16 @@ class ExtractorConfig {
         if ($value === null && array_key_exists($key, $this->config)) {
             unset($this->config[$key]);
         } else {
-            $this->config[$key] = $value;
+            // Special treatment.
+            switch ($key) {
+                case 'currentMatch':
+                    // Since it already was incremented, save that value - 1.
+                    $this->config[$key] = $value - 1;
+                    break;
+                default:
+                    $this->config[$key] = $value;
+                    break;
+            }
         }
 
         $this->saveConfig();
