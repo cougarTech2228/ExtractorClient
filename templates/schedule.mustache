@@ -5,7 +5,7 @@
         <div class="col s12">
             <h1>Match Schedule</h1>
 
-            <table class="striped">
+            <table>
                 <thead>
                 <tr>
                     <th data-field="matchNum">Match</th>
@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                 {{#matches}}
-                    <tr {{#current}}class="green lighten-3"{{/current}}>
+                    <tr  class="{{#current}}green lighten-3 black-text{{/current}}">
                         <td>{{match}}</td>
                         <td>{{red1}}</td>
                         <td>{{red2}}</td>

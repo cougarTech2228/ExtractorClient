@@ -5,17 +5,17 @@
         <div class="col s12">
             <h1>Driver List</h1>
 
-            <a class="waves-effect waves-light btn-large" href="{{BASEURI}}driver/current"><i class="material-icons left">skip_next</i> Jump to Current Driver</a>
-            <a class="btn-floating btn-large waves-effect waves-light right" href="{{BASEURI}}driver/blank"><i class="material-icons">add</i></a>
+            <a class="waves-effect waves-light btn-large green" href="{{BASEURI}}driver/current"><i class="material-icons left">skip_next</i> Jump to Current Driver</a>
+            <a class="btn-floating btn-large waves-effect waves-light green right" href="{{BASEURI}}driver/blank"><i class="material-icons">add</i></a>
 
-            <ul class="collection with-header">
-                <li class="collection-item">
+            <ul class="collection with-header yellow accent-3 black-text">
+                <li class="collection-item yellow accent-3 black-text">
                     <div>Match &num;
                         <div class="secondary-content">Team</div>
                     </div>
                 </li>
                 {{#drivers}}
-                    <li class="collection-item{{#current}} green lighten-3{{/current}}"><a href="{{BASEURI}}driver/{{match}}">
+                    <li class="collection-item {{#current}}green lighten-3{{/current}}{{^current}}yellow accent-3 black-text{{/current}}"><a href="{{BASEURI}}driver/{{match}}">
                         <div>Match &num;{{match}}
                             <div class="secondary-content">{{teamNum}}</div>
                         </div>
