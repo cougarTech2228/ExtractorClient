@@ -68,7 +68,13 @@ class ExtractorConfig {
      */
     public function getConfig($key) {
         if (array_key_exists($key, $this->config)) {
-            return $this->config[$key];
+            // Special treatment.
+            switch ($key) {
+                case 'currentMatch':
+                    return $this->config[$key] + 1;
+                default:
+                    return $this->config[$key];
+            }
         }
 
         return false;
