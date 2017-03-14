@@ -9,7 +9,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('DATADIR', __DIR__ . DS . 'data' . DS);
 define('DATASEARCHPATH', DS . 'storage' . DS . 'sdcard1' . DS . 'Extractor' . DS);
 define('CONFIG', DATADIR . 'config.json');
-define('VERSION', '0.0.0');
+define('VERSION', '1.0.0');
 
 //////////
 // Main //
