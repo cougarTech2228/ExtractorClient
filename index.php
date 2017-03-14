@@ -341,7 +341,8 @@ function pitForm($param) {
         'driveTrain6'    => false,
         'driveTrainTank' => false,
         'robotCamera'    => false,
-        'robotVision'    => false
+        'robotVision'    => false,
+        'gearGround'     => false
     );
 
     if ($param[1] !== 'blank') {
@@ -403,7 +404,8 @@ function pitSubmit($param) {
         'teleRole'     => null,
         'driveTrain'   => null,
         'robotCamera'  => FILTER_VALIDATE_BOOLEAN,
-        'robotVision'  => FILTER_VALIDATE_BOOLEAN
+        'robotVision'  => FILTER_VALIDATE_BOOLEAN,
+        'gearGround'   => FILTER_VALIDATE_BOOLEAN
     );
 
     $data = filter_input_array(INPUT_POST, $validate, true);

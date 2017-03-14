@@ -115,6 +115,7 @@ class ExtractorScouting {
                     'robotVision',
                     'teleRoleFuel',
                     'teleRoleGear',
+                    'gearGround'
                 );
                 break;
             case 'driver':
