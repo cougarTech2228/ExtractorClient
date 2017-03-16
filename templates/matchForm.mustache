@@ -29,54 +29,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <label for="auto_fuel_high">Fuel launched into the high position</label>
-                            </p>
-                            <p class="range-field">
-                                <input type="range" id="auto_fuel_high" name="autoFuelHigh" min="0" step="5" max="10" value="{{autoFuelHigh}}" required>
-                            </p>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="auto_fuel_high" name="autoFuelHigh" type="number" class="validate" value="{{autoFuelHigh}}" min="0" required>
+                            <label for="auto_fuel_high">Fuel launched into the high position</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <label for="auto_fuel_low">Fuel launched into the low position</label>
-                            </p>
-                            <p class="range-field">
-                                <input type="range" id="auto_fuel_low" name="autoFuelLow" min="0" step="5" max="10" value="{{autoFuelLow}}" required>
-                            </p>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="auto_fuel_low" name="autoFuelLow" type="number" class="validate" value="{{autoFuelLow}}" min="0" required>
+                            <label for="auto_fuel_low">Fuel launched into the low position</label>
                         </div>
                     </div>
                     <h3>Tele-operated</h3>
                     <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <label for="tele_fuel_high">Fuel launched into the high position</label>
-                            </p>
-                            <p class="range-field">
-                                <input type="range" id="tele_fuel_high" name="teleFuelHigh" min="0" step="10" max="40" value="{{teleFuelHigh}}" required>
-                            </p>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="tele_fuel_high" name="teleFuelHigh" type="number" class="validate" value="{{teleFuelHigh}}" min="0" required>
+                            <label for="tele_fuel_high">Fuel launched into the high position</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="tele_fuel_low" name="teleFuelLow" type="number" class="validate" value="{{teleFuelLow}}" min="0" required>
+                            <label for="tele_fuel_low">Fuel launched into the low position</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <label for="tele_fuel_low">Fuel launched into the low position</label>
-                            </p>
-                            <p class="range-field">
-                                <input type="range" id="tele_fuel_low" name="teleFuelLow" min="0" step="25" max="75" value="{{teleFuelLow}}" required>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <label for="tele_gears">Number of gears delivered</label>
-                            </p>
-                            <p class="range-field">
-                                <input type="range" id="tele_gears" name="teleGears" min="0" step="3" max="6" value="{{teleGears}}" required>
-                            </p>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="tele_gears" name="teleGears" type="number" class="validate" value="{{teleGears}}" min="0" required>
+                            <label for="tele_gears">Number of gears delivered</label>
                         </div>
                     </div>
                     <div class="row">
