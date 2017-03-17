@@ -845,6 +845,29 @@ function config($param) {
 }
 
 /**
+ * Set Team Controller
+ * Handles setting the team without a config hotswap.
+ *
+ * @param array $param Router input
+ */
+function setTeam($param) {
+    unset($param);
+
+    $team = filter_input(INPUT_GET, 'team');
+
+    $allowedTeams = array(
+        'red1', 'red2', 'red3', 'blue1', 'blue2', 'blue3'
+    );
+
+    if (in_array($team, $allowedTeams)) {
+        $oc = new ExtractorConfig();
+        $oc->setConfig('team', $team);
+    }
+
+    redirect('about');
+}
+
+/**
  * Return 404
  * Returns a 404 to the browser.
  */
@@ -1053,6 +1076,12 @@ $routingArray = array(
         'method' => 'get',
         'func'   => 'config',
         'uri'    => 'config'
+    ),
+    // Set Team
+    array(
+        'method' => 'get',
+        'func'   => 'setTeam',
+        'uri'    => 'setteam'
     )
 );
 

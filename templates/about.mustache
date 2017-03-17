@@ -36,8 +36,28 @@
                     </div>
                 </li>
             </ul>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6">
             <a class="waves-effect waves-light btn-large green" href="{{BASEURI}}config"><i class="material-icons left">system_update_alt</i> Hot Swap Config</a>
+        </div>
+        <div class="col s6">
+            <div>
+                <label>Change team:</label>
+                <select name="team" onchange="window.location.href='{{BASEURI}}setteam?team=' + this.options[this.selectedIndex].value;" title="Change team">
+                    <optgroup label="Red">
+                        <option value="red1">Red 1</option>
+                        <option value="red2">Red 2</option>
+                        <option value="red3">Red 3</option>
+                    </optgroup>
+                    <optgroup label="Blue">
+                        <option value="blue1">Blue 1</option>
+                        <option value="blue2">Blue 2</option>
+                        <option value="blue3">Blue 3</option>
+                    </optgroup>
+                </select>
+            </div>
         </div>
     </div>
 </div>
