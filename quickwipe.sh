@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 said="no"
+clear
 echo ">> Quick wipe <<"
 
 if [[ -f "composer.json" ]] || [[ -d ".git" ]]
