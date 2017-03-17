@@ -26,6 +26,7 @@ do
     echo "> Sending..."
     adb push ./* /storage/emulated/0/www/public/ > /dev/null
     echo -n "> Waiting for disconnect"
+    afplay /System/Library/Sounds/Glass.aiff
     said="no"
     while [[ "$(adb devices | tail -n 2 | head -n 1 | awk -F' ' '{ print $2 }')" == "device" ]]
     do
