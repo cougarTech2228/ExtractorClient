@@ -15,7 +15,7 @@ class ExtractorConfig
         'team'         => 'red1',
         'currentMatch' => 0,
         'currentPit'   => 0,
-        'qrRateMS'     => 1000,
+        'qrRateMS'     => 1125,
         'matches'      => [],
         'pits'         => []
     ];

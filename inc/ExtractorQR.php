@@ -17,7 +17,7 @@ class ExtractorQR
         $qrCode = new QrCode();
         try {
             $qrCode->setText($text)
-                   ->setSize(450)
+                   ->setSize(300)
                    ->setPadding(0)
                    ->setErrorCorrection('high')
                    ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
