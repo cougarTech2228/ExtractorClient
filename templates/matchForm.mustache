@@ -22,53 +22,61 @@
                     <h3>Autonomous</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_baseline" name="autoBaseline" type="checkbox" value="true"
-                                   {{#autoBaseline}}checked{{/autoBaseline}}>
-                            <label for="auto_baseline">Broke baseline</label>
+                            <input id="autoRun" name="autoRun" type="checkbox" value="true"
+                                   {{#autoRun}}checked{{/autoRun}}>
+                            <label for="autoRun">Auto Run</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="auto_gear" name="autoGear" type="checkbox" value="true"
-                                   {{#autoGear}}checked{{/autoGear}}>
-                            <label for="auto_gear">Delivered gear</label>
+                            <input id="autoSwitch" name="autoSwitch" type="checkbox" value="true"
+                                   {{#autoSwitch}}checked{{/autoSwitch}}>
+                            <label for="autoSwitch">Delivered to Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="0" id="auto_fuel_high" name="autoFuelHigh" type="number"
-                                   class="validate" value="{{autoFuelHigh}}" min="0" required>
-                            <label for="auto_fuel_high">Fuel launched into the high position</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input placeholder="0" id="auto_fuel_low" name="autoFuelLow" type="number" class="validate"
-                                   value="{{autoFuelLow}}" min="0" required>
-                            <label for="auto_fuel_low">Fuel launched into the low position</label>
+                            <input id="autoScale" name="autoScale" type="checkbox" value="true"
+                                   {{#autoScale}}checked{{/autoScale}}>
+                            <label for="autoScale">Delivered to Scale</label>
                         </div>
                     </div>
-                    <h3>Tele-operated</h3>
+                    <h3>Tele-Operated</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="0" id="tele_fuel_high" name="teleFuelHigh" type="number"
-                                   class="validate" value="{{teleFuelHigh}}" min="0" required>
-                            <label for="tele_fuel_high">Fuel launched into the high position</label>
+                            <input placeholder="0" id="teleAllySwitch" name="teleAllySwitch" type="number"
+                                   class="validate" value="{{teleAllySwitch}}" min="0" required>
+                            <label for="teleAllySwitch">Cubes delivered to alliance switch</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="0" id="tele_fuel_low" name="teleFuelLow" type="number" class="validate"
-                                   value="{{teleFuelLow}}" min="0" required>
-                            <label for="tele_fuel_low">Fuel launched into the low position</label>
+                            <input placeholder="0" id="teleScale" name="teleScale" type="number" class="validate"
+                                   value="{{teleScale}}" min="0" required>
+                            <label for="teleScale">Cubes delivered to scale</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="0" id="tele_gears" name="teleGears" type="number" class="validate"
-                                   value="{{teleGears}}" min="0" required>
-                            <label for="tele_gears">Number of gears delivered</label>
+                            <input placeholder="0" id="teleOppSwitch" name="teleOppSwitch" type="number"
+                                   class="validate" value="{{teleOppSwitch}}" min="0" required>
+                            <label for="teleOppSwitch">Cubes delivered to opposition switch</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="0" id="teleVault" name="teleVault" type="number" class="validate"
+                                   value="{{teleVault}}" min="0" required>
+                            <label for="teleVault">Cubes delivered to vault</label>
                         </div>
                     </div>
+                    <h3>End Game</h3>
                     <div class="row">
-                        <div class="input-field col s12">
-                            <input id="tele_tookoff" name="teleTookOff" type="checkbox" value="true"
-                                   {{#teleTookOff}}checked{{/teleTookOff}}>
-                            <label for="tele_tookoff">Took off</label>
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="end" type="radio" id="endClimb"
+                                       value="climb" {{#endClimb}}checked{{/endClimb}}>
+                                <label for="endClimb">Climb</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="end" type="radio" id="endPark"
+                                       value="park" {{#endPark}}checked{{/endPark}}>
+                                <label for="endPark">Park</label>
+                            </p>
                         </div>
                     </div>
                     <h3>Tags</h3>
