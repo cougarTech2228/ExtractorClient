@@ -9,6 +9,12 @@ then
   exit 1
 fi
 
+if [[ "$(which adb)" == "" ]]
+then
+  echo "Android debugger is missing. Please install the Android Studio."
+  exit 1
+fi
+
 while true
 do
   if [[ "$said" == "no" ]]

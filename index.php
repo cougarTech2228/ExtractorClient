@@ -37,7 +37,8 @@ foreach ($files as $file) {
  *
  * @param array $param Router input
  */
-function index($param) {
+function index($param)
+{
     unset($param);
 
     redirect('schedule');
@@ -51,37 +52,38 @@ function index($param) {
  *
  * @param array $param Router input
  */
-function matchList($param) {
+function matchList($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
 
-    $matches = array();
+    $matches = [];
     foreach ($ec->getConfig('matches') as $match) {
-        $matches[] = array(
+        $matches[] = [
             'match'   => $match['match'],
             'teamNum' => $match[$ec->getConfig('team')],
             'current' => ($ec->getConfig('currentMatch') === $match['match'])
-        );
+        ];
     }
 
     // Handle any extra matches.
     $extra = ExtractorStorage::fetch('sys', 'extraMatches');
     if ($extra !== false) {
         foreach ($extra as $match) {
-            $matches[] = array(
+            $matches[] = [
                 'match'   => $match['match'],
                 'teamNum' => $match['team'],
                 'current' => ($ec->getConfig('currentMatch') === $match['match'])
-            );
+            ];
         }
     }
 
-    $context = array(
+    $context = [
         'team'      => ExtractorUtil::teamNiceName($ec->getConfig('team')),
         'teamColor' => ExtractorUtil::teamColor($ec->getConfig('team')),
         'matches'   => $matches,
-    );
+    ];
 
     echo render('matchList', $context, 'Match List');
 
@@ -94,33 +96,17 @@ function matchList($param) {
  *
  * @param array $param Router input
  */
-function matchForm($param) {
+function matchForm($param)
+{
     // Config instance.
     $ec = new ExtractorConfig();
 
     // Set defaults.
-    $defaults = array(
+    $defaults = [
         'match'          => '',
         'team'           => '',
-        'autoBaseline'   => false,
-        'autoGear'       => false,
-        'autoFuelHigh'   => 0,
-        'autoFuelLow'    => 0,
-        'teleFuelHigh'   => 0,
-        'teleFuelLow'    => 0,
-        'teleGears'      => 0,
-        'teleTookOff'    => false,
-        'tagNoShow'      => false,
-        'tagNoMove'      => false,
-        'tagFlipped'     => false,
-        'tagStuck'       => false,
-        'tagFell'        => false,
-        'tagPenalized'   => false,
-        'prefConfused'   => false,
-        'prefSlow'       => false,
-        'prefEfficient'  => false,
-        'prefPowerhouse' => false
-    );
+// TODO: Add new fields here
+    ];
 
     if ($param[1] !== 'blank') {
         // Search if data is in the matches config key.
@@ -159,29 +145,16 @@ function matchForm($param) {
  *
  * @param array $param Router input
  */
-function matchSubmit($param) {
+function matchSubmit($param)
+{
     unset($param);
 
     // Validation array.
-    $validate = array(
+    $validate = [
         'match'        => FILTER_VALIDATE_INT,
         'team'         => FILTER_VALIDATE_INT,
-        'autoBaseline' => FILTER_VALIDATE_BOOLEAN,
-        'autoGear'     => FILTER_VALIDATE_BOOLEAN,
-        'autoFuelHigh' => FILTER_VALIDATE_INT,
-        'autoFuelLow'  => FILTER_VALIDATE_INT,
-        'teleFuelHigh' => FILTER_VALIDATE_INT,
-        'teleFuelLow'  => FILTER_VALIDATE_INT,
-        'teleGears'    => FILTER_VALIDATE_INT,
-        'teleTookOff'  => FILTER_VALIDATE_BOOLEAN,
-        'tagNoShow'    => FILTER_VALIDATE_BOOLEAN,
-        'tagNoMove'    => FILTER_VALIDATE_BOOLEAN,
-        'tagFlipped'   => FILTER_VALIDATE_BOOLEAN,
-        'tagStuck'     => FILTER_VALIDATE_BOOLEAN,
-        'tagFell'      => FILTER_VALIDATE_BOOLEAN,
-        'tagPenalized' => FILTER_VALIDATE_BOOLEAN,
-        'performance'  => null
-    );
+        // TODO: Add new fields
+    ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
 
@@ -227,16 +200,16 @@ function matchSubmit($param) {
         // Initialize if extraMatches doesn't exist yet.
         // FIXME: Could use a rework.
         if ($extra === false) {
-            $extra = array();
+            $extra = [];
         }
 
         $extraKey = array_search($data['match'], array_column($extra, 'match'));
 
         if ($extraKey === false) {
-            $append = array(
+            $append = [
                 'match' => $data['match'],
                 'team'  => $data['team']
-            );
+            ];
 
             ExtractorStorage::append('sys', 'extraMatches', $append);
         } else {
@@ -257,7 +230,8 @@ function matchSubmit($param) {
  *
  * @param array $param Router input
  */
-function currentMatch($param) {
+function currentMatch($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
@@ -279,34 +253,35 @@ function currentMatch($param) {
  *
  * @param array $param Router input
  */
-function pitList($param) {
+function pitList($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
 
-    $pits = array();
+    $pits = [];
     foreach ($ec->getConfig('pits') as $pit) {
-        $pits[] = array(
+        $pits[] = [
             'team'    => $pit['team'],
             'current' => ($ec->getConfig('currentPit') === array_search($pit['team'], array_column($ec->getConfig('pits'), 'team')))
 
-        );
+        ];
     }
 
     // Handle any extra matches.
     $extra = ExtractorStorage::fetch('sys', 'extraPits');
     if ($extra !== false) {
         foreach ($extra as $pit) {
-            $pits[] = array(
+            $pits[] = [
                 'team'    => $pit['team'],
                 'current' => ($ec->getConfig('currentPit') === array_search($pit['team'], array_column($ec->getConfig('pits'), 'team')))
-            );
+            ];
         }
     }
 
-    $context = array(
+    $context = [
         'pits' => $pits
-    );
+    ];
 
     echo render('pitList', $context, 'Pit List');
 
@@ -319,31 +294,16 @@ function pitList($param) {
  *
  * @param array $param Router input
  */
-function pitForm($param) {
+function pitForm($param)
+{
     // Config instance.
     $ec = new ExtractorConfig();
 
     // Set defaults.
-    $defaults = array(
+    $defaults = [
         'team'           => '',
-        'autoFuelHigh'   => false,
-        'autoFuelLow'    => false,
-        'autoBaseline'   => false,
-        'autoGear'       => false,
-        'autoMultiple'   => false,
-        'teleFuelHigh'   => false,
-        'teleFuelLow'    => false,
-        'teleGear'       => false,
-        'teleTakeOff'    => false,
-        'teleRoleFuel'   => false,
-        'teleRoleGear'   => false,
-        'driveTrain4'    => false,
-        'driveTrain6'    => false,
-        'driveTrainTank' => false,
-        'robotCamera'    => false,
-        'robotVision'    => false,
-        'gearGround'     => false
-    );
+// TODO: Add new fields
+    ];
 
     if ($param[1] !== 'blank') {
         // Search if data is in the pits config key.
@@ -386,27 +346,15 @@ function pitForm($param) {
  *
  * @param array $param Router input
  */
-function pitSubmit($param) {
+function pitSubmit($param)
+{
     unset($param);
 
     // Validation array.
-    $validate = array(
+    $validate = [
         'team'         => FILTER_VALIDATE_INT,
-        'autoFuelHigh' => FILTER_VALIDATE_BOOLEAN,
-        'autoFuelLow'  => FILTER_VALIDATE_BOOLEAN,
-        'autoBaseline' => FILTER_VALIDATE_BOOLEAN,
-        'autoGear'     => FILTER_VALIDATE_BOOLEAN,
-        'autoMultiple' => FILTER_VALIDATE_BOOLEAN,
-        'teleFuelHigh' => FILTER_VALIDATE_BOOLEAN,
-        'teleFuelLow'  => FILTER_VALIDATE_BOOLEAN,
-        'teleGear'     => FILTER_VALIDATE_BOOLEAN,
-        'teleTakeOff'  => FILTER_VALIDATE_BOOLEAN,
-        'teleRole'     => null,
-        'driveTrain'   => null,
-        'robotCamera'  => FILTER_VALIDATE_BOOLEAN,
-        'robotVision'  => FILTER_VALIDATE_BOOLEAN,
-        'gearGround'   => FILTER_VALIDATE_BOOLEAN
-    );
+// TODO: Add new fields
+    ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
 
@@ -451,16 +399,16 @@ function pitSubmit($param) {
         // Set current match one up from the last.
         $ec->setConfig('currentPit', $pitKey + 1);
     } else {
-        $append = array(
+        $append = [
             'team' => $data['team']
-        );
+        ];
 
         // Check if extra already exists for the match.
         $extra = ExtractorStorage::fetch('sys', 'extraPits');
         // Initialize if extraMatches doesn't exist yet.
         // FIXME: Could use a rework.
         if ($extra === false) {
-            $extra = array();
+            $extra = [];
         }
 
         $extraKey = array_search($data['team'], array_column($extra, 'team'));
@@ -481,7 +429,8 @@ function pitSubmit($param) {
  *
  * @param array $param Router input
  */
-function currentPit($param) {
+function currentPit($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
@@ -504,26 +453,27 @@ function currentPit($param) {
  *
  * @param array $param Router input
  */
-function driverList($param) {
+function driverList($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
 
-    $drivers = array();
+    $drivers = [];
     $extra = ExtractorStorage::fetch('sys', 'extraDriver');
     if ($extra !== false) {
         foreach ($extra as $match) {
-            $drivers[] = array(
+            $drivers[] = [
                 'match'   => $match['match'],
                 'teamNum' => $match['team'],
                 'current' => ($ec->getConfig('currentMatch') === $match['match'])
-            );
+            ];
         }
     }
 
-    $context = array(
+    $context = [
         'drivers' => $drivers,
-    );
+    ];
 
     echo render('driverList', $context, 'Driver List');
 
@@ -536,19 +486,20 @@ function driverList($param) {
  *
  * @param array $param Router input
  */
-function driverForm($param) {
+function driverForm($param)
+{
     // Config instance.
     $ec = new ExtractorConfig();
 
     // Set defaults.
-    $defaults = array(
+    $defaults = [
         'match'          => '',
         'team'           => '',
         'prefConfused'   => false,
         'prefSlow'       => false,
         'prefEfficient'  => false,
         'prefPowerhouse' => false
-    );
+    ];
 
     if ($param[1] !== 'blank') {
         $es = new ExtractorScouting('driver', $param[1]);
@@ -579,15 +530,16 @@ function driverForm($param) {
  *
  * @param array $param Router input
  */
-function driverSubmit($param) {
+function driverSubmit($param)
+{
     unset($param);
 
     // Validation array.
-    $validate = array(
+    $validate = [
         'match'       => FILTER_VALIDATE_INT,
         'team'        => FILTER_VALIDATE_INT,
         'performance' => null
-    );
+    ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
 
@@ -624,16 +576,16 @@ function driverSubmit($param) {
     // Initialize if extraMatches doesn't exist yet.
     // FIXME: Could use a rework.
     if ($extra === false) {
-        $extra = array();
+        $extra = [];
     }
 
     $extraKey = array_search($data['match'], array_column($extra, 'match'));
 
     if ($extraKey === false) {
-        $append = array(
+        $append = [
             'match' => $data['match'],
             'team'  => $data['team']
-        );
+        ];
 
         ExtractorStorage::append('sys', 'extraDriver', $append);
     } else {
@@ -653,7 +605,8 @@ function driverSubmit($param) {
  *
  * @param array $param Router input
  */
-function currentDriver($param) {
+function currentDriver($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
@@ -661,7 +614,7 @@ function currentDriver($param) {
     $store = ExtractorStorage::fetch('sys', 'extraDriver');
 
     if ($store === false) {
-        $store = array();
+        $store = [];
     }
 
     if (in_array($ec->getConfig('currentMatch'), array_column($store, 'match'))) {
@@ -682,10 +635,11 @@ function currentDriver($param) {
  *
  * @param array $param Router input
  */
-function transfer($param) {
+function transfer($param)
+{
     unset($param);
 
-    echo render('transfer', array(), 'Transfer');
+    echo render('transfer', [], 'Transfer');
 
     return;
 }
@@ -696,7 +650,8 @@ function transfer($param) {
  *
  * @param array $param Router input
  */
-function transferDisplay($param) {
+function transferDisplay($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
@@ -709,10 +664,10 @@ function transferDisplay($param) {
         return;
     }
 
-    $context = array(
+    $context = [
         'qrMS' => $ec->getConfig('qrRateMS'),
-        'qrs'  => array()
-    );
+        'qrs'  => []
+    ];
 
     // Set key num. Start at 1 because 0 is start key.
     $k = 1;
@@ -723,19 +678,19 @@ function transferDisplay($param) {
             $es = new ExtractorScouting($cat, $item);
 
             /** @noinspection PhpVoidFunctionResultUsedInspection */
-            $context['qrs'][] = array(
+            $context['qrs'][] = [
                 'key' => $k,
                 'src' => ExtractorQR::uri($es->csv())
-            );
+            ];
 
             $k++;
         }
     }
 
-    $context['qrs'][] = array(
+    $context['qrs'][] = [
         'key' => 0,
         'src' => ExtractorQR::start($k - 1)
-    );
+    ];
 
     echo render('transferDisplay', $context, 'Transfer');
 
@@ -748,7 +703,8 @@ function transferDisplay($param) {
  *
  * @param array $param Router input
  */
-function transferFinished($param) {
+function transferFinished($param)
+{
     unset($param);
 
     // Fail silently if there is no data.
@@ -772,7 +728,8 @@ function transferFinished($param) {
  *
  * @param array $param Router input
  */
-function schedule($param) {
+function schedule($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
@@ -783,9 +740,9 @@ function schedule($param) {
         $matches[$k]['current'] = ($ec->getConfig('currentMatch') === $match['match']);
     }
 
-    $context = array(
+    $context = [
         'matches' => $matches
-    );
+    ];
 
     echo render('schedule', $context, 'Schedule');
 
@@ -798,19 +755,20 @@ function schedule($param) {
  *
  * @param array $param Router input
  */
-function about($param) {
+function about($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
 
-    $context = array(
+    $context = [
         'deviceID'     => $ec->getConfig('deviceID'),
         'team'         => ExtractorUtil::teamNiceName($ec->getConfig('team')),
         'teamColor'    => ExtractorUtil::teamColor($ec->getConfig('team')),
         'currentMatch' => $ec->getConfig('currentMatch'),
         'currentPit'   => $ec->getConfig('currentPit'),
         'qrRateMS'     => $ec->getConfig('qrRateMS')
-    );
+    ];
 
     echo render('about', $context, 'About');
 
@@ -823,20 +781,21 @@ function about($param) {
  *
  * @param array $param Router input
  */
-function config($param) {
+function config($param)
+{
     unset($param);
 
     $ec = new ExtractorConfig();
     $check = $ec->fullLoad();
 
     if ($check) {
-        $context = array(
+        $context = [
             'msg' => 'It worked! The new configuration has been saved.'
-        );
+        ];
     } else {
-        $context = array(
+        $context = [
             'msg' => 'Could not find the configuration file. Are you sure the config is in the right place?'
-        );
+        ];
     }
 
     echo render('config', $context, 'Config');
@@ -850,14 +809,20 @@ function config($param) {
  *
  * @param array $param Router input
  */
-function setTeam($param) {
+function setTeam($param)
+{
     unset($param);
 
     $team = filter_input(INPUT_GET, 'team');
 
-    $allowedTeams = array(
-        'red1', 'red2', 'red3', 'blue1', 'blue2', 'blue3'
-    );
+    $allowedTeams = [
+        'red1',
+        'red2',
+        'red3',
+        'blue1',
+        'blue2',
+        'blue3'
+    ];
 
     if (in_array($team, $allowedTeams)) {
         $oc = new ExtractorConfig();
@@ -871,10 +836,11 @@ function setTeam($param) {
  * Return 404
  * Returns a 404 to the browser.
  */
-function return404() {
+function return404()
+{
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
 
-    echo render('404', array(), '404');
+    echo render('404', [], '404');
 
     return;
 }
@@ -885,7 +851,8 @@ function return404() {
  *
  * @param string $uri Redirect URI
  */
-function redirect($uri) {
+function redirect($uri)
+{
     header('Location: ' . BASEURI . $uri);
 
     return;
@@ -901,7 +868,8 @@ function redirect($uri) {
  *
  * @return false|string
  */
-function render($tpl, $context, $title = 'Extractor') {
+function render($tpl, $context, $title = 'Extractor')
+{
     if (!isset($tpl) || !isset($context)) {
         return false;
     }
@@ -914,176 +882,176 @@ function render($tpl, $context, $title = 'Extractor') {
     $context['title'] = 'Extractor' . ($title !== null ? ' | ' . $title : '');
     $context['BASEURI'] = BASEURI;
     $context['VERSION'] = VERSION;
-    $context['navlinks'] = array(
-        array(
+    $context['navlinks'] = [
+        [
             'active' => ($tpl == 'matchList' || $tpl === 'matchForm'),
             'link'   => 'match',
             'icon'   => 'view_list',
             'name'   => 'Match'
-        ),
-        array(
+        ],
+        [
             'active' => ($tpl == 'pitList' || $tpl === 'pitForm'),
             'link'   => 'pit',
             'icon'   => 'view_list',
             'name'   => 'Pit'
-        ),
-        array(
+        ],
+        [
             'active' => ($tpl == 'driverList' || $tpl === 'driverForm'),
             'link'   => 'driver',
             'icon'   => 'view_list',
             'name'   => 'Driver'
-        ),
-        array(
+        ],
+        [
             'active' => ($tpl == 'transfer' || $tpl === 'transferDisplay'),
             'link'   => 'transfer',
             'icon'   => 'present_to_all',
             'name'   => 'Transfer'
-        ),
-        array(
+        ],
+        [
             'active' => ($tpl == 'schedule'),
             'link'   => 'schedule',
             'icon'   => 'list',
             'name'   => 'Schedule'
-        ),
-        array(
+        ],
+        [
             'active' => ($tpl == 'about' || $tpl === 'config'),
             'link'   => 'about',
             'icon'   => 'phonelink_setup',
             'name'   => 'About'
-        )
-    );
+        ]
+    ];
 
-    $mustache = new Mustache_Engine(array(
+    $mustache = new Mustache_Engine([
         'loader'          => new Mustache_Loader_FilesystemLoader(__DIR__ . DS . 'templates'),
         'partials_loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . DS . 'templates' . DS . 'partial')
-    ));
+    ]);
     $render = $mustache->loadTemplate($tpl);
 
     return $render->render($context);
 }
 
-$routingArray = array(
+$routingArray = [
     // Index
-    array(
+    [
         'method' => 'get',
         'func'   => 'index',
         'uri'    => ''
-    ),
+    ],
     // Match list
-    array(
+    [
         'method' => 'get',
         'func'   => 'matchList',
         'uri'    => 'match'
-    ),
+    ],
     // Match form
-    array(
+    [
         'method' => 'get',
         'func'   => 'matchForm',
         'uri'    => 'match\/([0-9]{1,}|blank)'
-    ),
+    ],
     // Match data handler
-    array(
+    [
         'method' => 'post',
         'func'   => 'matchSubmit',
         'uri'    => 'post\/match'
-    ),
+    ],
     // Current match
-    array(
+    [
         'method' => 'get',
         'func'   => 'currentMatch',
         'uri'    => 'match\/current'
-    ),
+    ],
     // Pit list
-    array(
+    [
         'method' => 'get',
         'func'   => 'pitList',
         'uri'    => 'pit'
-    ),
+    ],
     // Pit form
-    array(
+    [
         'method' => 'get',
         'func'   => 'pitForm',
         'uri'    => 'pit\/([0-9]{1,}|blank)'
-    ),
+    ],
     // Pit data handler
-    array(
+    [
         'method' => 'post',
         'func'   => 'pitSubmit',
         'uri'    => 'post\/pit'
-    ),
+    ],
     // Current pit form
-    array(
+    [
         'method' => 'get',
         'func'   => 'currentPit',
         'uri'    => 'pit\/current'
-    ),
+    ],
     // Driver list
-    array(
+    [
         'method' => 'get',
         'func'   => 'driverList',
         'uri'    => 'driver'
-    ),
+    ],
     // Driver form
-    array(
+    [
         'method' => 'get',
         'func'   => 'driverForm',
         'uri'    => 'driver\/([0-9]{1,}|blank)'
-    ),
+    ],
     // Driver data handler
-    array(
+    [
         'method' => 'post',
         'func'   => 'driverSubmit',
         'uri'    => 'post\/driver'
-    ),
+    ],
     // Current pit form
-    array(
+    [
         'method' => 'get',
         'func'   => 'currentDriver',
         'uri'    => 'driver\/current'
-    ),
+    ],
     // Transfer
-    array(
+    [
         'method' => 'get',
         'func'   => 'transfer',
         'uri'    => 'transfer'
-    ),
+    ],
     // Transfer Begin
-    array(
+    [
         'method' => 'get',
         'func'   => 'transferDisplay',
         'uri'    => 'transfer\/display'
-    ),
+    ],
     // Transfer finish
-    array(
+    [
         'method' => 'get',
         'func'   => 'transferFinished',
         'uri'    => 'transfer\/finished'
-    ),
+    ],
     // Schedule
-    array(
+    [
         'method' => 'get',
         'func'   => 'schedule',
         'uri'    => 'schedule'
-    ),
+    ],
     // About
-    array(
+    [
         'method' => 'get',
         'func'   => 'about',
         'uri'    => 'about'
-    ),
+    ],
     // Configuration
-    array(
+    [
         'method' => 'get',
         'func'   => 'config',
         'uri'    => 'config'
-    ),
+    ],
     // Set Team
-    array(
+    [
         'method' => 'get',
         'func'   => 'setTeam',
         'uri'    => 'setteam'
-    )
-);
+    ]
+];
 
 if (!Router::process($routingArray)) {
     $pre = Router::preProcess();

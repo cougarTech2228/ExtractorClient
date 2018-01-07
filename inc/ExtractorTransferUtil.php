@@ -3,14 +3,15 @@
 /**
  * Class ExtractorTransferUtil
  */
-class ExtractorTransferUtil {
+class ExtractorTransferUtil
+{
     /**
      * List Not Transferred
      * Lists the currently not transferred data.
-     *
      * @return array|false
      */
-    public static function listNotTransferred() {
+    public static function listNotTransferred()
+    {
         $list = ExtractorStorage::fetch('sys', 'notTransferred');
 
         return $list;
@@ -26,16 +27,17 @@ class ExtractorTransferUtil {
      *
      * @return true
      */
-    public static function setTransferred($cat, $key, $isTransferred) {
+    public static function setTransferred($cat, $key, $isTransferred)
+    {
         $list = ExtractorStorage::fetch('sys', 'notTransferred');
 
         // Prep if it doesn't exist.
         if ($list === false) {
-            $list = array();
+            $list = [];
         }
 
         if (!array_key_exists($cat, $list)) {
-            $list[$cat] = array();
+            $list[$cat] = [];
         }
 
         // Add if not transferred, else remove.
@@ -54,17 +56,17 @@ class ExtractorTransferUtil {
     /**
      * Set All Transferred
      * Removes all not transferred items.
-     *
      * @return true
      */
-    public static function setAllTransferred() {
+    public static function setAllTransferred()
+    {
         $list = ExtractorStorage::fetch('sys', 'notTransferred');
 
         if ($list === false) {
             return true;
         }
 
-        ExtractorStorage::store('sys', 'notTransferred', array());
+        ExtractorStorage::store('sys', 'notTransferred', []);
 
         return true;
     }

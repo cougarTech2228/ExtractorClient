@@ -3,37 +3,39 @@
 /**
  * Class ExtractorConfig
  */
-class ExtractorConfig {
+class ExtractorConfig
+{
     private $config;
 
     /**
      * @var array Array of default config values.
      */
-    protected $defaults = array(
+    protected $defaults = [
         'deviceID'     => 1,
         'team'         => 'red1',
         'currentMatch' => 0,
         'currentPit'   => 0,
         'qrRateMS'     => 1000,
-        'matches'      => array(),
-        'pits'         => array()
-    );
+        'matches'      => [],
+        'pits'         => []
+    ];
 
     /**
      * ExtractorClient constructor.
      * Pre-loads config.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->loadConfig();
     }
 
     /**
      * Load Config
      * Loads Extractor's configuration file.
-     *
      * @return true
      */
-    private function loadConfig() {
+    private function loadConfig()
+    {
 
         if (file_exists(CONFIG)) {
             $this->config = file_get_contents(CONFIG);
@@ -49,10 +51,10 @@ class ExtractorConfig {
     /**
      * Save Config
      * Saves the changes to the configuration files.
-     *
      * @return true
      */
-    private function saveConfig() {
+    private function saveConfig()
+    {
         file_put_contents(CONFIG, json_encode($this->config, JSON_PRETTY_PRINT));
 
         return true;
@@ -66,7 +68,8 @@ class ExtractorConfig {
      *
      * @return mixed
      */
-    public function getConfig($key) {
+    public function getConfig($key)
+    {
         if (array_key_exists($key, $this->config)) {
             // Special treatment.
             switch ($key) {
@@ -89,7 +92,8 @@ class ExtractorConfig {
      *
      * @return true;
      */
-    public function setConfig($key, $value) {
+    public function setConfig($key, $value)
+    {
         if (!is_string($key)) {
             return false;
         }
@@ -117,10 +121,10 @@ class ExtractorConfig {
     /**
      * Full Load
      * Load configuration data fully from hot swap config.
-     *
      * @return bool
      */
-    public function fullLoad() {
+    public function fullLoad()
+    {
         // Check if mounted.
         if (!file_exists(DATASEARCHPATH)) {
             return false;

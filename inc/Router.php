@@ -1,6 +1,7 @@
 <?php
 
-class Router {
+class Router
+{
     /**
      * Process URI
      * Processes the current URIs with the given array.
@@ -9,7 +10,8 @@ class Router {
      *
      * @return bool
      */
-    public static function process($routes) {
+    public static function process($routes)
+    {
         $requestURI = self::preProcess();
 
         if (self::checkURI() === false) {
@@ -34,10 +36,10 @@ class Router {
     /**
      * Pre-Process
      * Pre-processes the REQUEST_URI for use with static::process.
-     *
      * @return string Processed URI
      */
-    public static function preProcess() {
+    public static function preProcess()
+    {
         $requestURI = substr(filter_input(INPUT_SERVER, 'REQUEST_URI'), strlen(BASEURI));
         $requestURI = strtok($requestURI, '?');
 
@@ -47,10 +49,10 @@ class Router {
     /**
      * Remove Slash
      * Removes the trailing slash of a URL and redirects the user.
-     *
      * @return bool False if check fails.
      */
-    private static function checkURI() {
+    private static function checkURI()
+    {
         $uri = filter_input(INPUT_SERVER, 'REQUEST_URI');
 
         if ($uri === BASEURI) {

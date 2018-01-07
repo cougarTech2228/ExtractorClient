@@ -3,7 +3,8 @@
 /**
  * Class ExtractorStorage
  */
-class ExtractorStorage {
+class ExtractorStorage
+{
     /**
      * Store Data
      * Stores data in the data store with the given key and category.
@@ -14,7 +15,8 @@ class ExtractorStorage {
      *
      * @return true
      */
-    public static function store($cat, $key, $data) {
+    public static function store($cat, $key, $data)
+    {
         if (!file_exists(DATADIR . $cat)) {
             mkdir(DATADIR . $cat, 0755);
         }
@@ -33,7 +35,8 @@ class ExtractorStorage {
      *
      * @return array|false
      */
-    public static function fetch($cat, $key) {
+    public static function fetch($cat, $key)
+    {
         if (!file_exists(DATADIR . $cat . DS . $key . '.json')) {
             return false;
         }
@@ -51,11 +54,12 @@ class ExtractorStorage {
      *
      * @return bool
      */
-    public static function append($cat, $key, $data) {
+    public static function append($cat, $key, $data)
+    {
         $fetch = self::fetch($cat, $key);
 
         if ($fetch === false) {
-            $fetch = array();
+            $fetch = [];
         }
 
         $fetch[] = $data;

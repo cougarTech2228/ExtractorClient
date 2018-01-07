@@ -3,7 +3,8 @@
 /**
  * Class ExtractorScouting
  */
-class ExtractorScouting {
+class ExtractorScouting
+{
     private $type, $key, $data;
 
     /**
@@ -13,14 +14,15 @@ class ExtractorScouting {
      * @param string $type Type of data (match or pit)
      * @param string $key  Match number or team number.
      */
-    public function __construct($type, $key) {
+    public function __construct($type, $key)
+    {
         $this->type = $type;
         $this->key = $key;
 
         $this->data = ExtractorStorage::fetch($this->type, $this->key);
 
         if ($this->data === false) {
-            $this->data = array();
+            $this->data = [];
         }
     }
 
@@ -32,7 +34,8 @@ class ExtractorScouting {
      *
      * @return bool
      */
-    public function set($data) {
+    public function set($data)
+    {
         if (!is_array($data)) {
             return false;
         }
@@ -45,10 +48,10 @@ class ExtractorScouting {
     /**
      * Save Data
      * Saves the data to disk and marks the data as not transferred using ExtractorTransferUtil.
-     *
      * @return true
      */
-    public function save() {
+    public function save()
+    {
         ExtractorStorage::store($this->type, $this->key, $this->data);
         ExtractorTransferUtil::setTransferred($this->type, $this->key, false);
 
@@ -58,24 +61,24 @@ class ExtractorScouting {
     /**
      * Get Data
      * Get the data file.
-     *
      * @return array
      */
-    public function get() {
+    public function get()
+    {
         return $this->data;
     }
 
     /**
      * Format to CSV
      * Formats the data to be outputted as a CSV.
-     *
      * @return string
      */
-    public function csv() {
+    public function csv()
+    {
         // Check if match data or pit data
         switch ($this->type) {
             case 'match':
-                $order = array(
+                $order = [
                     'match',
                     'team',
                     'autoFuelHigh',
@@ -96,10 +99,10 @@ class ExtractorScouting {
                     'tagStuck',
                     'tagFell',
                     'tagPenalized',
-                );
+                ];
                 break;
             case 'pit':
-                $order = array(
+                $order = [
                     'team',
                     'autoFuelHigh',
                     'autoFuelLow',
@@ -116,24 +119,24 @@ class ExtractorScouting {
                     'teleRoleFuel',
                     'teleRoleGear',
                     'gearGround'
-                );
+                ];
                 break;
             case 'driver':
-                $order = array(
+                $order = [
                     'match',
                     'team',
                     'prefConfused',
                     'prefSlow',
                     'prefEfficient',
                     'prefPowerhouse',
-                );
+                ];
                 break;
             default:
-                $order = array();
+                $order = [];
                 break;
         }
 
-        $return = array();
+        $return = [];
         foreach ($order as $item) {
             switch (true) {
                 case ($item === 'prefConfused'):

@@ -1,7 +1,9 @@
 <?php
+
 use Endroid\QrCode\QrCode;
 
-class ExtractorQR {
+class ExtractorQR
+{
     /**
      * Create QR Object
      * Creates a QR code with the given text and returns the QR object.
@@ -10,15 +12,21 @@ class ExtractorQR {
      *
      * @return QrCode
      */
-    public static function create($text) {
+    public static function create($text)
+    {
         $qrCode = new QrCode();
-        $qrCode->setText($text)
-            ->setSize(450)
-            ->setPadding(0)
-            ->setErrorCorrection('high')
-            ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0))
-            ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255))
-            ->setImageType(QrCode::IMAGE_TYPE_PNG);
+        try {
+            $qrCode->setText($text)
+                   ->setSize(450)
+                   ->setPadding(0)
+                   ->setErrorCorrection('high')
+                   ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
+                   ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255])
+                   ->setImageType(QrCode::IMAGE_TYPE_PNG);
+
+        } catch (\Endroid\QrCode\Exceptions\ImageTypeInvalidException $e) {
+            die($e->getMessage());
+        }
 
         return $qrCode;
     }
@@ -31,7 +39,8 @@ class ExtractorQR {
      *
      * @return string
      */
-    public static function uri($text) {
+    public static function uri($text)
+    {
         $qr = self::create($text);
 
         return $qr->getDataUri();
@@ -45,7 +54,8 @@ class ExtractorQR {
      *
      * @return string
      */
-    public static function start($num) {
+    public static function start($num)
+    {
         $qr = self::create('START:' . $num);
 
         return $qr->getDataUri();

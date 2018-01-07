@@ -3,7 +3,8 @@
 /**
  * Class ExtractorUtil
  */
-class ExtractorUtil {
+class ExtractorUtil
+{
     /**
      * Team Nice Name
      * Creates a nice name for teams based on an identifier.
@@ -12,7 +13,8 @@ class ExtractorUtil {
      *
      * @return string
      */
-    public static function teamNiceName($identifier) {
+    public static function teamNiceName($identifier)
+    {
         preg_match('/^(red|blue)([1-3])$/', $identifier, $match);
 
         return ucfirst($match[1]) . ' ' . $match[2];
@@ -26,7 +28,8 @@ class ExtractorUtil {
      *
      * @return string
      */
-    public static function teamColor($identifier) {
+    public static function teamColor($identifier)
+    {
         preg_match('/^(red|blue)[1-3]$/', $identifier, $match);
 
         switch ($match[1]) {
