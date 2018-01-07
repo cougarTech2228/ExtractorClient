@@ -17,119 +17,142 @@
                     <h3>Autonomous</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_fuel_high" name="autoFuelHigh" type="checkbox"
-                                   {{#autoFuelHigh}}checked{{/autoFuelHigh}}>
-                            <label for="auto_fuel_high">Fuel High</label>
+                            <input id="autoRun" name="autoRun" type="checkbox"
+                                   {{#autoRun}}checked{{/autoRun}}>
+                            <label for="autoRun">Auto Run</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="auto_fuel_low" name="autoFuelLow" type="checkbox"
-                                   {{#autoFuelLow}}checked{{/autoFuelLow}}>
-                            <label for="auto_fuel_low">Fuel Low</label>
+                            <input id="autoDeliverSwitch" name="autoDeliverSwitch" type="checkbox"
+                                   {{#autoDeliverSwitch}}checked{{/autoDeliverSwitch}}>
+                            <label for="autoDeliverSwitch">Deliver to Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_baseline" name="autoBaseline" type="checkbox"
-                                   {{#autoBaseline}}checked{{/autoBaseline}}>
-                            <label for="auto_baseline">Baseline</label>
+                            <input id="autoDeliverScale" name="autoDeliverScale" type="checkbox"
+                                   {{#autoDeliverScale}}checked{{/autoDeliverScale}}>
+                            <label for="autoDeliverScale">Deliver to Scale</label>
+                        </div>
+                    </div>
+                    <h3>Tele-Operated</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleAllySwitch" name="teleAllySwitch" type="checkbox"
+                                   {{#teleAllySwitch}}checked{{/teleAllySwitch}}>
+                            <label for="teleAllySwitch">Deliver to Alliance Switch</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="auto_gear" name="autoGear" type="checkbox" {{#autoGear}}checked{{/autoGear}}>
-                            <label for="auto_gear">Deliver gear</label>
+                            <input id="teleOppSwitch" name="teleOppSwitch" type="checkbox"
+                                   {{#teleOppSwitch}}checked{{/teleOppSwitch}}>
+                            <label for="teleOppSwitch">Deliver to Opposition Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="auto_multiple" name="autoMultiple" type="checkbox"
-                                   {{#autoMultiple}}checked{{/autoMultiple}}>
-                            <label for="auto_multiple">Multiple Routines</label>
+                            <input id="teleScale" name="teleScale" type="checkbox" {{#teleScale}}checked{{/teleScale}}>
+                            <label for="teleScale">Deliver to Scale</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleVault" name="teleVault" type="checkbox" {{#teleVault}}checked{{/teleVault}}>
+                            <label for="teleVault">Deliver to Vault</label>
                         </div>
                     </div>
-                    <h3>Tele-operated</h3>
+                    <h3>End Game</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tele_fuel_high" name="teleFuelHigh" type="checkbox"
-                                   {{#teleFuelHigh}}checked{{/teleFuelHigh}}>
-                            <label for="tele_fuel_high">Fuel High</label>
+                            <input id="endPark" name="endPark" type="checkbox" {{#endPark}}checked{{/endPark}}>
+                            <label for="endPark">Able to Park</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tele_fuel_low" name="teleFuelLow" type="checkbox"
-                                   {{#teleFuelLow}}checked{{/teleFuelLow}}>
-                            <label for="tele_fuel_low">Fuel Low</label>
+                            <input id="endClimb" name="endClimb" type="checkbox" {{#endClimb}}checked{{/endClimb}}>
+                            <label for="endClimb">Able to Climb</label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="tele_gear" name="teleGear" type="checkbox" {{#teleGear}}checked{{/teleGear}}>
-                            <label for="tele_gear">Deliver gear</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="tele_tookoff" name="teleTakeOff" type="checkbox"
-                                   {{#teleTakeOff}}checked{{/teleTakeOff}}>
-                            <label for="tele_tookoff">Took Off</label>
-                        </div>
-                    </div>
+                    <h3>Main Role</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="teleRole" type="radio" id="tele_role_fuel" value="fuel"
-                                       {{#teleRoleFuel}}checked{{/teleRoleFuel}}>
-                                <label for="tele_role_fuel">Main goal is to deliver fuel</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleVault" value="vault"
+                                       {{#mainRoleVault}}checked{{/mainRoleVault}}>
+                                <label for="mainRoleVault">Vault</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="teleRole" type="radio" id="tele_role_gears" value="gear"
-                                       {{#teleRoleGear}}checked{{/teleRoleGear}}>
-                                <label for="tele_role_gears">Main goal is to deliver gears</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleSwitch" value="switch"
+                                       {{#mainRoleSwitch}}checked{{/mainRoleSwitch}}>
+                                <label for="mainRoleSwitch">Switch</label>
                             </p>
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleScale" value="scale"
+                                       {{#mainRoleScale}}checked{{/mainRoleScale}}>
+                                <label for="mainRoleScale">Scale</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleFlex" value="flex"
+                                       {{#mainRoleFlex}}checked{{/mainRoleFlex}}>
+                                <label for="mainRoleFlex">"Flex"</label>
+                            </p>
+                        </div>
+                    </div>
+                    <h3>Cube Handling</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cubePortal" name="cubePortal" type="checkbox"
+                                   {{#cubePortal}}checked{{/cubePortal}}>
+                            <label for="cubePortal">Portal</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="cubeGround" name="cubeGround" type="checkbox"
+                                   {{#cubeGround}}checked{{/cubeGround}}>
+                            <label for="cubeGround">Off ground</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cubeRotate" name="cubeRotate" type="checkbox"
+                                   {{#cubeRotate}}checked{{/cubeRotate}}>
+                            <label for="cubeRotate">Rotate</label>
                         </div>
                     </div>
                     <h3>Robot</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="driveTrain" type="radio" id="drive_4" value="4"
+                                <input class="with-gap" name="driveTrain" type="radio" id="driveTrain4" value="4"
                                        {{#driveTrain4}}checked{{/driveTrain4}}>
-                                <label for="drive_4">4 wheel drive</label>
+                                <label for="driveTrain4">4 wheel drive</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="driveTrain" type="radio" id="drive_6" value="6"
+                                <input class="with-gap" name="driveTrain" type="radio" id="driveTrain6" value="6"
                                        {{#driveTrain6}}checked{{/driveTrain6}}>
-                                <label for="drive_6">6 wheel drive</label>
+                                <label for="driveTrain6">6 wheel drive</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="driveTrain" type="radio" id="drive_t" value="t"
+                                <input class="with-gap" name="driveTrain" type="radio" id="driveTrainT" value="t"
                                        {{#driveTrainT}}checked{{/driveTrainT}}>
-                                <label for="drive_t">Tank drive</label>
+                                <label for="driveTrainT">Tank drive</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="driveTrain" type="radio" id="drive_m" value="m"
+                                <input class="with-gap" name="driveTrain" type="radio" id="driveTrainM" value="m"
                                        {{#driveTrainM}}checked{{/driveTrainM}}>
-                                <label for="drive_m">Mecanum drive</label>
+                                <label for="driveTrainM">Mecanum drive</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="driveTrain" type="radio" id="drive_s" value="s"
+                                <input class="with-gap" name="driveTrain" type="radio" id="driveTrainS" value="s"
                                        {{#driveTrainS}}checked{{/driveTrainS}}>
-                                <label for="drive_s">Swerve drive</label>
+                                <label for="driveTrainS">Swerve drive</label>
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="robot_camera" name="robotCamera" type="checkbox"
+                            <input id="robotCamera" name="robotCamera" type="checkbox"
                                    {{#robotCamera}}checked{{/robotCamera}}>
-                            <label for="robot_camera">Camera</label>
+                            <label for="robotCamera">Camera</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="robot_vision" name="robotVision" type="checkbox"
+                            <input id="robotVision" name="robotVision" type="checkbox"
                                    {{#robotVision}}checked{{/robotVision}}>
-                            <label for="robot_vision">Vision</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="gear_ground" name="gearGround" type="checkbox"
-                                   {{#gearGround}}checked{{/gearGround}}>
-                            <label for="gear_ground">Can pick gears off the ground</label>
+                            <label for="robotVision">Vision</label>
                         </div>
                     </div>
                     <div class="row">
