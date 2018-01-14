@@ -9,37 +9,37 @@
                 <form class="col s12" action="{{BASEURI}}post/driver" method="post">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate"
-                                   value="{{match}}" min="0" required>
-                            <label for="match_number">Match Number</label>
+                            <input placeholder="Match" id="matchNumber" name="matchNumber" type="number"
+                                   class="validate" value="{{matchNumber}}" min="0" required>
+                            <label for="matchNumber">Match Number</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate"
-                                   value="{{team}}" min="0" required>
-                            <label for="team_number">Team Number</label>
+                            <input placeholder="Team" id="teamNumber" name="teamNumber" type="number" class="validate"
+                                   value="{{teamNumber}}" min="0" required>
+                            <label for="teamNumber">Team Number</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_confused"
-                                       value="confused" {{#prefConfused}}checked{{/prefConfused}}>
-                                <label for="pref_confused">Confused</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefC"
+                                       value="c" {{#prefC}}checked{{/prefC}}>
+                                <label for="prefC">Confused</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_slow" value="slow"
-                                       {{#prefSlow}}checked{{/prefSlow}}>
-                                <label for="pref_slow">Slow</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefS" value="s"
+                                       {{#prefS}}checked{{/prefS}}>
+                                <label for="prefS">Slow</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_efficient"
-                                       value="efficient" {{#prefEfficient}}checked{{/prefEfficient}}>
-                                <label for="pref_efficient">Efficient</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefE"
+                                       value="e" {{#prefE}}checked{{/prefE}}>
+                                <label for="prefE">Efficient</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_powerhouse"
-                                       value="powerhouse" {{#prefPowerhouse}}checked{{/prefPowerhouse}}>
-                                <label for="pref_powerhouse">Powerhouse</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefP"
+                                       value="p" {{#prefP}}checked{{/prefP}}>
+                                <label for="prefP">Powerhouse</label>
                             </p>
                         </div>
                     </div>

@@ -123,12 +123,9 @@ class ExtractorScouting
                 break;
             case 'driver':
                 $order = [
-                    'match',
-                    'team',
-                    'prefConfused',
-                    'prefSlow',
-                    'prefEfficient',
-                    'prefPowerhouse',
+                    'matchNumber',
+                    'teamNumber',
+                    'performance',
                 ];
                 break;
             default:
@@ -139,24 +136,15 @@ class ExtractorScouting
         $return = [];
         foreach ($order as $item) {
             switch (true) {
-                case ($item === 'prefConfused'):
-                case ($item === 'prefSlow'):
-                case ($item === 'prefEfficient'):
-                case ($item === 'prefPowerhouse'):
-                    $return[] = ($this->data['performance'] === strtolower(substr($item, 4))) ? 1 : 0;
-                    break;
-                case ($item === 'driveTrain'):
-                    $return[] = strtoupper($this->data['driveTrain']);
-                    break;
-                case ($item === 'teleRoleFuel'):
-                case ($item === 'teleRoleGear'):
-                    $return[] = ($this->data['teleRole'] === strtolower(substr($item, 8))) ? 1 : 0;
+                case ($item === 'performance'):
+
+                    $return[] = strtoupper($this->data[$item]);
                     break;
                 case (is_bool($this->data[$item])):
                     $return[] = ($this->data[$item]) ? 1 : 0;
                     break;
                 case (is_int($this->data[$item])):
-                    $return[] = $this->data[$item];
+                    $return[] = intval($this->data[$item]);
                     break;
                 default:
                     break;

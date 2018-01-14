@@ -464,9 +464,9 @@ function driverList($param)
     if ($extra !== false) {
         foreach ($extra as $match) {
             $drivers[] = [
-                'match'   => $match['match'],
-                'teamNum' => $match['team'],
-                'current' => ($ec->getConfig('currentMatch') === $match['match'])
+                'match'   => $match['matchNumber'],
+                'teamNum' => $match['teamNumber'],
+                'current' => ($ec->getConfig('currentMatch') === $match['matchNumber'])
             ];
         }
     }
@@ -493,12 +493,12 @@ function driverForm($param)
 
     // Set defaults.
     $defaults = [
-        'match'          => '',
-        'team'           => '',
-        'prefConfused'   => false,
-        'prefSlow'       => false,
-        'prefEfficient'  => false,
-        'prefPowerhouse' => false
+        'matchNumber'    => '',
+        'teamNumber'     => '',
+        'prefC'   => false,
+        'prefS'       => false,
+        'prefE'  => false,
+        'prefP' => false
     ];
 
     if ($param[1] !== 'blank') {
@@ -536,8 +536,8 @@ function driverSubmit($param)
 
     // Validation array.
     $validate = [
-        'match'       => FILTER_VALIDATE_INT,
-        'team'        => FILTER_VALIDATE_INT,
+        'matchNumber' => FILTER_VALIDATE_INT,
+        'teamNumber'  => FILTER_VALIDATE_INT,
         'performance' => null
     ];
 
@@ -563,13 +563,13 @@ function driverSubmit($param)
         }
     }
 
-    $es = new ExtractorScouting('driver', $data['match']);
+    $es = new ExtractorScouting('driver', $data['matchNumber']);
     $es->set($data);
     $es->save();
 
     $ec = new ExtractorConfig();
 
-    $ec->setConfig('currentMatch', $data['match'] + 1);
+    $ec->setConfig('currentMatch', $data['matchNumber'] + 1);
 
     // Check if extra already exists for the match.
     $extra = ExtractorStorage::fetch('sys', 'extraDriver');
@@ -579,17 +579,17 @@ function driverSubmit($param)
         $extra = [];
     }
 
-    $extraKey = array_search($data['match'], array_column($extra, 'match'));
+    $extraKey = array_search($data['matchNumber'], array_column($extra, 'matchNumber'));
 
     if ($extraKey === false) {
         $append = [
-            'match' => $data['match'],
-            'team'  => $data['team']
+            'matchNumber' => $data['matchNumber'],
+            'teamNumber'  => $data['teamNumber']
         ];
 
         ExtractorStorage::append('sys', 'extraDriver', $append);
     } else {
-        $extra[$extraKey]['team'] = $data['team'];
+        $extra[$extraKey]['teamNumber'] = $data['teamNumber'];
 
         ExtractorStorage::store('sys', 'extraDriver', $extra);
     }
