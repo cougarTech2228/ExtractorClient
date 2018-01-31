@@ -133,8 +133,8 @@ class ExtractorConfig
         // Scan for files.
         $files = scandir(DATASEARCHPATH);
 
-        if (in_array('config.json', $files) && is_file(DATASEARCHPATH . 'config.json')) {
-            $new = file_get_contents(DATASEARCHPATH . 'config.json');
+        if (in_array('config.txt', $files) && is_file(DATASEARCHPATH . 'config.txt')) {
+            $new = file_get_contents(DATASEARCHPATH . 'config.txt');
             $new = json_decode($new, true);
 
             if (!is_array($new)) {
@@ -143,6 +143,8 @@ class ExtractorConfig
 
             $this->config = array_merge($this->defaults, $this->config, $new);
             $this->saveConfig();
+
+            unlink(DATASEARCHPATH . 'config.txt');
 
             return true;
         }
