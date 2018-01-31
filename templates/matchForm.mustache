@@ -9,14 +9,15 @@
                 <form class="col s12" action="{{BASEURI}}post/match" method="post">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Match" id="match_number" name="match" type="number" class="validate"
-                                   value="{{match}}" min="0" required>
-                            <label for="match_number">Match Number</label>
+                            <input placeholder="Match" id="matchNumber" name="matchNumber" type="number"
+                                   class="validate"
+                                   value="{{matchNumber}}" min="0" required>
+                            <label for="matchNumber">Match Number</label>
                         </div>
                         <div class="input-field col s6">
-                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate"
-                                   value="{{team}}" min="0" required>
-                            <label for="team_number">Team Number</label>
+                            <input placeholder="Team" id="teamNumber" name="teamNumber" type="number" class="validate"
+                                   value="{{teamNumber}}" min="0" required>
+                            <label for="teamNumber">Team Number</label>
                         </div>
                     </div>
                     <h3>Autonomous</h3>
@@ -66,78 +67,76 @@
                     </div>
                     <h3>End Game</h3>
                     <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <input class="with-gap" name="end" type="radio" id="endClimb"
-                                       value="climb" {{#endClimb}}checked{{/endClimb}}>
-                                <label for="endClimb">Climb</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="end" type="radio" id="endPark"
-                                       value="park" {{#endPark}}checked{{/endPark}}>
-                                <label for="endPark">Park</label>
-                            </p>
+                        <div class="input-field col s6">
+                            <input id="endClimb" name="endClimb" type="checkbox" value="true"
+                                   {{#endClimb}}checked{{/endClimb}}>
+                            <label for="endClimb">Climb</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="endPark" name="endPark" type="checkbox" value="true"
+                                   {{#endPark}}checked{{/endPark}}>
+                            <label for="endPark">Park</label>
                         </div>
                     </div>
                     <h3>Tags</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_no_show" name="tagNoShow" type="checkbox" value="true"
+                            <input id="tagNoShow" name="tagNoShow" type="checkbox" value="true"
                                    {{#tagNoShow}}checked{{/tagNoShow}}>
-                            <label for="tag_no_show">No Show</label>
+                            <label for="tagNoShow">No Show</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_no_move" name="tagNoMove" type="checkbox" value="true"
-                                   {{#$tagNoMove}}checked{{/$tagNoMove}}>
-                            <label for="tag_no_move">Didn't move</label>
+                            <input id="tagNoMove" name="tagNoMove" type="checkbox" value="true"
+                                   {{#tagNoMove}}checked{{/tagNoMove}}>
+                            <label for="tagNoMove">Didn't move</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_flipped" name="tagFlipped" type="checkbox" value="true"
+                            <input id="tagFlipped" name="tagFlipped" type="checkbox" value="true"
                                    {{#tagFlipped}}checked{{/tagFlipped}}>
-                            <label for="tag_flipped">Flipped</label>
+                            <label for="tagFlipped">Flipped</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_stuck" name="tagStuck" type="checkbox" value="true"
+                            <input id="tagStuck" name="tagStuck" type="checkbox" value="true"
                                    {{#tagStuck}}checked{{/tagStuck}}>
-                            <label for="tag_stuck">Stuck</label>
+                            <label for="tagStuck">Stuck</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="tag_fell" name="tagFell" type="checkbox" value="true"
+                            <input id="tagFell" name="tagFell" type="checkbox" value="true"
                                    {{#tagFell}}checked{{/tagFell}}>
-                            <label for="tag_fell">Fell</label>
+                            <label for="tagFell">Fell</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="tag_penalized" name="tagPenalized" type="checkbox" value="true"
+                            <input id="tagPenalized" name="tagPenalized" type="checkbox" value="true"
                                    {{#tagPenalized}}checked{{/tagPenalized}}>
-                            <label for="tag_penalized">Penalized</label>
+                            <label for="tagPenalized">Penalized</label>
                         </div>
                     </div>
                     <h3>Overall Performance</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_confused"
-                                       value="confused" {{#prefConfused}}checked{{/prefConfused}}>
-                                <label for="pref_confused">Confused</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefC"
+                                       value="c" {{#prefC}}checked{{/prefC}}>
+                                <label for="prefC">Confused</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_slow" value="slow"
-                                       {{#prefSlow}}checked{{/prefSlow}}>
-                                <label for="pref_slow">Slow</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefS" value="s"
+                                       {{#prefS}}checked{{/prefS}}>
+                                <label for="prefS">Slow</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_efficient"
-                                       value="efficient" {{#prefEfficient}}checked{{/prefEfficient}}>
-                                <label for="pref_efficient">Efficient</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefE"
+                                       value="e" {{#prefE}}checked{{/prefE}}>
+                                <label for="prefE">Efficient</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="performance" type="radio" id="pref_powerhouse"
-                                       value="powerhouse" {{#prefPowerhouse}}checked{{/prefPowerhouse}}>
-                                <label for="pref_powerhouse">Powerhouse</label>
+                                <input class="with-gap" name="performance" type="radio" id="prefP"
+                                       value="p" {{#prefP}}checked{{/prefP}}>
+                                <label for="prefP">Powerhouse</label>
                             </p>
                         </div>
                     </div>

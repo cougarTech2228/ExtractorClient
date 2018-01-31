@@ -9,9 +9,9 @@
                 <form class="col s12" action="{{BASEURI}}post/pit" method="post">
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Team" id="team_number" name="team" type="number" class="validate"
-                                   value="{{team}}" min="0" required>
-                            <label for="match_number">Team Number</label>
+                            <input placeholder="Team" id="teamNumber" name="teamNumber" type="number" class="validate"
+                                   value="{{teamNumber}}" min="0" required>
+                            <label for="teamNumber">Team Number</label>
                         </div>
                     </div>
                     <h3>Autonomous</h3>
@@ -22,16 +22,16 @@
                             <label for="autoRun">Auto Run</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="autoDeliverSwitch" name="autoDeliverSwitch" type="checkbox"
-                                   {{#autoDeliverSwitch}}checked{{/autoDeliverSwitch}}>
-                            <label for="autoDeliverSwitch">Deliver to Switch</label>
+                            <input id="autoSwitch" name="autoSwitch" type="checkbox"
+                                   {{#autoSwitch}}checked{{/autoSwitch}}>
+                            <label for="autoSwitch">Deliver to Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="autoDeliverScale" name="autoDeliverScale" type="checkbox"
-                                   {{#autoDeliverScale}}checked{{/autoDeliverScale}}>
-                            <label for="autoDeliverScale">Deliver to Scale</label>
+                            <input id="autoScale" name="autoScale" type="checkbox"
+                                   {{#autoScale}}checked{{/autoScale}}>
+                            <label for="autoScale">Deliver to Scale</label>
                         </div>
                     </div>
                     <h3>Tele-Operated</h3>
@@ -72,24 +72,24 @@
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleVault" value="vault"
-                                       {{#mainRoleVault}}checked{{/mainRoleVault}}>
-                                <label for="mainRoleVault">Vault</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleV" value="v"
+                                       {{#mainRoleV}}checked{{/mainRoleV}}>
+                                <label for="mainRoleV">Vault</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleSwitch" value="switch"
-                                       {{#mainRoleSwitch}}checked{{/mainRoleSwitch}}>
-                                <label for="mainRoleSwitch">Switch</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleW" value="w"
+                                       {{#mainRoleW}}checked{{/mainRoleW}}>
+                                <label for="mainRoleW">Switch</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleScale" value="scale"
-                                       {{#mainRoleScale}}checked{{/mainRoleScale}}>
-                                <label for="mainRoleScale">Scale</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleS" value="s"
+                                       {{#mainRoleS}}checked{{/mainRoleS}}>
+                                <label for="mainRoleS">Scale</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleFlex" value="flex"
-                                       {{#mainRoleFlex}}checked{{/mainRoleFlex}}>
-                                <label for="mainRoleFlex">"Flex"</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleF" value="f"
+                                       {{#mainRoleF}}checked{{/mainRoleF}}>
+                                <label for="mainRoleF">"Flex"</label>
                             </p>
                         </div>
                     </div>

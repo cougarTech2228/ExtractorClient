@@ -79,46 +79,45 @@ class ExtractorScouting
         switch ($this->type) {
             case 'match':
                 $order = [
-                    'match',
-                    'team',
-                    'autoFuelHigh',
-                    'autoFuelLow',
-                    'autoGear',
-                    'autoBaseline',
-                    'teleFuelHigh',
-                    'teleFuelLow',
-                    'teleGears',
-                    'teleTookOff',
-                    'prefConfused',
-                    'prefSlow',
-                    'prefEfficient',
-                    'prefPowerhouse',
+                    'matchNumber',
+                    'teamNumber',
+                    'autoRun',
+                    'autoSwitch',
+                    'autoScale',
+                    'teleAllySwitch',
+                    'teleScale',
+                    'teleOppSwitch',
+                    'teleVault',
+                    'endClimb',
+                    'endPark',
+                    'performance',
                     'tagNoShow',
                     'tagNoMove',
                     'tagFlipped',
                     'tagStuck',
                     'tagFell',
-                    'tagPenalized',
+                    'tagPenalized'
                 ];
                 break;
             case 'pit':
                 $order = [
-                    'team',
-                    'autoFuelHigh',
-                    'autoFuelLow',
-                    'autoGear',
-                    'autoBaseline',
-                    'autoMultiple',
-                    'teleFuelHigh',
-                    'teleFuelLow',
-                    'teleGear',
-                    'driveTrain',
-                    'teleTakeOff',
+                    'teamNumber',
+                    'autoRun',
+                    'autoSwitch',
+                    'autoScale',
+                    'teleAllySwitch',
+                    'teleScale',
+                    'teleOppSwitch',
+                    'teleVault',
+                    'endClimb',
+                    'endPark',
                     'robotCamera',
                     'robotVision',
-                    'teleRoleFuel',
-                    'teleRoleGear',
-                    'gearGround'
+                    'driveTrain',
+                    'cubePortal',
+                    'cubeGround',
+                    'cubeRotate',
+                    'mainRole'
                 ];
                 break;
             case 'driver':
@@ -137,6 +136,18 @@ class ExtractorScouting
         foreach ($order as $item) {
             switch (true) {
                 case ($item === 'performance'):
+                    $str = $this->data[$item] === 'c' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 's' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 'e' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 'p' ? 1 : 0;
+
+                    $return[] = $str;
+                    break;
+                case ($item === 'mainRole'):
+                case ($item === 'driveTrain'):
 
                     $return[] = strtoupper($this->data[$item]);
                     break;

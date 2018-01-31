@@ -103,18 +103,36 @@ function matchForm($param)
 
     // Set defaults.
     $defaults = [
-        'match'          => '',
-        'team'           => '',
-// TODO: Add new fields here
+        'matchNumber'    => '',
+        'teamNumber'     => '',
+        'autoRun'        => false,
+        'autoSwitch'     => false,
+        'autoScale'      => false,
+        'teleAllySwitch' => '',
+        'teleScale'      => '',
+        'teleOppSwitch'  => '',
+        'teleVault'      => '',
+        'endClimb'       => false,
+        'endPark'        => false,
+        'prefC'          => false,
+        'prefS'          => false,
+        'prefE'          => false,
+        'prefP'          => false,
+        'tagNoShow'      => false,
+        'tagNoMove'      => false,
+        'tagFlipped'     => false,
+        'tagStuck'       => false,
+        'tagFell'        => false,
+        'tagPenalized'   => false
     ];
 
     if ($param[1] !== 'blank') {
         // Search if data is in the matches config key.
-        $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'match'));
+        $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'matchNumber'));
 
         if ($matchKey !== false) {
-            $defaults['match'] = $ec->getConfig('matches')[$matchKey]['match'];
-            $defaults['team'] = $ec->getConfig('matches')[$matchKey][$ec->getConfig('team')];
+            $defaults['matchNumber'] = $ec->getConfig('matches')[$matchKey]['matchNumber'];
+            $defaults['teamNumber'] = $ec->getConfig('matches')[$matchKey][$ec->getConfig('team')];
         }
 
         $es = new ExtractorScouting('match', $param[1]);
@@ -151,9 +169,30 @@ function matchSubmit($param)
 
     // Validation array.
     $validate = [
-        'match'        => FILTER_VALIDATE_INT,
-        'team'         => FILTER_VALIDATE_INT,
-        // TODO: Add new fields
+        'matchNumber'    => FILTER_VALIDATE_INT,
+        'teamNumber'     => FILTER_VALIDATE_INT,
+        'autoRun'        => FILTER_VALIDATE_BOOLEAN,
+        'autoSwitch'     => FILTER_VALIDATE_BOOLEAN,
+        'autoScale'      => FILTER_VALIDATE_BOOLEAN,
+        'teleAllySwitch' => FILTER_VALIDATE_INT,
+        'teleScale'      => FILTER_VALIDATE_INT,
+        'teleOppSwitch'  => FILTER_VALIDATE_INT,
+        'teleVault'      => FILTER_VALIDATE_INT,
+        'endClimb'       => FILTER_VALIDATE_BOOLEAN,
+        'endPark'        => FILTER_VALIDATE_BOOLEAN,
+        // TODO
+        'performance'    => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['c', 's', 'e', 'p']) ? $input : 'c';
+            }
+        ],
+        'tagNoShow'      => FILTER_VALIDATE_BOOLEAN,
+        'tagNoMove'      => FILTER_VALIDATE_BOOLEAN,
+        'tagFlipped'     => FILTER_VALIDATE_BOOLEAN,
+        'tagStuck'       => FILTER_VALIDATE_BOOLEAN,
+        'tagFell'        => FILTER_VALIDATE_BOOLEAN,
+        'tagPenalized'   => FILTER_VALIDATE_BOOLEAN
     ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
@@ -169,7 +208,7 @@ function matchSubmit($param)
                     $data[$k] = false;
                     break;
                 case null:
-                    $data[$k] = 'efficient';
+                    $data[$k] = 'c';
                     break;
                 default:
                     break;
@@ -181,19 +220,19 @@ function matchSubmit($param)
         }
     }
 
-    $es = new ExtractorScouting('match', $data['match']);
+    $es = new ExtractorScouting('match', $data['matchNumber']);
     $es->set($data);
     $es->save();
 
     $ec = new ExtractorConfig();
 
-    $matchKey = array_search($data['match'], array_column($ec->getConfig('matches'), 'match'));
+    $matchKey = array_search($data['matchNumber'], array_column($ec->getConfig('matches'), 'match'));
 
     if ($matchKey !== false) {
         // Set current match one up from the last.
-        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 1);
+        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['matchNumber'] + 1);
     } else {
-        $ec->setConfig('currentMatch', $data['match'] + 1);
+        $ec->setConfig('currentMatch', $data['matchNumber'] + 1);
 
         // Check if extra already exists for the match.
         $extra = ExtractorStorage::fetch('sys', 'extraMatches');
@@ -203,17 +242,17 @@ function matchSubmit($param)
             $extra = [];
         }
 
-        $extraKey = array_search($data['match'], array_column($extra, 'match'));
+        $extraKey = array_search($data['matchNumber'], array_column($extra, 'match'));
 
         if ($extraKey === false) {
             $append = [
-                'match' => $data['match'],
-                'team'  => $data['team']
+                'match' => $data['matchNumber'],
+                'team'  => $data['teamNumber']
             ];
 
             ExtractorStorage::append('sys', 'extraMatches', $append);
         } else {
-            $extra[$extraKey]['team'] = $data['team'];
+            $extra[$extraKey]['team'] = $data['teamNumber'];
 
             ExtractorStorage::store('sys', 'extraMatches', $extra);
         }
@@ -301,8 +340,30 @@ function pitForm($param)
 
     // Set defaults.
     $defaults = [
-        'team'           => '',
-// TODO: Add new fields
+        'teamNumber'     => '',
+        'autoRun'        => false,
+        'autoSwitch'     => false,
+        'autoScale'      => false,
+        'teleAllySwitch' => false,
+        'teleOppSwitch'  => false,
+        'teleScale'      => false,
+        'teleVault'      => false,
+        'endPark'        => false,
+        'endClimb'       => false,
+        'mainRoleV'      => false,
+        'mainRoleW'      => false,
+        'mainRoleS'      => false,
+        'mainRoleF'      => false,
+        'cubePortal'     => false,
+        'cubeGround'     => false,
+        'cubeRotate'     => false,
+        'driveTrain4'    => false,
+        'driveTrain6'    => false,
+        'driveTrainT'    => false,
+        'driveTrainM'    => false,
+        'driveTrainS'    => false,
+        'robotCamera'    => false,
+        'robotVision'    => false
     ];
 
     if ($param[1] !== 'blank') {
@@ -310,7 +371,7 @@ function pitForm($param)
         $pitKey = array_search(intval($param[1]), array_column($ec->getConfig('pits'), 'team'));
 
         if ($pitKey !== false) {
-            $defaults['team'] = $ec->getConfig('pits')[$pitKey]['team'];
+            $defaults['teamNumber'] = $ec->getConfig('pits')[$pitKey]['team'];
         }
 
         $es = new ExtractorScouting('pit', $param[1]);
@@ -320,8 +381,8 @@ function pitForm($param)
         $data = array_merge($defaults, $data);
 
         // Handle radio for role.
-        if (array_key_exists('teleRole', $data)) {
-            $data['teleRole' . ucfirst($data['teleRole'])] = true;
+        if (array_key_exists('mainRole', $data)) {
+            $data['mainRole' . ucfirst($data['mainRole'])] = true;
         }
 
         // Handle radio for drive train.
@@ -352,8 +413,33 @@ function pitSubmit($param)
 
     // Validation array.
     $validate = [
-        'team'         => FILTER_VALIDATE_INT,
-// TODO: Add new fields
+        'teamNumber'     => FILTER_VALIDATE_INT,
+        'autoRun'        => FILTER_VALIDATE_BOOLEAN,
+        'autoSwitch'     => FILTER_VALIDATE_BOOLEAN,
+        'autoScale'      => FILTER_VALIDATE_BOOLEAN,
+        'teleAllySwitch' => FILTER_VALIDATE_BOOLEAN,
+        'teleOppSwitch'  => FILTER_VALIDATE_BOOLEAN,
+        'teleScale'      => FILTER_VALIDATE_BOOLEAN,
+        'teleVault'      => FILTER_VALIDATE_BOOLEAN,
+        'endPark'        => FILTER_VALIDATE_BOOLEAN,
+        'endClimb'       => FILTER_VALIDATE_BOOLEAN,
+        'mainRole'       => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['v', 'w', 's', 'f']) ? $input : 'f';
+            }
+        ],
+        'cubePortal'     => FILTER_VALIDATE_BOOLEAN,
+        'cubeGround'     => FILTER_VALIDATE_BOOLEAN,
+        'cubeRotate'     => FILTER_VALIDATE_BOOLEAN,
+        'driveTrain'     => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['4', '6', 't', 'm', 's']) ? $input : '4';
+            }
+        ],
+        'robotCamera'    => FILTER_VALIDATE_BOOLEAN,
+        'robotVision'    => FILTER_VALIDATE_BOOLEAN
     ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
@@ -372,8 +458,8 @@ function pitSubmit($param)
                     break;
             }
 
-            if ($k === 'teleRole' && $v === null) {
-                $data[$k] = 'fuel';
+            if ($k === 'mainRole' && $v === null) {
+                $data[$k] = 'v';
             }
 
             if ($k === 'driveTrain' && $v === null) {
@@ -387,20 +473,20 @@ function pitSubmit($param)
         }
     }
 
-    $es = new ExtractorScouting('pit', $data['team']);
+    $es = new ExtractorScouting('pit', $data['teamNumber']);
     $es->set($data);
     $es->save();
 
     $ec = new ExtractorConfig();
 
-    $pitKey = array_search($data['team'], array_column($ec->getConfig('pits'), 'team'));
+    $pitKey = array_search($data['teamNumber'], array_column($ec->getConfig('pits'), 'team'));
 
     if ($pitKey !== false) {
         // Set current match one up from the last.
         $ec->setConfig('currentPit', $pitKey + 1);
     } else {
         $append = [
-            'team' => $data['team']
+            'team' => $data['teamNumber']
         ];
 
         // Check if extra already exists for the match.
@@ -411,7 +497,7 @@ function pitSubmit($param)
             $extra = [];
         }
 
-        $extraKey = array_search($data['team'], array_column($extra, 'team'));
+        $extraKey = array_search($data['teamNumber'], array_column($extra, 'team'));
 
         if ($extraKey === false) {
             ExtractorStorage::append('sys', 'extraPits', $append);
@@ -488,17 +574,14 @@ function driverList($param)
  */
 function driverForm($param)
 {
-    // Config instance.
-    $ec = new ExtractorConfig();
-
     // Set defaults.
     $defaults = [
-        'matchNumber'    => '',
-        'teamNumber'     => '',
-        'prefC'   => false,
+        'matchNumber' => '',
+        'teamNumber'  => '',
+        'prefC'       => false,
         'prefS'       => false,
-        'prefE'  => false,
-        'prefP' => false
+        'prefE'       => false,
+        'prefP'       => false
     ];
 
     if ($param[1] !== 'blank') {
@@ -538,7 +621,12 @@ function driverSubmit($param)
     $validate = [
         'matchNumber' => FILTER_VALIDATE_INT,
         'teamNumber'  => FILTER_VALIDATE_INT,
-        'performance' => null
+        'performance' => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['c', 's', 'e', 'p']) ? $input : 'c';
+            }
+        ],
     ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
@@ -551,7 +639,7 @@ function driverSubmit($param)
                     $data[$k] = 0;
                     break;
                 case null:
-                    $data[$k] = 'efficient';
+                    $data[$k] = 'c';
                     break;
                 default:
                     break;

@@ -9,21 +9,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library name="PHP" type="php">
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/endroid/qrcode" />
-          <root url="file://$MODULE_DIR$/vendor/mustache/mustache" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
-        </CLASSES>
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/vendor/composer" />
-          <root url="file://$MODULE_DIR$/vendor/endroid/qrcode" />
-          <root url="file://$MODULE_DIR$/vendor/mustache/mustache" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>
