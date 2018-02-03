@@ -1089,12 +1089,12 @@ function render($tpl, $context, $title = 'Extractor')
             'icon'   => 'view_list',
             'name'   => 'Pit'
         ],
-        [
+        /*[
             'active' => ($tpl == 'driverList' || $tpl === 'driverForm'),
             'link'   => 'driver',
             'icon'   => 'view_list',
             'name'   => 'Driver'
-        ],
+        ],*/
         [
             'active' => ($tpl == 'transfer' || $tpl === 'transferDisplay'),
             'link'   => 'transfer',
