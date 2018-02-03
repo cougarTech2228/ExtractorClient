@@ -68,4 +68,43 @@ class ExtractorStorage
 
         return true;
     }
+
+    /**
+     * Clear Data Storage
+     * Clears the data storage except for the config.
+     *
+     * @param string|null $suffix Find path suffix.
+     *
+     * @return bool
+     */
+    public static function clear($suffix = null)
+    {
+        // Set suffix if exists
+        $basePath = $suffix ? $suffix : DATADIR . $suffix;
+
+        // Recusivly work through the directory to clear it.
+        foreach (scandir($basePath) as $item) {
+            switch (true) {
+                // If dir and not special, recursive callback with new suffix.
+                case is_dir($basePath . $item):
+                    if (!in_array($item, ['.', '..'])) {
+                        self::clear($basePath . $item . DS);
+                        rmdir($basePath . DS . $item);
+                    }
+                    break;
+                // If file and not config, remove it.
+                case is_file($basePath . $item):
+                    if ($item !== 'config.json') {
+                        unlink($basePath . $item);
+                    }
+                    break;
+                default:
+                    // Cant be bothered to error handle an edge case. Wipe the device and try again.
+                    return false;
+                    break;
+            }
+        }
+
+        return true;
+    }
 }

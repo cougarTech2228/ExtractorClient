@@ -921,6 +921,22 @@ function setTeam($param)
 }
 
 /**
+ * Clear Device Data
+ * Clears the device data except for config.
+ *
+ * @param array $param Router input
+ */
+function clear($param)
+{
+    unset($param);
+
+    ExtractorStorage::clear();
+
+    redirect('about');
+}
+
+
+/**
  * Return 404
  * Returns a 404 to the browser.
  */
@@ -1138,6 +1154,12 @@ $routingArray = [
         'method' => 'get',
         'func'   => 'setTeam',
         'uri'    => 'setteam'
+    ],
+    // Clear data
+    [
+        'method' => 'get',
+        'func'   => 'clear',
+        'uri'    => 'clear'
     ]
 ];
 
