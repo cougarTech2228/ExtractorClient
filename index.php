@@ -9,6 +9,8 @@ define('DS', DIRECTORY_SEPARATOR);
 define('DATADIR', __DIR__ . DS . 'data' . DS);
 define('DATASEARCHPATH', DS . 'storage' . DS . 'emulated' . DS . '0' . DS . 'bluetooth' . DS);
 define('CONFIG', DATADIR . 'config.json');
+// Dear users of github, yes this is 'bad' but really, doesn't matter. It's just made to prevent "Oops I deleted the data" situations.
+define('CONFIGPWDHASH', '$2y$10$rYrLJ3BnHIO2lFk.ilVFAeHigptddTLwdsisBxT/gCgwdlSxuDnBy');
 define('VERSION', '1.0.0');
 
 //////////
@@ -838,6 +840,61 @@ function schedule($param)
 }
 
 /**
+ * Pwd Controller
+ * Display pwd view.
+ *
+ * @param array $param Router input
+ */
+function pwd($param)
+{
+    unset ($param);
+
+    echo render('pwd', [], 'Password Required');
+
+    return;
+}
+
+/**
+ * Auth Check Controller
+ * Authenticate to the configuration view.
+ *
+ * @param array $param Router input
+ */
+function pwdCheck($param)
+{
+    unset($param);
+
+    $Auth = new ExtractorAuth();
+
+    if ($Auth->auth(filter_input(INPUT_POST, 'pwd'))) {
+        redirect('about');
+    } else {
+        redirect('pwd');
+    }
+
+    return;
+}
+
+/**
+ * Deauth
+ * Deauth controller.
+ *
+ * @param array $param Router input
+ */
+function authExit($param)
+{
+    unset ($param);
+
+    $Auth = new ExtractorAuth();
+
+    $Auth->deauth();
+
+    redirect('');
+
+    return;
+}
+
+/**
  * About Controller
  * Outputs the about page render.
  *
@@ -846,6 +903,14 @@ function schedule($param)
 function about($param)
 {
     unset($param);
+
+    $Auth = new ExtractorAuth();
+
+    if (!$Auth->isAuthed()) {
+        redirect('pwd');
+
+        return;
+    }
 
     $ec = new ExtractorConfig();
 
@@ -872,6 +937,14 @@ function about($param)
 function config($param)
 {
     unset($param);
+
+    $Auth = new ExtractorAuth();
+
+    if (!$Auth->isAuthed()) {
+        redirect('pwd');
+
+        return;
+    }
 
     $ec = new ExtractorConfig();
     $check = $ec->fullLoad();
@@ -901,6 +974,14 @@ function setTeam($param)
 {
     unset($param);
 
+    $Auth = new ExtractorAuth();
+
+    if (!$Auth->isAuthed()) {
+        redirect('pwd');
+
+        return;
+    }
+
     $team = filter_input(INPUT_GET, 'team');
 
     $allowedTeams = [
@@ -929,6 +1010,15 @@ function setTeam($param)
 function clear($param)
 {
     unset($param);
+
+    $Auth = new ExtractorAuth();
+
+    if (!$Auth->isAuthed()) {
+        redirect('pwd');
+
+        return;
+    }
+
 
     ExtractorStorage::clear();
 
@@ -1142,6 +1232,24 @@ $routingArray = [
         'method' => 'get',
         'func'   => 'about',
         'uri'    => 'about'
+    ],
+    // Pwd
+    [
+        'method' => 'get',
+        'func'   => 'pwd',
+        'uri'    => 'pwd'
+    ],
+    // Pwd check
+    [
+        'method' => 'post',
+        'func'   => 'pwdCheck',
+        'uri'    => 'pwd\/check'
+    ],
+    // Exit
+    [
+        'method' => 'get',
+        'func'   => 'authExit',
+        'uri'    => 'exit'
     ],
     // Configuration
     [
