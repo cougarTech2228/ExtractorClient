@@ -11,7 +11,7 @@
                         <div class="input-field col s6">
                             <input placeholder="Team" id="teamNumber" name="teamNumber" type="number" class="validate"
                                    value="{{teamNumber}}" min="0" required>
-                            <label for="teamNumber">Team Number</label>
+                            <label for="teamNumber" class="white-text">Team Number</label>
                         </div>
                     </div>
                     <h3>Autonomous</h3>
@@ -19,19 +19,19 @@
                         <div class="input-field col s6">
                             <input id="autoRun" name="autoRun" type="checkbox"
                                    {{#autoRun}}checked{{/autoRun}}>
-                            <label for="autoRun">Auto Run</label>
+                            <label for="autoRun" class="white-text">Auto Run</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="autoSwitch" name="autoSwitch" type="checkbox"
                                    {{#autoSwitch}}checked{{/autoSwitch}}>
-                            <label for="autoSwitch">Deliver to Switch</label>
+                            <label for="autoSwitch" class="white-text">Deliver to Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="autoScale" name="autoScale" type="checkbox"
                                    {{#autoScale}}checked{{/autoScale}}>
-                            <label for="autoScale">Deliver to Scale</label>
+                            <label for="autoScale" class="white-text">Deliver to Scale</label>
                         </div>
                     </div>
                     <h3>Tele-Operated</h3>
@@ -39,33 +39,33 @@
                         <div class="input-field col s6">
                             <input id="teleAllySwitch" name="teleAllySwitch" type="checkbox"
                                    {{#teleAllySwitch}}checked{{/teleAllySwitch}}>
-                            <label for="teleAllySwitch">Deliver to Alliance Switch</label>
+                            <label for="teleAllySwitch" class="white-text">Deliver to Alliance Switch</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="teleOppSwitch" name="teleOppSwitch" type="checkbox"
                                    {{#teleOppSwitch}}checked{{/teleOppSwitch}}>
-                            <label for="teleOppSwitch">Deliver to Opposition Switch</label>
+                            <label for="teleOppSwitch" class="white-text">Deliver to Opposition Switch</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="teleScale" name="teleScale" type="checkbox" {{#teleScale}}checked{{/teleScale}}>
-                            <label for="teleScale">Deliver to Scale</label>
+                            <label for="teleScale" class="white-text">Deliver to Scale</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="teleVault" name="teleVault" type="checkbox" {{#teleVault}}checked{{/teleVault}}>
-                            <label for="teleVault">Deliver to Vault</label>
+                            <label for="teleVault" class="white-text">Deliver to Vault</label>
                         </div>
                     </div>
                     <h3>End Game</h3>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="endPark" name="endPark" type="checkbox" {{#endPark}}checked{{/endPark}}>
-                            <label for="endPark">Able to Park</label>
+                            <label for="endPark" class="white-text">Able to Park</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="endClimb" name="endClimb" type="checkbox" {{#endClimb}}checked{{/endClimb}}>
-                            <label for="endClimb">Able to Climb</label>
+                            <label for="endClimb" class="white-text">Able to Climb</label>
                         </div>
                     </div>
                     <h3>Main Role</h3>
@@ -74,22 +74,22 @@
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleV" value="v"
                                        {{#mainRoleV}}checked{{/mainRoleV}}>
-                                <label for="mainRoleV">Vault</label>
+                                <label for="mainRoleV" class="white-text">Vault</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleW" value="w"
                                        {{#mainRoleW}}checked{{/mainRoleW}}>
-                                <label for="mainRoleW">Switch</label>
+                                <label for="mainRoleW" class="white-text">Switch</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleS" value="s"
                                        {{#mainRoleS}}checked{{/mainRoleS}}>
-                                <label for="mainRoleS">Scale</label>
+                                <label for="mainRoleS" class="white-text">Scale</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleF" value="f"
                                        {{#mainRoleF}}checked{{/mainRoleF}}>
-                                <label for="mainRoleF">"Flex"</label>
+                                <label for="mainRoleF" class="white-text">"Flex"</label>
                             </p>
                         </div>
                     </div>
@@ -98,19 +98,19 @@
                         <div class="input-field col s6">
                             <input id="cubePortal" name="cubePortal" type="checkbox"
                                    {{#cubePortal}}checked{{/cubePortal}}>
-                            <label for="cubePortal">Portal</label>
+                            <label for="cubePortal" class="white-text">Portal</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="cubeGround" name="cubeGround" type="checkbox"
                                    {{#cubeGround}}checked{{/cubeGround}}>
-                            <label for="cubeGround">Off ground</label>
+                            <label for="cubeGround" class="white-text">Off ground</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="cubeRotate" name="cubeRotate" type="checkbox"
                                    {{#cubeRotate}}checked{{/cubeRotate}}>
-                            <label for="cubeRotate">Rotate</label>
+                            <label for="cubeRotate" class="white-text">Rotate</label>
                         </div>
                     </div>
                     <h3>Robot</h3>
@@ -119,27 +119,27 @@
                             <p>
                                 <input class="with-gap" name="driveTrain" type="radio" id="driveTrain4" value="4"
                                        {{#driveTrain4}}checked{{/driveTrain4}}>
-                                <label for="driveTrain4">4 wheel drive</label>
+                                <label for="driveTrain4" class="white-text">4 wheel drive</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="driveTrain" type="radio" id="driveTrain6" value="6"
                                        {{#driveTrain6}}checked{{/driveTrain6}}>
-                                <label for="driveTrain6">6 wheel drive</label>
+                                <label for="driveTrain6" class="white-text">6 wheel drive</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="driveTrain" type="radio" id="driveTrainT" value="t"
                                        {{#driveTrainT}}checked{{/driveTrainT}}>
-                                <label for="driveTrainT">Tank drive</label>
+                                <label for="driveTrainT" class="white-text">Tank drive</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="driveTrain" type="radio" id="driveTrainM" value="m"
                                        {{#driveTrainM}}checked{{/driveTrainM}}>
-                                <label for="driveTrainM">Mecanum drive</label>
+                                <label for="driveTrainM" class="white-text">Mecanum drive</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="driveTrain" type="radio" id="driveTrainS" value="s"
                                        {{#driveTrainS}}checked{{/driveTrainS}}>
-                                <label for="driveTrainS">Swerve drive</label>
+                                <label for="driveTrainS" class="white-text">Swerve drive</label>
                             </p>
                         </div>
                     </div>
@@ -147,12 +147,12 @@
                         <div class="input-field col s6">
                             <input id="robotCamera" name="robotCamera" type="checkbox"
                                    {{#robotCamera}}checked{{/robotCamera}}>
-                            <label for="robotCamera">Camera</label>
+                            <label for="robotCamera" class="white-text">Camera</label>
                         </div>
                         <div class="input-field col s6">
                             <input id="robotVision" name="robotVision" type="checkbox"
                                    {{#robotVision}}checked{{/robotVision}}>
-                            <label for="robotVision">Vision</label>
+                            <label for="robotVision" class="white-text">Vision</label>
                         </div>
                     </div>
                     <div class="row">
