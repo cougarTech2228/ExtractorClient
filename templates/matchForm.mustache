@@ -42,27 +42,62 @@
                     </div>
                     <h3>Tele-Operated</h3>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="0" id="teleAllySwitch" name="teleAllySwitch" type="number"
-                                   class="validate" value="{{teleAllySwitch}}" min="0" required>
-                            <label for="teleAllySwitch" class="white-text">Cubes delivered to alliance switch</label>
+                        <div class="col s6">
+                            <button class="btn-floating" type="button" onclick="decVal('teleAllySwitch')">
+                                <i class="material-icons right">remove</i>
+                            </button>
+                            <div class="input-field inline">
+                                <input placeholder="0" id="teleAllySwitch" name="teleAllySwitch" type="number"
+                                       class="validate" value="{{teleAllySwitch}}" min="0" required>
+                                <label for="teleAllySwitch" class="white-text">
+                                    Cubes delivered to alliance switch
+                                </label>
+                            </div>
+                            <button class="btn-floating" type="button" onclick="incVal('teleAllySwitch')">
+                                <i class="material-icons right">add</i>
+                            </button>
                         </div>
-                        <div class="input-field col s6">
-                            <input placeholder="0" id="teleScale" name="teleScale" type="number" class="validate"
-                                   value="{{teleScale}}" min="0" required>
-                            <label for="teleScale" class="white-text">Cubes delivered to scale</label>
+                        <div class="col s6">
+                            <button class="btn-floating" type="button" onclick="decVal('teleScale')">
+                                <i class="material-icons right">remove</i>
+                            </button>
+                            <div class="input-field inline">
+                                <input placeholder="0" id="teleScale" name="teleScale" type="number" class="validate"
+                                       value="{{teleScale}}" min="0" required>
+                                <label for="teleScale" class="white-text">Cubes delivered to scale</label>
+                            </div>
+                            <button class="btn-floating" type="button" onclick="incVal('teleScale')">
+                                <i class="material-icons right">add</i>
+                            </button>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="0" id="teleOppSwitch" name="teleOppSwitch" type="number"
-                                   class="validate" value="{{teleOppSwitch}}" min="0" required>
-                            <label for="teleOppSwitch" class="white-text">Cubes delivered to opposition switch</label>
+                        <div class="col s6">
+                            <button class="btn-floating" type="button" onclick="decVal('teleOppSwitch')">
+                                <i class="material-icons right">remove</i>
+                            </button>
+                            <div class="input-field inline">
+                                <input placeholder="0" id="teleOppSwitch" name="teleOppSwitch" type="number"
+                                       class="validate" value="{{teleOppSwitch}}" min="0" required>
+                                <label for="teleOppSwitch" class="white-text">
+                                    Cubes delivered to opposition switch</label>
+                            </div>
+                            <button class="btn-floating" type="button" onclick="incVal('teleOppSwitch')">
+                                <i class="material-icons right">add</i>
+                            </button>
                         </div>
-                        <div class="input-field col s6">
-                            <input placeholder="0" id="teleVault" name="teleVault" type="number" class="validate"
-                                   value="{{teleVault}}" min="0" required>
-                            <label for="teleVault" class="white-text">Cubes delivered to vault</label>
+                        <div class="col s6">
+                            <button class="btn-floating" type="button" onclick="decVal('teleVault')">
+                                <i class="material-icons right">remove</i>
+                            </button>
+                            <div class="input-field inline">
+                                <input placeholder="0" id="teleVault" name="teleVault" type="number" class="validate"
+                                       value="{{teleVault}}" min="0" required>
+                                <label for="teleVault" class="white-text">Cubes delivered to vault</label>
+                            </div>
+                            <button class="btn-floating" type="button" onclick="incVal('teleVault')">
+                                <i class="material-icons right">add</i>
+                            </button>
                         </div>
                     </div>
                     <h3>End Game</h3>
@@ -152,5 +187,15 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function incVal(element) {
+        document.getElementById(element).value++;
+    }
+
+    function decVal(element) {
+        document.getElementById(element).value--;
+    }
+
+</script>
 {{> foot}}
 {{> footer}}
