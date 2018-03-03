@@ -130,10 +130,10 @@ function matchForm($param)
 
     if ($param[1] !== 'blank') {
         // Search if data is in the matches config key.
-        $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'matchNumber'));
+        $matchKey = array_search(intval($param[1]), array_column($ec->getConfig('matches'), 'match'));
 
         if ($matchKey !== false) {
-            $defaults['matchNumber'] = $ec->getConfig('matches')[$matchKey]['matchNumber'];
+            $defaults['matchNumber'] = $ec->getConfig('matches')[$matchKey]['match'];
             $defaults['teamNumber'] = $ec->getConfig('matches')[$matchKey][$ec->getConfig('team')];
         }
 
@@ -232,7 +232,7 @@ function matchSubmit($param)
 
     if ($matchKey !== false) {
         // Set current match one up from the last.
-        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['matchNumber'] + 1);
+        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 1);
     } else {
         $ec->setConfig('currentMatch', $data['matchNumber'] + 1);
 
