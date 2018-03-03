@@ -111,15 +111,22 @@
                     </div>
                     <h3>End Game</h3>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input id="endClimb" name="endClimb" type="checkbox" value="true"
-                                   {{#endClimb}}checked{{/endClimb}}>
-                            <label for="endClimb" class="white-text">Climb</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="endPark" name="endPark" type="checkbox" value="true"
-                                   {{#endPark}}checked{{/endPark}}>
-                            <label for="endPark" class="white-text">Park</label>
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="endGame" type="radio" id="endC"
+                                       value="c" {{#endC}}checked{{/endC}} required>
+                                <label for="endC" class="white-text">Climb</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="endGame" type="radio" id="endP" value="p"
+                                       {{#endP}}checked{{/endP}} required>
+                                <label for="endP" class="white-text">Park</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="endGame" type="radio" id="endN" value="n"
+                                       {{#endN}}checked{{/endN}} required>
+                                <label for="endN" class="white-text">Neither</label>
+                            </p>
                         </div>
                     </div>
                     <h3>Tags</h3>
@@ -203,6 +210,11 @@
 
     function decVal(element) {
         document.getElementById(element).value--;
+    }
+
+    function uncheck(element1, element2) {
+        document.getElementById(element1).checked = false;
+        document.getElementById(element2).checked = false;
     }
 
 </script>

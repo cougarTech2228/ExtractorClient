@@ -88,8 +88,7 @@ class ExtractorScouting
                     'teleScale',
                     'teleOppSwitch',
                     'teleVault',
-                    'endClimb',
-                    'endPark',
+                    'endGame',
                     'performance',
                     'tagNoShow',
                     'tagNoMove',
@@ -141,6 +140,13 @@ class ExtractorScouting
                     $str .= $this->data[$item] === 's' ? 1 : 0;
                     $str .= ',';
                     $str .= $this->data[$item] === 'e' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 'p' ? 1 : 0;
+
+                    $return[] = $str;
+                    break;
+                case ($item === 'endGame'):
+                    $str = $this->data[$item] === 'c' ? 1 : 0;
                     $str .= ',';
                     $str .= $this->data[$item] === 'p' ? 1 : 0;
 

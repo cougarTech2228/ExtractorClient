@@ -114,8 +114,9 @@ function matchForm($param)
         'teleScale'      => 0,
         'teleOppSwitch'  => 0,
         'teleVault'      => 0,
-        'endClimb'       => false,
-        'endPark'        => false,
+        'endC'           => false,
+        'endP'           => false,
+        'endN'           => false,
         'prefC'          => false,
         'prefS'          => false,
         'prefE'          => false,
@@ -147,6 +148,11 @@ function matchForm($param)
         if (array_key_exists('performance', $data)) {
             $data['pref' . ucfirst($data['performance'])] = true;
         }
+
+        if (array_key_exists('endGame', $data)) {
+            $data['end' . ucfirst($data['endGame'])] = true;
+        }
+
 
         $context = $data;
     } else {
@@ -180,9 +186,12 @@ function matchSubmit($param)
         'teleScale'      => FILTER_VALIDATE_INT,
         'teleOppSwitch'  => FILTER_VALIDATE_INT,
         'teleVault'      => FILTER_VALIDATE_INT,
-        'endClimb'       => FILTER_VALIDATE_BOOLEAN,
-        'endPark'        => FILTER_VALIDATE_BOOLEAN,
-        // TODO
+        'endGame'        => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['c', 'p', 'n']) ? $input : 'n';
+            }
+        ],
         'performance'    => [
             'filter'  => FILTER_CALLBACK,
             'options' => function ($input) {
@@ -208,9 +217,6 @@ function matchSubmit($param)
                     break;
                 case FILTER_VALIDATE_BOOLEAN:
                     $data[$k] = false;
-                    break;
-                case null:
-                    $data[$k] = 'c';
                     break;
                 default:
                     break;
