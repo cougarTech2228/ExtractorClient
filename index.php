@@ -232,7 +232,8 @@ function matchSubmit($param)
 
     if ($matchKey !== false) {
         // Set current match one up from the last.
-        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 1);
+        $ec->setConfig('currentMatch', $ec->getConfig('matches')[$matchKey]['match'] + 2); // FIXME: Redo current
+        // match system
     } else {
         $ec->setConfig('currentMatch', $data['matchNumber'] + 1);
 
