@@ -48,6 +48,7 @@ class ExtractorScouting
     /**
      * Save Data
      * Saves the data to disk and marks the data as not transferred using ExtractorTransferUtil.
+     *
      * @return true
      */
     public function save()
@@ -61,6 +62,7 @@ class ExtractorScouting
     /**
      * Get Data
      * Get the data file.
+     *
      * @return array
      */
     public function get()
@@ -71,6 +73,7 @@ class ExtractorScouting
     /**
      * Format to CSV
      * Formats the data to be outputted as a CSV.
+     *
      * @return string
      */
     public function csv()
@@ -81,42 +84,60 @@ class ExtractorScouting
                 $order = [
                     'matchNumber',
                     'teamNumber',
-                    'autoRun',
-                    'autoSwitch',
-                    'autoScale',
-                    'teleAllySwitch',
-                    'teleScale',
-                    'teleOppSwitch',
-                    'teleVault',
+                    'sandstorm',
+                    'cargoShip',
+                    'cargoShipSandstorm',
+                    'cargoLow',
+                    'cargoLowSandstorm',
+                    'cargoMedium',
+                    'cargoMediumSandstorm',
+                    'cargoHigh',
+                    'cargoHighSandstorm',
+                    'hatchShip',
+                    'hatchShipSandstorm',
+                    'hatchLow',
+                    'hatchLowSandstorm',
+                    'hatchMedium',
+                    'hatchMediumSandstorm',
+                    'hatchHigh',
+                    'hatchHighSandstorm',
                     'endGame',
-                    'performance',
                     'tagNoShow',
                     'tagNoMove',
                     'tagFlipped',
                     'tagStuck',
                     'tagFell',
-                    'tagPenalized'
+                    'tagPenalized',
+                    'tagDefense',
+                    'performance',
                 ];
                 break;
             case 'pit':
                 $order = [
                     'teamNumber',
-                    'autoRun',
-                    'autoSwitch',
-                    'autoScale',
-                    'teleAllySwitch',
-                    'teleScale',
-                    'teleOppSwitch',
-                    'teleVault',
-                    'endClimb',
-                    'endPark',
+                    'driveTrain',
+                    'hatchFromGround',
+                    'hatchFromFeeder',
+                    'cargoFromGround',
+                    'cargoFromFeeder',
                     'robotCamera',
                     'robotVision',
-                    'driveTrain',
-                    'cubePortal',
-                    'cubeGround',
-                    'cubeRotate',
-                    'mainRole'
+                    'mainRole',
+                    'sandstormL1',
+                    'sandstormL2',
+                    'sandstormPlaceCargo',
+                    'sandstormPlaceHatch',
+                    'teleCargoShip',
+                    'teleCargoL',
+                    'teleCargoM',
+                    'teleCargoH',
+                    'teleHatchShip',
+                    'teleHatchL',
+                    'teleHatchM',
+                    'teleHatchH',
+                    'endL1',
+                    'endL2',
+                    'endL3'
                 ];
                 break;
             case 'driver':
@@ -140,13 +161,6 @@ class ExtractorScouting
                     $str .= $this->data[$item] === 's' ? 1 : 0;
                     $str .= ',';
                     $str .= $this->data[$item] === 'e' ? 1 : 0;
-                    $str .= ',';
-                    $str .= $this->data[$item] === 'p' ? 1 : 0;
-
-                    $return[] = $str;
-                    break;
-                case ($item === 'endGame'):
-                    $str = $this->data[$item] === 'c' ? 1 : 0;
                     $str .= ',';
                     $str .= $this->data[$item] === 'p' ? 1 : 0;
 

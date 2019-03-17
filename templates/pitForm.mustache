@@ -19,106 +19,7 @@
                             <label for="teamNumber" class="white-text">Team Number</label>
                         </div>
                     </div>
-                    <h3>Autonomous</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="autoRun" name="autoRun" type="checkbox"
-                                   {{#autoRun}}checked{{/autoRun}}>
-                            <label for="autoRun" class="white-text">Auto Run</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="autoSwitch" name="autoSwitch" type="checkbox"
-                                   {{#autoSwitch}}checked{{/autoSwitch}}>
-                            <label for="autoSwitch" class="white-text">Deliver to Switch</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="autoScale" name="autoScale" type="checkbox"
-                                   {{#autoScale}}checked{{/autoScale}}>
-                            <label for="autoScale" class="white-text">Deliver to Scale</label>
-                        </div>
-                    </div>
-                    <h3>Tele-Operated</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleAllySwitch" name="teleAllySwitch" type="checkbox"
-                                   {{#teleAllySwitch}}checked{{/teleAllySwitch}}>
-                            <label for="teleAllySwitch" class="white-text">Deliver to Alliance Switch</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleOppSwitch" name="teleOppSwitch" type="checkbox"
-                                   {{#teleOppSwitch}}checked{{/teleOppSwitch}}>
-                            <label for="teleOppSwitch" class="white-text">Deliver to Opposition Switch</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleScale" name="teleScale" type="checkbox" {{#teleScale}}checked{{/teleScale}}>
-                            <label for="teleScale" class="white-text">Deliver to Scale</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleVault" name="teleVault" type="checkbox" {{#teleVault}}checked{{/teleVault}}>
-                            <label for="teleVault" class="white-text">Deliver to Vault</label>
-                        </div>
-                    </div>
-                    <h3>End Game</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="endPark" name="endPark" type="checkbox" {{#endPark}}checked{{/endPark}}>
-                            <label for="endPark" class="white-text">Able to Park</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="endClimb" name="endClimb" type="checkbox" {{#endClimb}}checked{{/endClimb}}>
-                            <label for="endClimb" class="white-text">Able to Climb</label>
-                        </div>
-                    </div>
-                    <h3>Main Role</h3>
-                    <div class="row">
-                        <div class="col s12">
-                            <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleV" value="v"
-                                       {{#mainRoleV}}checked{{/mainRoleV}}>
-                                <label for="mainRoleV" class="white-text">Vault</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleW" value="w"
-                                       {{#mainRoleW}}checked{{/mainRoleW}}>
-                                <label for="mainRoleW" class="white-text">Switch</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleS" value="s"
-                                       {{#mainRoleS}}checked{{/mainRoleS}}>
-                                <label for="mainRoleS" class="white-text">Scale</label>
-                            </p>
-                            <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleF" value="f"
-                                       {{#mainRoleF}}checked{{/mainRoleF}}>
-                                <label for="mainRoleF" class="white-text">"Flex"</label>
-                            </p>
-                        </div>
-                    </div>
-                    <h3>Cube Handling</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="cubePortal" name="cubePortal" type="checkbox"
-                                   {{#cubePortal}}checked{{/cubePortal}}>
-                            <label for="cubePortal" class="white-text">Portal</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="cubeGround" name="cubeGround" type="checkbox"
-                                   {{#cubeGround}}checked{{/cubeGround}}>
-                            <label for="cubeGround" class="white-text">Off ground</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="cubeRotate" name="cubeRotate" type="checkbox"
-                                   {{#cubeRotate}}checked{{/cubeRotate}}>
-                            <label for="cubeRotate" class="white-text">Rotate</label>
-                        </div>
-                    </div>
-                    <h3>Robot</h3>
+                    <h3>Drive Train</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
@@ -148,6 +49,31 @@
                             </p>
                         </div>
                     </div>
+                    <h3>Handling</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="hatchFromGround" name="hatchFromGround" type="checkbox"
+                                   {{#hatchFromGround}}checked{{/hatchFromGround}}>
+                            <label for="hatchFromGround" class="white-text">Pick hatch up from ground</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="hatchFromFeeder" name="hatchFromFeeder" type="checkbox"
+                                   {{#hatchFromFeeder}}checked{{/hatchFromFeeder}}>
+                            <label for="hatchFromFeeder" class="white-text">Pick hatch up from feeder</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="cargoFromGround" name="cargoFromGround" type="checkbox"
+                                   {{#cargoFromGround}}checked{{/cargoFromGround}}>
+                            <label for="cargoFromGround" class="white-text">Pick cargo up from ground</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="cargoFromFeeder" name="cargoFromFeeder" type="checkbox"
+                                   {{#cargoFromFeeder}}checked{{/cargoFromFeeder}}>
+                            <label for="cargoFromFeeder" class="white-text">Pick cargo up from feeder</label>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="input-field col s6">
                             <input id="robotCamera" name="robotCamera" type="checkbox"
@@ -158,6 +84,117 @@
                             <input id="robotVision" name="robotVision" type="checkbox"
                                    {{#robotVision}}checked{{/robotVision}}>
                             <label for="robotVision" class="white-text">Vision</label>
+                        </div>
+                    </div>
+                    <h3>Main Role</h3>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleH" value="h"
+                                       {{#mainRoleH}}checked{{/mainRoleH}}>
+                                <label for="mainRoleH" class="white-text">Hatch</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleC" value="c"
+                                       {{#mainRoleC}}checked{{/mainRoleC}}>
+                                <label for="mainRoleC" class="white-text">Cargo</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleF" value="f"
+                                       {{#mainRoleF}}checked{{/mainRoleF}}>
+                                <label for="mainRoleF" class="white-text">"Flex"</label>
+                            </p>
+                        </div>
+                    </div>
+                    <h3>Sandstorm</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="sandstormL1" name="sandstormL1" type="checkbox"
+                                   {{#sandstormL1}}checked{{/sandstormL1}}>
+                            <label for="sandstormL1" class="white-text">Start from level 1</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="sandstormL2" name="sandstormL2" type="checkbox"
+                                   {{#sandstormL2}}checked{{/sandstormL2}}>
+                            <label for="sandstormL2" class="white-text">Start from level 2</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="sandstormPlaceCargo" name="sandstormPlaceCargo" type="checkbox"
+                                   {{#sandstormPlaceCargo}}checked{{/sandstormPlaceCargo}}>
+                            <label for="sandstormPlaceCargo" class="white-text">Place cargo</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="sandstormPlaceHatch" name="sandstormPlaceHatch" type="checkbox"
+                                   {{#sandstormPlaceHatch}}checked{{/sandstormPlaceHatch}}>
+                            <label for="sandstormPlaceHatch" class="white-text">Place hatch</label>
+                        </div>
+                    </div>
+                    <h3>Tele-Operated</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleCargoShip" name="teleCargoShip" type="checkbox"
+                                   {{#teleCargoShip}}checked{{/teleCargoShip}}>
+                            <label for="teleCargoShip" class="white-text">Deliver cargo to cargo ship</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleCargoL" name="teleCargoL" type="checkbox"
+                                   {{#teleCargoL}}checked{{/teleCargoL}}>
+                            <label for="teleCargoL" class="white-text">Deliver cargo to rocket low</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleCargoM" name="teleCargoM" type="checkbox"
+                                   {{#teleCargoM}}checked{{/teleCargoM}}>
+                            <label for="teleCargoM" class="white-text">Deliver cargo to rocket medium</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleCargoH" name="teleCargoH" type="checkbox"
+                                   {{#teleCargoH}}checked{{/teleCargoH}}>
+                            <label for="teleCargoH" class="white-text">Deliver cargo to rocket high</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleHatchShip" name="teleHatchShip" type="checkbox"
+                                   {{#teleHatchShip}}checked{{/teleHatchShip}}>
+                            <label for="teleHatchShip" class="white-text">Deliver hatch to cargo ship</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleHatchL" name="teleHatchL" type="checkbox"
+                                   {{#teleHatchL}}checked{{/teleHatchL}}>
+                            <label for="teleHatchL" class="white-text">Deliver hatch to rocket low</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleHatchM" name="teleHatchM" type="checkbox"
+                                   {{#teleHatchM}}checked{{/teleHatchM}}>
+                            <label for="teleHatchM" class="white-text">Deliver hatch to rocket medium</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleHatchH" name="teleHatchH" type="checkbox"
+                                   {{#teleHatchH}}checked{{/teleHatchH}}>
+                            <label for="teleHatchH" class="white-text">Deliver hatch to rocket high</label>
+                        </div>
+                    </div>
+                    <h3>End Game</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="endL1" name="endL1" type="checkbox" {{#endL1}}checked{{/endL1}}>
+                            <label for="endL1" class="white-text">End on level 1</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="endL2" name="endL2" type="checkbox" {{#endL2}}checked{{/endL2}}>
+                            <label for="endL2" class="white-text">End on level 2</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="endL3" name="endL3" type="checkbox" {{#endL3}}checked{{/endL3}}>
+                            <label for="endL3" class="white-text">End on level 3</label>
                         </div>
                     </div>
                     <div class="row">

@@ -40,7 +40,6 @@ do
       sleep 1
     done
     echo
-    clear
   fi
   sleep 1
   done

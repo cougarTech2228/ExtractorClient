@@ -29,103 +29,222 @@
                             <label for="teamNumber" class="white-text">Team Number</label>
                         </div>
                     </div>
-                    <h3>Autonomous</h3>
+                    <h3>Sandstorm</h3>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input id="autoRun" name="autoRun" type="checkbox" value="true"
-                                   {{#autoRun}}checked{{/autoRun}}>
-                            <label for="autoRun" class="white-text">Auto Run</label>
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="sandstorm" type="radio" id="sandStormDidntMove"
+                                       value="0" {{#sandStormDidntMove}}checked{{/sandStormDidntMove}} required>
+                                <label for="sandStormDidntMove" class="white-text">Didn't move</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="sandstorm" type="radio" id="sandStormLevel1" value="1"
+                                       {{#sandStormLevel1}}checked{{/sandStormLevel1}} required>
+                                <label for="sandStormLevel1" class="white-text">Level 1</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="sandstorm" type="radio" id="sandStormLevel2" value="2"
+                                       {{#sandStormLevel2}}checked{{/sandStormLevel2}} required>
+                                <label for="sandStormLevel2" class="white-text">Level 2</label>
+                            </p>
                         </div>
-                        <div class="input-field col s6">
-                            <input id="autoSwitch" name="autoSwitch" type="checkbox" value="true"
-                                   {{#autoSwitch}}checked{{/autoSwitch}}>
-                            <label for="autoSwitch" class="white-text">Delivered to Switch</label>
+                    </div>
+                    <h3>Cargo</h3>
+                    <div class="row">
+                        <div class="col s6">
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('cargoShip')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="cargoShip" name="cargoShip" type="number"
+                                           class="validate" value="{{cargoShip}}" min="0" required>
+                                    <label for="cargoShip" class="white-text">
+                                        Cargo Ship
+                                    </label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('cargoShip')">
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
+                            <div style="padding-top: 10px">
+                                <input id="cargoShipSandstorm" name="cargoShipSandstorm" type="checkbox" value="true"
+                                       {{#cargoShipSandstorm}}checked{{/cargoShipSandstorm}}>
+                                <label for="cargoShipSandstorm" class="white-text">Sandstorm</label>
+                            </div>
+                        </div>
+                        <div class="col s6">
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('cargoLow')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="cargoLow" name="cargoLow" type="number" class="validate"
+                                           value="{{cargoLow}}" min="0" required>
+                                    <label for="cargoLow" class="white-text">Rocket Low</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('cargoLow')">
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
+                            <div style="padding-top: 10px">
+                                <input id="cargoLowSandstorm" name="cargoLowSandstorm" type="checkbox" value="true"
+                                       {{#cargoLowSandstorm}}checked{{/cargoLowSandstorm}}>
+                                <label for="cargoLowSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input id="autoScale" name="autoScale" type="checkbox" value="true"
-                                   {{#autoScale}}checked{{/autoScale}}>
-                            <label for="autoScale" class="white-text">Delivered to Scale</label>
+                        <div class="col s6">
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('cargoMedium')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="cargoMedium" name="cargoMedium" type="number"
+                                           class="validate" value="{{cargoMedium}}" min="0" required>
+                                    <label for="cargoMedium" class="white-text">Rocket Medium</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('cargoMedium')">
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
+                            <div style="padding-top: 10px">
+                                <input id="cargoMediumSandstorm" name="cargoMediumSandstorm" type="checkbox" value="true"
+                                       {{#cargoMediumSandstorm}}checked{{/cargoMediumSandstorm}}>
+                                <label for="cargoMediumSandstorm" class="white-text">Sandstorm</label>
+                            </div>
+                        </div>
+                        <div class="col s6">
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('cargoHigh')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="cargoHigh" name="cargoHigh" type="number" class="validate"
+                                           value="{{cargoHigh}}" min="0" required>
+                                    <label for="cargoHigh" class="white-text">Rocket High</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('cargoHigh')">
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
+                            <div style="padding-top: 10px">
+                                <input id="cargoHighSandstorm" name="cargoHighSandstorm" type="checkbox" value="true"
+                                       {{#cargoHighSandstorm}}checked{{/cargoHighSandstorm}}>
+                                <label for="cargoHighSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                     </div>
-                    <h3>Tele-Operated</h3>
+                    <h3>Hatch</h3>
                     <div class="row">
                         <div class="col s6">
-                            <button class="btn-floating" type="button" onclick="decVal('teleAllySwitch')">
-                                <i class="material-icons right">remove</i>
-                            </button>
-                            <div class="input-field inline">
-                                <input placeholder="0" id="teleAllySwitch" name="teleAllySwitch" type="number"
-                                       class="validate" value="{{teleAllySwitch}}" min="0" required>
-                                <label for="teleAllySwitch" class="white-text">
-                                    Cubes delivered to alliance switch
-                                </label>
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('hatchShip')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="hatchShip" name="hatchShip" type="number"
+                                           class="validate" value="{{hatchShip}}" min="0" required>
+                                    <label for="hatchShip" class="white-text">
+                                        Cargo Ship
+                                    </label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('hatchShip')">
+                                    <i class="material-icons right">add</i>
+                                </button>
                             </div>
-                            <button class="btn-floating" type="button" onclick="incVal('teleAllySwitch')">
-                                <i class="material-icons right">add</i>
-                            </button>
+                            <div style="padding-top: 10px">
+                                <input id="hatchShipSandstorm" name="hatchShipSandstorm" type="checkbox" value="true"
+                                       {{#hatchShipSandstorm}}checked{{/hatchShipSandstorm}}>
+                                <label for="hatchShipSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                         <div class="col s6">
-                            <button class="btn-floating" type="button" onclick="decVal('teleScale')">
-                                <i class="material-icons right">remove</i>
-                            </button>
-                            <div class="input-field inline">
-                                <input placeholder="0" id="teleScale" name="teleScale" type="number" class="validate"
-                                       value="{{teleScale}}" min="0" required>
-                                <label for="teleScale" class="white-text">Cubes delivered to scale</label>
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('hatchLow')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="hatchLow" name="hatchLow" type="number" class="validate"
+                                           value="{{hatchLow}}" min="0" required>
+                                    <label for="hatchLow" class="white-text">Rocket Low</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('hatchLow')">
+                                    <i class="material-icons right">add</i>
+                                </button>
                             </div>
-                            <button class="btn-floating" type="button" onclick="incVal('teleScale')">
-                                <i class="material-icons right">add</i>
-                            </button>
+                            <div style="padding-top: 10px">
+                                <input id="hatchLowSandstorm" name="hatchLowSandstorm" type="checkbox" value="true"
+                                       {{#hatchLowSandstorm}}checked{{/hatchLowSandstorm}}>
+                                <label for="hatchLowSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6">
-                            <button class="btn-floating" type="button" onclick="decVal('teleOppSwitch')">
-                                <i class="material-icons right">remove</i>
-                            </button>
-                            <div class="input-field inline">
-                                <input placeholder="0" id="teleOppSwitch" name="teleOppSwitch" type="number"
-                                       class="validate" value="{{teleOppSwitch}}" min="0" required>
-                                <label for="teleOppSwitch" class="white-text">
-                                    Cubes delivered to opposition switch</label>
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('hatchMedium')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="hatchMedium" name="hatchMedium" type="number"
+                                           class="validate" value="{{hatchMedium}}" min="0" required>
+                                    <label for="hatchMedium" class="white-text">Rocket Medium</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('hatchMedium')">
+                                    <i class="material-icons right">add</i>
+                                </button>
                             </div>
-                            <button class="btn-floating" type="button" onclick="incVal('teleOppSwitch')">
-                                <i class="material-icons right">add</i>
-                            </button>
+                            <div style="padding-top: 10px">
+                                <input id="hatchMediumSandstorm" name="hatchMediumSandstorm" type="checkbox" value="true"
+                                       {{#hatchMediumSandstorm}}checked{{/hatchMediumSandstorm}}>
+                                <label for="hatchMediumSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                         <div class="col s6">
-                            <button class="btn-floating" type="button" onclick="decVal('teleVault')">
-                                <i class="material-icons right">remove</i>
-                            </button>
-                            <div class="input-field inline">
-                                <input placeholder="0" id="teleVault" name="teleVault" type="number" class="validate"
-                                       value="{{teleVault}}" min="0" required>
-                                <label for="teleVault" class="white-text">Cubes delivered to vault</label>
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('hatchHigh')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="hatchHigh" name="hatchHigh" type="number" class="validate"
+                                           value="{{hatchHigh}}" min="0" required>
+                                    <label for="hatchHigh" class="white-text">Rocket High</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('hatchHigh')">
+                                    <i class="material-icons right">add</i>
+                                </button>
                             </div>
-                            <button class="btn-floating" type="button" onclick="incVal('teleVault')">
-                                <i class="material-icons right">add</i>
-                            </button>
+                            <div style="padding-top: 10px">
+                                <input id="hatchHighSandstorm" name="hatchHighSandstorm" type="checkbox" value="true"
+                                       {{#hatchHighSandstorm}}checked{{/hatchHighSandstorm}}>
+                                <label for="hatchHighSandstorm" class="white-text">Sandstorm</label>
+                            </div>
                         </div>
                     </div>
                     <h3>End Game</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="endGame" type="radio" id="endC"
-                                       value="c" {{#endC}}checked{{/endC}} required>
-                                <label for="endC" class="white-text">Climb</label>
+                                <input class="with-gap" name="endGame" type="radio" id="endNoClimb"
+                                       value="0" {{#endNoClimb}}checked{{/endNoClimb}} required>
+                                <label for="endNoClimb" class="white-text">No Climb</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="endGame" type="radio" id="endP" value="p"
-                                       {{#endP}}checked{{/endP}} required>
-                                <label for="endP" class="white-text">Park</label>
+                                <input class="with-gap" name="endGame" type="radio" id="endLevel1" value="1"
+                                       {{#endLevel1}}checked{{/endLevel1}} required>
+                                <label for="endLevel1" class="white-text">Level 1</label>
                             </p>
                             <p>
-                                <input class="with-gap" name="endGame" type="radio" id="endN" value="n"
-                                       {{#endN}}checked{{/endN}} required>
-                                <label for="endN" class="white-text">Neither</label>
+                                <input class="with-gap" name="endGame" type="radio" id="endLevel2"
+                                       value="2" {{#endLevel2}}checked{{/endLevel2}} required>
+                                <label for="endLevel2" class="white-text">Level 2</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="endGame" type="radio" id="endLevel3"
+                                       value="3" {{#endLevel3}}checked{{/endLevel3}} required>
+                                <label for="endLevel3" class="white-text">Level 3</label>
                             </p>
                         </div>
                     </div>
@@ -164,6 +283,13 @@
                             <input id="tagPenalized" name="tagPenalized" type="checkbox" value="true"
                                    {{#tagPenalized}}checked{{/tagPenalized}}>
                             <label for="tagPenalized" class="white-text">Penalized</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="tagDefense" name="tagDefense" type="checkbox" value="true"
+                                   {{#tagDefense}}checked{{/tagDefense}}>
+                            <label for="tagDefense" class="white-text">Defense</label>
                         </div>
                     </div>
                     <h3>Overall Performance</h3>
@@ -211,12 +337,6 @@
     function decVal(element) {
         document.getElementById(element).value--;
     }
-
-    function uncheck(element1, element2) {
-        document.getElementById(element1).checked = false;
-        document.getElementById(element2).checked = false;
-    }
-
 </script>
 {{> foot}}
 {{> footer}}

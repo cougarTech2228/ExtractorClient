@@ -1,5 +1,6 @@
 <?php
 
+use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\QrCode;
 
 class ExtractorQR
@@ -14,19 +15,13 @@ class ExtractorQR
      */
     public static function create($text)
     {
-        $qrCode = new QrCode();
-        try {
-            $qrCode->setText($text)
-                   ->setSize(300)
-                   ->setPadding(0)
-                   ->setErrorCorrection('high')
-                   ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
-                   ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255])
-                   ->setImageType(QrCode::IMAGE_TYPE_PNG);
-
-        } catch (\Endroid\QrCode\Exceptions\ImageTypeInvalidException $e) {
-            die($e->getMessage());
-        }
+        $qrCode = new QrCode($text);
+        $qrCode->setSize(400);
+        $qrCode->setMargin(0);
+        $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+        $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0]);
+        $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255]);
+        $qrCode->setWriterByName('png');
 
         return $qrCode;
     }
@@ -43,7 +38,7 @@ class ExtractorQR
     {
         $qr = self::create($text);
 
-        return $qr->getDataUri();
+        return $qr->writeDataUri();
     }
 
     /**
@@ -58,6 +53,6 @@ class ExtractorQR
     {
         $qr = self::create('START:' . $num);
 
-        return $qr->getDataUri();
+        return $qr->writeDataUri();
     }
 }

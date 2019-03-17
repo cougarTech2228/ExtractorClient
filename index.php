@@ -3,15 +3,15 @@
 /////////////
 // Globals //
 /////////////
-define('BASEURL', 'http://localhost:9999');
+define('BASEURL', 'http://localhost:2228');
 define('BASEURI', '/');
 define('DS', DIRECTORY_SEPARATOR);
 define('DATADIR', __DIR__ . DS . 'data' . DS);
 define('DATASEARCHPATH', DS . 'storage' . DS . 'emulated' . DS . '0' . DS . 'bluetooth' . DS);
 define('CONFIG', DATADIR . 'config.json');
 // Dear users of github, yes this is 'bad' but really, doesn't matter. It's just made to prevent "Oops I deleted the data" situations.
-define('CONFIGPWDHASH', '$2y$10$rYrLJ3BnHIO2lFk.ilVFAeHigptddTLwdsisBxT/gCgwdlSxuDnBy');
-define('VERSION', '1.0.1');
+define('CONFIGPWDHASH', '$2y$10$iajFOukpCWAYHDu3RN25se1eo3UFdhFSqVZ0oSAX8ual.kWYitsWG');
+define('VERSION', '1.0.2');
 
 //////////
 // Main //
@@ -105,28 +105,42 @@ function matchForm($param)
 
     // Set defaults.
     $defaults = [
-        'matchNumber'    => '',
-        'teamNumber'     => '',
-        'autoRun'        => false,
-        'autoSwitch'     => false,
-        'autoScale'      => false,
-        'teleAllySwitch' => 0,
-        'teleScale'      => 0,
-        'teleOppSwitch'  => 0,
-        'teleVault'      => 0,
-        'endC'           => false,
-        'endP'           => false,
-        'endN'           => false,
-        'prefC'          => false,
-        'prefS'          => false,
-        'prefE'          => false,
-        'prefP'          => false,
-        'tagNoShow'      => false,
-        'tagNoMove'      => false,
-        'tagFlipped'     => false,
-        'tagStuck'       => false,
-        'tagFell'        => false,
-        'tagPenalized'   => false
+        'matchNumber'          => '',
+        'teamNumber'           => '',
+        'sandStormDidntMove'   => false,
+        'sandStormLevel1'      => false,
+        'sandStormLevel2'      => false,
+        'cargoShip'            => 0,
+        'cargoShipSandstorm'   => false,
+        'cargoLow'             => 0,
+        'cargoLowSandstorm'    => false,
+        'cargoMedium'          => 0,
+        'cargoMediumSandstorm' => false,
+        'cargoHigh'            => 0,
+        'cargoHighSandstorm'   => false,
+        'hatchShip'            => 0,
+        'hatchShipSandstorm'   => false,
+        'hatchLow'             => 0,
+        'hatchLowSandstorm'    => false,
+        'hatchMedium'          => 0,
+        'hatchMediumSandstorm' => false,
+        'hatchHigh'            => 0,
+        'hatchHighSandstorm'   => false,
+        'endNoClimb'           => false,
+        'endLevel1'            => false,
+        'endLevel2'            => false,
+        'endLevel3'            => false,
+        'tagNoShow'            => false,
+        'tagNoMove'            => false,
+        'tagFlipped'           => false,
+        'tagStuck'             => false,
+        'tagFell'              => false,
+        'tagPenalized'         => false,
+        'tagDefense'           => false,
+        'prefC'                => false,
+        'prefS'                => false,
+        'prefE'                => false,
+        'prefP'                => false,
     ];
 
     if ($param[1] !== 'blank') {
@@ -150,9 +164,41 @@ function matchForm($param)
         }
 
         if (array_key_exists('endGame', $data)) {
-            $data['end' . ucfirst($data['endGame'])] = true;
+            switch ($data['endGame']) {
+                case 0:
+                    $data['endNoClimb'] = true;
+                    break;
+                case 1;
+                    $data['endLevel1'] = true;
+                    break;
+                case 2:
+                    $data['endLevel2'] = true;
+                    break;
+                case 3:
+                    $data['endLevel3'] = true;
+                    break;
+                default:
+                    $data['endNoClimb'] = true;
+                    break;
+            }
         }
 
+        if (array_key_exists('sandstorm', $data)) {
+            switch ($data['sandstorm']) {
+                case 0:
+                    $data['sandStormDidntMove'] = true;
+                    break;
+                case 1;
+                    $data['sandStormLevel1'] = true;
+                    break;
+                case 2:
+                    $data['sandStormLevel2'] = true;
+                    break;
+                default:
+                    $data['sandStormDidntMove'] = true;
+                    break;
+            }
+        }
 
         $context = $data;
     } else {
@@ -177,33 +223,49 @@ function matchSubmit($param)
 
     // Validation array.
     $validate = [
-        'matchNumber'    => FILTER_VALIDATE_INT,
-        'teamNumber'     => FILTER_VALIDATE_INT,
-        'autoRun'        => FILTER_VALIDATE_BOOLEAN,
-        'autoSwitch'     => FILTER_VALIDATE_BOOLEAN,
-        'autoScale'      => FILTER_VALIDATE_BOOLEAN,
-        'teleAllySwitch' => FILTER_VALIDATE_INT,
-        'teleScale'      => FILTER_VALIDATE_INT,
-        'teleOppSwitch'  => FILTER_VALIDATE_INT,
-        'teleVault'      => FILTER_VALIDATE_INT,
-        'endGame'        => [
+        'matchNumber'          => FILTER_VALIDATE_INT,
+        'teamNumber'           => FILTER_VALIDATE_INT,
+        'sandstorm'            => [
             'filter'  => FILTER_CALLBACK,
             'options' => function ($input) {
-                return in_array($input, ['c', 'p', 'n']) ? $input : 'n';
+                return in_array((int)$input, [0, 1, 2]) ? (int)$input : '0';
             }
         ],
-        'performance'    => [
+        'cargoShip'            => FILTER_VALIDATE_INT,
+        'cargoShipSandstorm'   => FILTER_VALIDATE_BOOLEAN,
+        'cargoLow'             => FILTER_VALIDATE_INT,
+        'cargoLowSandstorm'    => FILTER_VALIDATE_BOOLEAN,
+        'cargoMedium'          => FILTER_VALIDATE_INT,
+        'cargoMediumSandstorm' => FILTER_VALIDATE_BOOLEAN,
+        'cargoHigh'            => FILTER_VALIDATE_INT,
+        'cargoHighSandstorm'   => FILTER_VALIDATE_BOOLEAN,
+        'hatchShip'            => FILTER_VALIDATE_INT,
+        'hatchShipSandstorm'   => FILTER_VALIDATE_BOOLEAN,
+        'hatchLow'             => FILTER_VALIDATE_INT,
+        'hatchLowSandstorm'    => FILTER_VALIDATE_BOOLEAN,
+        'hatchMedium'          => FILTER_VALIDATE_INT,
+        'hatchMediumSandstorm' => FILTER_VALIDATE_BOOLEAN,
+        'hatchHigh'            => FILTER_VALIDATE_INT,
+        'hatchHighSandstorm'   => FILTER_VALIDATE_BOOLEAN,
+        'endGame'              => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array((int)$input, [0, 1, 2, 3]) ? (int)$input : '0';
+            }
+        ],
+        'tagNoShow'            => FILTER_VALIDATE_BOOLEAN,
+        'tagNoMove'            => FILTER_VALIDATE_BOOLEAN,
+        'tagFlipped'           => FILTER_VALIDATE_BOOLEAN,
+        'tagStuck'             => FILTER_VALIDATE_BOOLEAN,
+        'tagFell'              => FILTER_VALIDATE_BOOLEAN,
+        'tagPenalized'         => FILTER_VALIDATE_BOOLEAN,
+        'tagDefense'           => FILTER_VALIDATE_BOOLEAN,
+        'performance'          => [
             'filter'  => FILTER_CALLBACK,
             'options' => function ($input) {
                 return in_array($input, ['c', 's', 'e', 'p']) ? $input : 'c';
             }
         ],
-        'tagNoShow'      => FILTER_VALIDATE_BOOLEAN,
-        'tagNoMove'      => FILTER_VALIDATE_BOOLEAN,
-        'tagFlipped'     => FILTER_VALIDATE_BOOLEAN,
-        'tagStuck'       => FILTER_VALIDATE_BOOLEAN,
-        'tagFell'        => FILTER_VALIDATE_BOOLEAN,
-        'tagPenalized'   => FILTER_VALIDATE_BOOLEAN
     ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
@@ -343,36 +405,42 @@ function pitList($param)
  * @param array $param Router input
  */
 function pitForm($param)
-{
+{/**/
     // Config instance.
     $ec = new ExtractorConfig();
 
     // Set defaults.
     $defaults = [
-        'teamNumber'     => '',
-        'autoRun'        => false,
-        'autoSwitch'     => false,
-        'autoScale'      => false,
-        'teleAllySwitch' => false,
-        'teleOppSwitch'  => false,
-        'teleScale'      => false,
-        'teleVault'      => false,
-        'endPark'        => false,
-        'endClimb'       => false,
-        'mainRoleV'      => false,
-        'mainRoleW'      => false,
-        'mainRoleS'      => false,
-        'mainRoleF'      => false,
-        'cubePortal'     => false,
-        'cubeGround'     => false,
-        'cubeRotate'     => false,
-        'driveTrain4'    => false,
-        'driveTrain6'    => false,
-        'driveTrainT'    => false,
-        'driveTrainM'    => false,
-        'driveTrainS'    => false,
-        'robotCamera'    => false,
-        'robotVision'    => false
+        'teamNumber'          => '',
+        'driveTrain4'         => false,
+        'driveTrain6'         => false,
+        'driveTrainT'         => false,
+        'driveTrainM'         => false,
+        'driveTrainS'         => false,
+        'hatchFromGround'     => false,
+        'hatchFromFeeder'     => false,
+        'cargoFromGround'     => false,
+        'cargoFromFeeder'     => false,
+        'robotCamera'         => false,
+        'robotVision'         => false,
+        'mainRoleH'           => false,
+        'mainRoleC'           => false,
+        'mainRoleF'           => false,
+        'sandstormL1'         => false,
+        'sandstormL2'         => false,
+        'sandstormPlaceCargo' => false,
+        'sandstormPlaceHatch' => false,
+        'teleCargoShip'       => false,
+        'teleCargoL'          => false,
+        'teleCargoM'          => false,
+        'teleCargoH'          => false,
+        'teleHatchShip'       => false,
+        'teleHatchL'          => false,
+        'teleHatchM'          => false,
+        'teleHatchH'          => false,
+        'endL1'               => false,
+        'endL2'               => false,
+        'endL3'               => false
     ];
 
     if ($param[1] !== 'blank') {
@@ -422,33 +490,40 @@ function pitSubmit($param)
 
     // Validation array.
     $validate = [
-        'teamNumber'     => FILTER_VALIDATE_INT,
-        'autoRun'        => FILTER_VALIDATE_BOOLEAN,
-        'autoSwitch'     => FILTER_VALIDATE_BOOLEAN,
-        'autoScale'      => FILTER_VALIDATE_BOOLEAN,
-        'teleAllySwitch' => FILTER_VALIDATE_BOOLEAN,
-        'teleOppSwitch'  => FILTER_VALIDATE_BOOLEAN,
-        'teleScale'      => FILTER_VALIDATE_BOOLEAN,
-        'teleVault'      => FILTER_VALIDATE_BOOLEAN,
-        'endPark'        => FILTER_VALIDATE_BOOLEAN,
-        'endClimb'       => FILTER_VALIDATE_BOOLEAN,
-        'mainRole'       => [
-            'filter'  => FILTER_CALLBACK,
-            'options' => function ($input) {
-                return in_array($input, ['v', 'w', 's', 'f']) ? $input : 'f';
-            }
-        ],
-        'cubePortal'     => FILTER_VALIDATE_BOOLEAN,
-        'cubeGround'     => FILTER_VALIDATE_BOOLEAN,
-        'cubeRotate'     => FILTER_VALIDATE_BOOLEAN,
-        'driveTrain'     => [
+        'teamNumber'          => FILTER_VALIDATE_INT,
+        'driveTrain'          => [
             'filter'  => FILTER_CALLBACK,
             'options' => function ($input) {
                 return in_array($input, ['4', '6', 't', 'm', 's']) ? $input : '4';
             }
         ],
-        'robotCamera'    => FILTER_VALIDATE_BOOLEAN,
-        'robotVision'    => FILTER_VALIDATE_BOOLEAN
+        'hatchFromGround'     => FILTER_VALIDATE_BOOLEAN,
+        'hatchFromFeeder'     => FILTER_VALIDATE_BOOLEAN,
+        'cargoFromGround'     => FILTER_VALIDATE_BOOLEAN,
+        'cargoFromFeeder'     => FILTER_VALIDATE_BOOLEAN,
+        'robotCamera'         => FILTER_VALIDATE_BOOLEAN,
+        'robotVision'         => FILTER_VALIDATE_BOOLEAN,
+        'mainRole'            => [
+            'filter'  => FILTER_CALLBACK,
+            'options' => function ($input) {
+                return in_array($input, ['h', 'c', 'f']) ? $input : 'f';
+            }
+        ],
+        'sandstormL1'         => FILTER_VALIDATE_BOOLEAN,
+        'sandstormL2'         => FILTER_VALIDATE_BOOLEAN,
+        'sandstormPlaceCargo' => FILTER_VALIDATE_BOOLEAN,
+        'sandstormPlaceHatch' => FILTER_VALIDATE_BOOLEAN,
+        'teleCargoShip'       => FILTER_VALIDATE_BOOLEAN,
+        'teleCargoL'          => FILTER_VALIDATE_BOOLEAN,
+        'teleCargoM'          => FILTER_VALIDATE_BOOLEAN,
+        'teleCargoH'          => FILTER_VALIDATE_BOOLEAN,
+        'teleHatchShip'       => FILTER_VALIDATE_BOOLEAN,
+        'teleHatchL'          => FILTER_VALIDATE_BOOLEAN,
+        'teleHatchM'          => FILTER_VALIDATE_BOOLEAN,
+        'teleHatchH'          => FILTER_VALIDATE_BOOLEAN,
+        'endL1'               => FILTER_VALIDATE_BOOLEAN,
+        'endL2'               => FILTER_VALIDATE_BOOLEAN,
+        'endL3'               => FILTER_VALIDATE_BOOLEAN,
     ];
 
     $data = filter_input_array(INPUT_POST, $validate, true);
