@@ -11,7 +11,7 @@ define('DATASEARCHPATH', DS . 'storage' . DS . 'emulated' . DS . '0' . DS . 'blu
 define('CONFIG', DATADIR . 'config.json');
 // Dear users of github, yes this is 'bad' but really, doesn't matter. It's just made to prevent "Oops I deleted the data" situations.
 define('CONFIGPWDHASH', '$2y$10$iajFOukpCWAYHDu3RN25se1eo3UFdhFSqVZ0oSAX8ual.kWYitsWG');
-define('VERSION', '1.1.1');
+define('VERSION', '1.1.2');
 
 //////////
 // Main //
@@ -355,32 +355,32 @@ function pitForm($param)
     // Set defaults.
     $defaults = [
         'teamNumber'     => '',
-        'autoInitLine'   => true,
-        'autoUpper'      => true,
-        'autoLower'      => true,
-        'teleUpper'      => true,
-        'teleLower'      => true,
-        'teleRotational' => true,
-        'telePositional' => true,
-        'endP'           => true,
-        'endH'           => true,
-        'robotCamera'    => true,
-        'robotVision'    => true,
+        'autoInitLine'   => false,
+        'autoUpper'      => false,
+        'autoLower'      => false,
+        'teleUpper'      => false,
+        'teleLower'      => false,
+        'teleRotational' => false,
+        'telePositional' => false,
+        'endP'           => false,
+        'endH'           => false,
+        'robotCamera'    => false,
+        'robotVision'    => false,
         'driveTrain4'    => false,
         'driveTrain6'    => false,
         'driveTrainT'    => false,
         'driveTrainM'    => false,
         'driveTrainS'    => false,
-        'fromFloor'      => true,
-        'fromFeeder'     => true,
+        'fromFloor'      => false,
+        'fromFeeder'     => false,
         'maxCells'       => 0,
-        'climbM'         => true,
-        'climbE'         => true,
-        'climbB'         => true,
-        'mainRoleU'      => true,
-        'mainRoleL'      => true,
-        'mainRoleC'      => true,
-        'mainRoleF'      => true,
+        'climbM'         => false,
+        'climbE'         => false,
+        'climbB'         => false,
+        'mainRoleU'      => false,
+        'mainRoleL'      => false,
+        'mainRoleC'      => false,
+        'mainRoleF'      => false,
     ];
 
     if ($param[1] !== 'blank') {
