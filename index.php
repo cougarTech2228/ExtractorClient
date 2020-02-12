@@ -11,7 +11,7 @@ define('DATASEARCHPATH', DS . 'storage' . DS . 'emulated' . DS . '0' . DS . 'blu
 define('CONFIG', DATADIR . 'config.json');
 // Dear users of github, yes this is 'bad' but really, doesn't matter. It's just made to prevent "Oops I deleted the data" situations.
 define('CONFIGPWDHASH', '$2y$10$iajFOukpCWAYHDu3RN25se1eo3UFdhFSqVZ0oSAX8ual.kWYitsWG');
-define('VERSION', '1.1.2');
+define('VERSION', '1.1.3');
 
 //////////
 // Main //
