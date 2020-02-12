@@ -84,32 +84,20 @@ class ExtractorScouting
                 $order = [
                     'matchNumber',
                     'teamNumber',
-                    'sandstorm',
-                    'cargoShip',
-                    'cargoShipSandstorm',
-                    'cargoLow',
-                    'cargoLowSandstorm',
-                    'cargoMedium',
-                    'cargoMediumSandstorm',
-                    'cargoHigh',
-                    'cargoHighSandstorm',
-                    'hatchShip',
-                    'hatchShipSandstorm',
-                    'hatchLow',
-                    'hatchLowSandstorm',
-                    'hatchMedium',
-                    'hatchMediumSandstorm',
-                    'hatchHigh',
-                    'hatchHighSandstorm',
+                    'autoInitLine',
+                    'autoUpper',
+                    'autoLower',
+                    'teleUpper',
+                    'teleLower',
+                    'teleRotational',
+                    'telePositional',
                     'endGame',
+                    'performance',
                     'tagNoShow',
                     'tagNoMove',
                     'tagFlipped',
                     'tagStuck',
                     'tagFell',
-                    'tagPenalized',
-                    'tagDefense',
-                    'performance',
                 ];
                 break;
             case 'pit':
@@ -150,13 +138,20 @@ class ExtractorScouting
         foreach ($order as $item) {
             switch (true) {
                 case ($item === 'performance'):
-                    $str = $this->data[$item] === 'c' ? 1 : 0;
-                    $str .= ',';
-                    $str .= $this->data[$item] === 's' ? 1 : 0;
+                    $str = $this->data[$item] === 'p' ? 1 : 0;
                     $str .= ',';
                     $str .= $this->data[$item] === 'e' ? 1 : 0;
                     $str .= ',';
-                    $str .= $this->data[$item] === 'p' ? 1 : 0;
+                    $str .= $this->data[$item] === 's' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 'c' ? 1 : 0;
+
+                    $return[] = $str;
+                    break;
+                case ($item === 'endGame'):
+                    $str = $this->data[$item] === 'p' ? 1 : 0;
+                    $str .= ',';
+                    $str .= $this->data[$item] === 'h' ? 1 : 0;
 
                     $return[] = $str;
                     break;
