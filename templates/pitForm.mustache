@@ -19,6 +19,74 @@
                             <label for="teamNumber" class="white-text">Team Number</label>
                         </div>
                     </div>
+                    <h3>Autonomous</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="autoInitLine" name="autoInitLine" type="checkbox"
+                                   {{#autoInitLine}}checked{{/autoInitLine}}>
+                            <label for="autoInitLine" class="white-text">Initiation Line</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="autoUpper" name="autoUpper" type="checkbox"
+                                   {{#autoUpper}}checked{{/autoUpper}}>
+                            <label for="autoUpper" class="white-text">Upper</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="autoLower" name="autoLower" type="checkbox"
+                                   {{#autoLower}}checked{{/autoLower}}>
+                            <label for="autoLower" class="white-text">Lower</label>
+                        </div>
+                    </div>
+                    <h3>Tele-Operated</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleUpper" name="teleUpper" type="checkbox"
+                                   {{#teleUpper}}checked{{/teleUpper}}>
+                            <label for="teleUpper" class="white-text">Upper</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="teleLower" name="teleLower" type="checkbox"
+                                   {{#teleLower}}checked{{/teleLower}}>
+                            <label for="teleLower" class="white-text">Lower</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="teleRotational" name="teleRotational" type="checkbox"
+                                   {{#teleRotational}}checked{{/teleRotational}}>
+                            <label for="teleRotational" class="white-text">Rotational control</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="telePositional" name="telePositional" type="checkbox"
+                                   {{#telePositional}}checked{{/telePositional}}>
+                            <label for="telePositional" class="white-text">Positional control</label>
+                        </div>
+                    </div>
+                    <h3>End Game</h3>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="endP" name="endP" type="checkbox" {{#endP}}checked{{/endP}}>
+                            <label for="endP" class="white-text">Park</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="endH" name="endH" type="checkbox" {{#endH}}checked{{/endH}}>
+                            <label for="endH" class="white-text">Hang</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="robotCamera" name="robotCamera" type="checkbox"
+                                   {{#robotCamera}}checked{{/robotCamera}}>
+                            <label for="robotCamera" class="white-text">Camera</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="robotVision" name="robotVision" type="checkbox"
+                                   {{#robotVision}}checked{{/robotVision}}>
+                            <label for="robotVision" class="white-text">Vision</label>
+                        </div>
+                    </div>
                     <h3>Drive Train</h3>
                     <div class="row">
                         <div class="col s12">
@@ -49,152 +117,76 @@
                             </p>
                         </div>
                     </div>
-                    <h3>Handling</h3>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="hatchFromGround" name="hatchFromGround" type="checkbox"
-                                   {{#hatchFromGround}}checked{{/hatchFromGround}}>
-                            <label for="hatchFromGround" class="white-text">Pick hatch up from ground</label>
+                            <input id="fromFloor" name="fromFloor" type="checkbox" {{#fromFloor}}checked{{/fromFloor}}>
+                            <label for="fromFloor" class="white-text">Power cell from floor</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="hatchFromFeeder" name="hatchFromFeeder" type="checkbox"
-                                   {{#hatchFromFeeder}}checked{{/hatchFromFeeder}}>
-                            <label for="hatchFromFeeder" class="white-text">Pick hatch up from feeder</label>
+                            <input id="fromFeeder" name="fromFeeder" type="checkbox" {{#fromFeeder}}checked{{/fromFeeder}}>
+                            <label for="fromFeeder" class="white-text">Power cell from feeder</label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input id="cargoFromGround" name="cargoFromGround" type="checkbox"
-                                   {{#cargoFromGround}}checked{{/cargoFromGround}}>
-                            <label for="cargoFromGround" class="white-text">Pick cargo up from ground</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="cargoFromFeeder" name="cargoFromFeeder" type="checkbox"
-                                   {{#cargoFromFeeder}}checked{{/cargoFromFeeder}}>
-                            <label for="cargoFromFeeder" class="white-text">Pick cargo up from feeder</label>
+                        <div class="col s12">
+                            <div>
+                                <button class="btn-floating" type="button" onclick="decVal('maxCells')">
+                                    <i class="material-icons right">remove</i>
+                                </button>
+                                <div class="input-field inline">
+                                    <input placeholder="0" id="maxCells" name="maxCells" type="number"
+                                           class="validate" value="{{maxCells}}" min="0" max="5" style="width: 100px" required>
+                                    <label for="maxCells" class="white-text">Max Cells</label>
+                                </div>
+                                <button class="btn-floating" type="button" onclick="incVal('maxCells')">
+                                    <i class="material-icons right">add</i>
+                                </button>
+                            </div>
                         </div>
                     </div>
+                    <h3>Climb</h3>
                     <div class="row">
-                        <div class="input-field col s6">
-                            <input id="robotCamera" name="robotCamera" type="checkbox"
-                                   {{#robotCamera}}checked{{/robotCamera}}>
-                            <label for="robotCamera" class="white-text">Camera</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="robotVision" name="robotVision" type="checkbox"
-                                   {{#robotVision}}checked{{/robotVision}}>
-                            <label for="robotVision" class="white-text">Vision</label>
+                        <div class="col s12">
+                            <p>
+                                <input class="with-gap" name="climb" type="radio" id="climbM" value="m"
+                                       {{#climbM}}checked{{/climbM}}>
+                                <label for="climbM" class="white-text">Middle</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="climb" type="radio" id="climbE" value="e"
+                                       {{#climbE}}checked{{/climbE}}>
+                                <label for="climbE" class="white-text">Edge</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="climb" type="radio" id="climbB" value="b"
+                                       {{#climbB}}checked{{/climbB}}>
+                                <label for="climbB" class="white-text">Both</label>
+                            </p>
                         </div>
                     </div>
                     <h3>Main Role</h3>
                     <div class="row">
                         <div class="col s12">
                             <p>
-                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleH" value="h"
-                                       {{#mainRoleH}}checked{{/mainRoleH}}>
-                                <label for="mainRoleH" class="white-text">Hatch</label>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleU" value="l"
+                                       {{#mainRoleU}}checked{{/mainRoleU}}>
+                                <label for="mainRoleU" class="white-text">Upper</label>
+                            </p>
+                            <p>
+                                <input class="with-gap" name="mainRole" type="radio" id="mainRoleL" value="u"
+                                       {{#mainRoleL}}checked{{/mainRoleL}}>
+                                <label for="mainRoleL" class="white-text">Lower</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleC" value="c"
                                        {{#mainRoleC}}checked{{/mainRoleC}}>
-                                <label for="mainRoleC" class="white-text">Cargo</label>
+                                <label for="mainRoleC" class="white-text">Control Panel</label>
                             </p>
                             <p>
                                 <input class="with-gap" name="mainRole" type="radio" id="mainRoleF" value="f"
                                        {{#mainRoleF}}checked{{/mainRoleF}}>
                                 <label for="mainRoleF" class="white-text">"Flex"</label>
                             </p>
-                        </div>
-                    </div>
-                    <h3>Sandstorm</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="sandstormL1" name="sandstormL1" type="checkbox"
-                                   {{#sandstormL1}}checked{{/sandstormL1}}>
-                            <label for="sandstormL1" class="white-text">Start from level 1</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="sandstormL2" name="sandstormL2" type="checkbox"
-                                   {{#sandstormL2}}checked{{/sandstormL2}}>
-                            <label for="sandstormL2" class="white-text">Start from level 2</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="sandstormPlaceCargo" name="sandstormPlaceCargo" type="checkbox"
-                                   {{#sandstormPlaceCargo}}checked{{/sandstormPlaceCargo}}>
-                            <label for="sandstormPlaceCargo" class="white-text">Place cargo</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="sandstormPlaceHatch" name="sandstormPlaceHatch" type="checkbox"
-                                   {{#sandstormPlaceHatch}}checked{{/sandstormPlaceHatch}}>
-                            <label for="sandstormPlaceHatch" class="white-text">Place hatch</label>
-                        </div>
-                    </div>
-                    <h3>Tele-Operated</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleCargoShip" name="teleCargoShip" type="checkbox"
-                                   {{#teleCargoShip}}checked{{/teleCargoShip}}>
-                            <label for="teleCargoShip" class="white-text">Deliver cargo to cargo ship</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleCargoL" name="teleCargoL" type="checkbox"
-                                   {{#teleCargoL}}checked{{/teleCargoL}}>
-                            <label for="teleCargoL" class="white-text">Deliver cargo to rocket low</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleCargoM" name="teleCargoM" type="checkbox"
-                                   {{#teleCargoM}}checked{{/teleCargoM}}>
-                            <label for="teleCargoM" class="white-text">Deliver cargo to rocket medium</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleCargoH" name="teleCargoH" type="checkbox"
-                                   {{#teleCargoH}}checked{{/teleCargoH}}>
-                            <label for="teleCargoH" class="white-text">Deliver cargo to rocket high</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleHatchShip" name="teleHatchShip" type="checkbox"
-                                   {{#teleHatchShip}}checked{{/teleHatchShip}}>
-                            <label for="teleHatchShip" class="white-text">Deliver hatch to cargo ship</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleHatchL" name="teleHatchL" type="checkbox"
-                                   {{#teleHatchL}}checked{{/teleHatchL}}>
-                            <label for="teleHatchL" class="white-text">Deliver hatch to rocket low</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="teleHatchM" name="teleHatchM" type="checkbox"
-                                   {{#teleHatchM}}checked{{/teleHatchM}}>
-                            <label for="teleHatchM" class="white-text">Deliver hatch to rocket medium</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="teleHatchH" name="teleHatchH" type="checkbox"
-                                   {{#teleHatchH}}checked{{/teleHatchH}}>
-                            <label for="teleHatchH" class="white-text">Deliver hatch to rocket high</label>
-                        </div>
-                    </div>
-                    <h3>End Game</h3>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="endL1" name="endL1" type="checkbox" {{#endL1}}checked{{/endL1}}>
-                            <label for="endL1" class="white-text">End on level 1</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="endL2" name="endL2" type="checkbox" {{#endL2}}checked{{/endL2}}>
-                            <label for="endL2" class="white-text">End on level 2</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input id="endL3" name="endL3" type="checkbox" {{#endL3}}checked{{/endL3}}>
-                            <label for="endL3" class="white-text">End on level 3</label>
                         </div>
                     </div>
                     <div class="row">
@@ -209,5 +201,18 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    function incVal(element) {
+        if (document.getElementById(element).value < document.getElementById(element).getAttribute('max')) {
+            document.getElementById(element).value++;
+        }
+    }
+
+    function decVal(element) {
+        if (document.getElementById(element).value > document.getElementById(element).getAttribute('min')) {
+            document.getElementById(element).value--;
+        }
+    }
+</script>
 {{> foot}}
 {{> footer}}

@@ -115,29 +115,23 @@ class ExtractorScouting
             case 'pit':
                 $order = [
                     'teamNumber',
-                    'driveTrain',
-                    'hatchFromGround',
-                    'hatchFromFeeder',
-                    'cargoFromGround',
-                    'cargoFromFeeder',
+                    'autoInitLine',
+                    'autoUpper',
+                    'autoLower',
+                    'teleUpper',
+                    'teleLower',
+                    'teleRotational',
+                    'telePositional',
+                    'endP',
+                    'endH',
                     'robotCamera',
                     'robotVision',
+                    'driveTrain',
+                    'fromFloor',
+                    'fromFeeder',
+                    'maxCells',
+                    'climb',
                     'mainRole',
-                    'sandstormL1',
-                    'sandstormL2',
-                    'sandstormPlaceCargo',
-                    'sandstormPlaceHatch',
-                    'teleCargoShip',
-                    'teleCargoL',
-                    'teleCargoM',
-                    'teleCargoH',
-                    'teleHatchShip',
-                    'teleHatchL',
-                    'teleHatchM',
-                    'teleHatchH',
-                    'endL1',
-                    'endL2',
-                    'endL3'
                 ];
                 break;
             case 'driver':
@@ -168,6 +162,7 @@ class ExtractorScouting
                     break;
                 case ($item === 'mainRole'):
                 case ($item === 'driveTrain'):
+                case ($item === 'climb'):
 
                     $return[] = strtoupper($this->data[$item]);
                     break;

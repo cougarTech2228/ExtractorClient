@@ -5,14 +5,18 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/bacon/bacon-qr-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/dasprid/enum" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/installer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/endroid/qr-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/khanamiryan/qrcode-detector-decoder" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/mustache/mustache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/php-enum" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-foundation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mime" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php72" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-access" />
     </content>
     <orderEntry type="inheritedJdk" />
